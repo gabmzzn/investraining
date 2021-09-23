@@ -18,4 +18,11 @@
     </mat-select>
 </mat-form-field>
 
+<mat-form-field appearance="fill">
+    <mat-label>Choose a date from</mat-label>
+    <input matInput [matDatepicker]="picker">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+</mat-form-field>
+
 <canvas (click)="sliceData()" id="chart" width="800" height="500"></canvas>
