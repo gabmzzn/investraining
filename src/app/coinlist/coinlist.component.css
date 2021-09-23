@@ -1,0 +1,41 @@
+table {
+  width: 95%;
+  background-color: rgba(38, 39, 53, 0);
+  border-radius: 8px;
+overflow:hidden !important;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: rgba(245, 245, 245, 0.137);
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef4f;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+}
+
+.example-element-symbol {
+  font-weight: bold;
+  font-size: 40px;
+  line-height: normal;
+}
+
+.example-element-description {
+  padding: 16px;
+}
+
+.example-element-description-attribution {
+  opacity: 0.5;
+}
