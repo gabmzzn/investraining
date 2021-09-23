@@ -1,1 +1,21 @@
+<mat-form-field appearance="fill">
+    <mat-label>Currency</mat-label>
+    <mat-select [(ngModel)]="selectedValue" name="currency">
+        <mat-option *ngFor="let currency of currencies" [value]="currency.name">
+            <img class="example-option-img" aria-hidden src="{{currency.img}}">
+            <span>{{currency.name}}</span>
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
+<mat-form-field appearance="fill">
+    <mat-label>Currency to compare</mat-label>
+    <mat-select [(ngModel)]="selectedValueToCompare" name="currency">
+        <mat-option *ngFor="let currency of currenciesToCompare" [value]="currency.name">
+            <img class="example-option-img" aria-hidden src="{{currency.img}}">
+            <span>{{currency.name}}</span>
+        </mat-option>
+    </mat-select>
+</mat-form-field>
+
 <canvas (click)="sliceData()" id="chart" width="800" height="500"></canvas>

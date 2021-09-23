@@ -2,6 +2,12 @@ import { Component, OnInit, ViewChild } from '@angular/core'
 import { trigger, state, style, animate, transition } from '@angular/animations'
 import { CryptoCompareAPI } from '../app.classes/CryptoCompareAPI'
 import Chart from 'chart.js/auto'
+import { CurrencyPipe } from '@angular/common'
+
+interface Currency {
+  name: string
+  img: string
+}
 
 @Component({
   selector: 'app-graph',
@@ -37,6 +43,21 @@ export class GraphComponent {
   firstSlice: any = 0
   lastSlice: any = 50
 
+  selectedValue!: string
+  selectedValueToCompare!: string
+
+  currencies: Currency[] = [
+    { name: 'BTC', img: 'https://cdn-icons-png.flaticon.com/512/825/825540.png' },
+    { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' },
+    { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' }
+  ];
+
+  currenciesToCompare: Currency[] = [
+    { name: 'BTC', img: 'https://cdn-icons-png.flaticon.com/512/825/825540.png' },
+    { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' },
+    { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' }
+  ];
+
   constructor() { }
 
   async ngOnInit() {
@@ -53,8 +74,6 @@ export class GraphComponent {
 
     this.data = await new CryptoCompareAPI().getHistorical('USD', 'ARS', 100, 1631610943, 'average')
     let dataset = this.data.slice(this.firstSlice, this.lastSlice)
-    const list = await new CryptoCompareAPI().getCoinList()
-    console.log(list)
 
     this.chart = new Chart('chart', {
       type: 'line',

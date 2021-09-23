@@ -39,7 +39,10 @@ export class CryptoCompareAPI {
 
         let url = 'https://min-api.cryptocompare.com/data/all/coinlist'
         const json = await fetch(url).then(res => res.json())
-        return await json.Data //.Data.Data.map((a: { high: any }) => a.high)
+
+        let array = Object.entries(json.Data)
+
+        return array
 
     }
 }

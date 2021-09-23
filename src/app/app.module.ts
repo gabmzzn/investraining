@@ -12,6 +12,10 @@ import { MatNativeDateModule } from '@angular/material/core'
 import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
 import { MatTableModule } from '@angular/material/table'
+import { MatInputModule } from '@angular/material/input'
+import { MatSelectModule } from '@angular/material/select'
+import { FormsModule } from '@angular/forms'
+
 
 
 import { AppComponent } from './app.component'
@@ -45,6 +49,9 @@ import { CoinlistComponent } from './coinlist/coinlist.component'
     MatCardModule,
     MatButtonModule,
     MatTableModule,
+    MatInputModule,
+    MatSelectModule,
+    FormsModule,
     RouterModule.forRoot([
       { path: 'graph', component: GraphComponent },
       { path: 'coinlist', component: CoinlistComponent },
