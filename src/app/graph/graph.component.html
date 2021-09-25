@@ -1,28 +1,30 @@
-<mat-form-field appearance="fill">
-    <mat-label>Currency</mat-label>
-    <mat-select [(ngModel)]="selectedValue" name="currency">
-        <mat-option *ngFor="let currency of currencies" [value]="currency.name">
-            <img class="example-option-img" aria-hidden src="{{currency.img}}">
-            <span>{{currency.name}}</span>
-        </mat-option>
-    </mat-select>
-</mat-form-field>
+<div class="inputvalues-graph">
+    <mat-form-field appearance="fill">
+        <mat-label>Currency to evaluate</mat-label>
+        <mat-select [(ngModel)]="selectedValue" name="currency">
+            <mat-option *ngFor="let currency of currencies" [value]="currency.name">
+                <img class="example-option-img" aria-hidden src="{{currency.img}}">
+                <span>{{currency.name}}</span>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
-<mat-form-field appearance="fill">
-    <mat-label>Currency to compare</mat-label>
-    <mat-select [(ngModel)]="selectedValueToCompare" name="currency">
-        <mat-option *ngFor="let currency of currenciesToCompare" [value]="currency.name">
-            <img class="example-option-img" aria-hidden src="{{currency.img}}">
-            <span>{{currency.name}}</span>
-        </mat-option>
-    </mat-select>
-</mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Currency to compare to</mat-label>
+        <mat-select [(ngModel)]="selectedValueToCompare" name="currency">
+            <mat-option *ngFor="let currency of currenciesToCompare" [value]="currency.name">
+                <img class="example-option-img" aria-hidden src="{{currency.img}}">
+                <span>{{currency.name}}</span>
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
-<mat-form-field appearance="fill">
-    <mat-label>Choose a date from</mat-label>
-    <input matInput [matDatepicker]="picker">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-</mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Choose a date from</mat-label>
+        <input matInput [matDatepicker]="picker" (dateInput)="OnDateChange($event.value)">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+</div>
 
 <canvas (click)="sliceData()" id="chart" width="800" height="500"></canvas>

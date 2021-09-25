@@ -41,26 +41,40 @@ export class GraphComponent {
   data: any
   chart: any
   firstSlice: any = 0
-  lastSlice: any = 50
+  lastSlice: any = 100
 
   selectedValue!: string
   selectedValueToCompare!: string
+  timeStamp!: number
 
   currencies: Currency[] = [
-    { name: 'BTC', img: 'https://cdn-icons-png.flaticon.com/512/825/825540.png' },
-    { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' },
-    { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' }
+    { name: 'BTC', img: 'https://cryptocompare.com/media/37746251/btc.png' },
+    { name: 'ETH', img: 'https://cryptocompare.com/media/37746238/eth.png' },
+    { name: 'XLM', img: 'https://cdn-icons-png.flaticon.com/512/5245/5245869.png' },
+    { name: 'BNB', img: 'https://www.cryptocompare.com/media/37746880/bnb.png' },
+    { name: 'ADA', img: 'https://cryptocompare.com/media/37746235/ada.png' },
+    { name: 'DOGE', img: 'https://cryptocompare.com/media/37746339/doge.png' },
+    { name: 'XRP', img: 'https://cryptocompare.com/media/38553096/xrp.png' },
+    { name: 'LTC', img: 'https://cryptocompare.com/media/37746243/ltc.png' },
+    { name: 'BCH', img: 'https://cryptocompare.com/media/37746245/bch.png' },
+    { name: 'LINK', img: 'https://cryptocompare.com/media/37746242/link.png' },
   ];
 
   currenciesToCompare: Currency[] = [
-    { name: 'BTC', img: 'https://cdn-icons-png.flaticon.com/512/825/825540.png' },
     { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' },
-    { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' }
+    { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' },
+    { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' }
   ];
 
   constructor() { }
 
-  async ngOnInit() {
+  OnDateChange(date: string) {
+    this.timeStamp = Date.parse(date)
+    this.drawGraph()
+  }
+  async drawGraph() {
+    //Nullifier
+    if (this.chart !== undefined) this.chart.destroy()
 
     // Chart background style
     var canvas: any = document.getElementById("chart")
@@ -72,7 +86,12 @@ export class GraphComponent {
     // gradientLow.addColorStop(0, '#ff0000')
     // gradientLow.addColorStop(1, 'rgba(0, 0, 0,0)')
 
-    this.data = await new CryptoCompareAPI().getHistorical('USD', 'ARS', 100, 1631610943, 'average')
+    this.data = await new CryptoCompareAPI().getHistorical(
+      this.selectedValue, this.selectedValueToCompare,
+      100, this.timeStamp, 'average')
+
+    console.log(this.timeStamp)
+
     let dataset = this.data.slice(this.firstSlice, this.lastSlice)
 
     this.chart = new Chart('chart', {

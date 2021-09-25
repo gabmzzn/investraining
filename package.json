@@ -25,6 +25,8 @@
     "axios": "^0.21.4",
     "binance": "^2.0.12",
     "chart.js": "^3.5.1",
+    "highcharts": "^9.2.2",
+    "highcharts-angular": "^2.10.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"

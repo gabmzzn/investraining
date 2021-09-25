@@ -16,8 +16,6 @@ import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { FormsModule } from '@angular/forms'
 
-
-
 import { AppComponent } from './app.component'
 import { GraphComponent } from './graph/graph.component'
 import { ListviewComponent } from './listview/listview.component'
@@ -26,7 +24,7 @@ import { StatsComponent } from './stats/stats.component'
 import { AboutComponent } from './about/about.component'
 import { PeriodictableComponent } from './periodictable/periodictable.component'
 import { CoinlistComponent } from './coinlist/coinlist.component'
-
+import { HighchartsChartComponent } from 'highcharts-angular'
 
 @NgModule({
   declarations: [
@@ -52,6 +50,7 @@ import { CoinlistComponent } from './coinlist/coinlist.component'
     MatInputModule,
     MatSelectModule,
     FormsModule,
+    // HighchartsChartComponent,
     RouterModule.forRoot([
       { path: 'graph', component: GraphComponent },
       { path: 'coinlist', component: CoinlistComponent },

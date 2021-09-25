@@ -19,3 +19,7 @@ h1 {
   margin-right: 8px;
   height: 25px;
 }
+
+mat-form-field {
+  margin-right: 1%;
+}
