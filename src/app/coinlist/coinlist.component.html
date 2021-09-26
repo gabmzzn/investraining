@@ -19,7 +19,7 @@
     <ng-container matColumnDef="website">
         <th mat-header-cell *matHeaderCellDef>WEBSITE</th>
         <td mat-cell *matCellDef="let element"><a mat-stroked-button (click)="$event.stopPropagation()"
-                href="{{element.website}}">LINK</a></td>
+                href="{{element.website}}">{{ element.website.slice(8)}}</a></td>
     </ng-container>
 
     <ng-container matColumnDef="launchdate">

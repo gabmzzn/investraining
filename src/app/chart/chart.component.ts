@@ -10,9 +10,9 @@ interface Currency {
 }
 
 @Component({
-  selector: 'app-graph',
-  templateUrl: './graph.component.html',
-  styleUrls: ['./graph.component.css'],
+  selector: 'app-chart',
+  templateUrl: './chart.component.html',
+  styleUrls: ['./chart.component.css'],
   animations: [
     trigger('openClose', [
       // ...
@@ -36,7 +36,7 @@ interface Currency {
   ]
 })
 
-export class GraphComponent {
+export class ChartComponent {
 
   data: any
   chart: any

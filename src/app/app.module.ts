@@ -17,24 +17,21 @@ import { MatSelectModule } from '@angular/material/select'
 import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component'
-import { GraphComponent } from './graph/graph.component'
-import { ListviewComponent } from './listview/listview.component'
+import { ChartComponent } from './chart/chart.component'
 import { Error404Component } from './error404/error404.component'
-import { StatsComponent } from './stats/stats.component'
+import { NewsComponent } from './news/news.component'
 import { AboutComponent } from './about/about.component'
-import { PeriodictableComponent } from './periodictable/periodictable.component'
 import { CoinlistComponent } from './coinlist/coinlist.component'
+import { MatTabsModule } from '@angular/material/tabs'
 import { HighchartsChartComponent } from 'highcharts-angular'
 
 @NgModule({
   declarations: [
     AppComponent,
-    GraphComponent,
-    ListviewComponent,
+    ChartComponent,
     Error404Component,
-    StatsComponent,
+    NewsComponent,
     AboutComponent,
-    PeriodictableComponent,
     CoinlistComponent,
   ],
   imports: [
@@ -49,14 +46,13 @@ import { HighchartsChartComponent } from 'highcharts-angular'
     MatTableModule,
     MatInputModule,
     MatSelectModule,
+    MatTabsModule,
     FormsModule,
     // HighchartsChartComponent,
     RouterModule.forRoot([
-      { path: 'graph', component: GraphComponent },
+      { path: 'chart', component: ChartComponent },
       { path: 'coinlist', component: CoinlistComponent },
-      { path: 'listview', component: ListviewComponent },
-      { path: 'periodictable', component: PeriodictableComponent },
-      { path: 'stats', component: StatsComponent },
+      { path: 'news', component: NewsComponent },
       { path: 'about', component: AboutComponent },
       { path: '', redirectTo: '/graph', pathMatch: 'full' },
       { path: '**', component: Error404Component }
