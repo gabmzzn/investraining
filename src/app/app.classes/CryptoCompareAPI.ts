@@ -20,14 +20,9 @@ export class CryptoCompareAPI {
             let high = json.Data.Data.map((a: { high: any }) => a.high)
             let low = json.Data.Data.map((b: { low: any }) => b.low)
             let array: any[] = []
-
-            for (let i = 0; i < high.length; i++) {
-                array[i] = (high[i] + low[i]) / 2
-            }
-
             let data: any = []
-
             for (let i = 0; i < limit; i++) {
+                array[i] = (high[i] + low[i]) / 2
                 data.push({ x: i, y: array[i] })
             }
 
@@ -39,9 +34,7 @@ export class CryptoCompareAPI {
 
         let url = 'https://min-api.cryptocompare.com/data/all/coinlist'
         const json = await fetch(url).then(res => res.json())
-
         let array = Object.entries(json.Data)
-
         return array
 
     }

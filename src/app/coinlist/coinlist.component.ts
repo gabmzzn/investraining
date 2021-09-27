@@ -65,7 +65,7 @@ const ELEMENT_DATA: Coin[] = [
     description: 'BNB powers the Binance ecosystem and is the native asset of the Binance Chain. BNB is a cryptocurrency created in June 2017, launched during an ICO in July, and initially issued as an ERC-20 token. Designed to be used for a fee reduction on the Binance exchange, its scope was extended over the years.BNB powers the Binance Chain as its native chain token. For instance, it is used to pay fees on the Binance DEX, issue new tokens, send/cancel orders, and transfer assets.BNB is also powering the Binance Smart Chain, which is an EVM-compatible network, forked from “go-ethereum”. It supports smart contracts and relies on a new consensus mechanism: Proof-of-Staked Authority (PoSA) consensus (“Parlia”), which incorporates elements from both Proof of Stake and Proof of Authority. BNB is used for delegated staking on the authority validator, leading to staking rewards for users and validators.Besides its on-chain functions, BNB has multiple additional use-cases such as fee discounts on multiple exchanges (e.g., Binance.com), payment asset on third-party services, and participation rights &amp; transacting currency on Binance Launchpad.At the core of the economics of BNB, there is a burn mechanism leading to period reductions in its total supply (~ every three months). From its initial maximum supply of 200 million, burns are expected to continue until the supply reaches 100 million.Telegram | Facebook | Instagram | YouTubeWhitepaper'
   },
   {
-    logo: 'https://cryptocompare.com/media/37746235/ada.png',
+    logo: 'https://cdn4.iconfinder.com/data/icons/crypto-currency-and-coin-2/256/cardano_ada-512.png',
     name: 'Cardano',
     symbol: 'ADA',
     website: 'https://cardano.org',

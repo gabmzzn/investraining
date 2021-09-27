@@ -23,6 +23,7 @@ import { NewsComponent } from './news/news.component'
 import { AboutComponent } from './about/about.component'
 import { CoinlistComponent } from './coinlist/coinlist.component'
 import { MatTabsModule } from '@angular/material/tabs'
+import { MatPaginatorModule } from '@angular/material/paginator'
 import { HighchartsChartComponent } from 'highcharts-angular'
 
 @NgModule({
@@ -48,13 +49,14 @@ import { HighchartsChartComponent } from 'highcharts-angular'
     MatSelectModule,
     MatTabsModule,
     FormsModule,
+    MatPaginatorModule,
     // HighchartsChartComponent,
     RouterModule.forRoot([
       { path: 'chart', component: ChartComponent },
       { path: 'coinlist', component: CoinlistComponent },
       { path: 'news', component: NewsComponent },
       { path: 'about', component: AboutComponent },
-      { path: '', redirectTo: '/graph', pathMatch: 'full' },
+      { path: '', redirectTo: '/chart', pathMatch: 'full' },
       { path: '**', component: Error404Component }
     ]),
     MaterialModule
