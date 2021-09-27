@@ -82,12 +82,10 @@ export class ChartComponent implements AfterViewInit {
 
   data: any
   chart: any
-  firstSlice: any = 0
-  lastSlice: any = 100
 
   selectedValue!: string
   selectedValueToCompare!: string
-  timeStamp!: number
+  timeStamp!: string
 
   currencies: Currency[] = [
     { name: 'BTC', img: 'https://cryptocompare.com/media/37746251/btc.png' },
@@ -111,9 +109,14 @@ export class ChartComponent implements AfterViewInit {
   constructor() { }
 
   OnDateChange(date: string) {
-    this.timeStamp = Date.parse(date)
+    //This is needed because 
+    //we need to slice 
+    //the timestamp to 10 characters
+    //or the API breaks
+    this.timeStamp = Date.parse(date).toString().slice(0, 10)
     this.drawGraph()
   }
+
   async drawGraph() {
     //Nullifier
     if (this.chart !== undefined) this.chart.destroy()
@@ -131,15 +134,14 @@ export class ChartComponent implements AfterViewInit {
     this.data = await new CryptoCompareAPI().getHistorical(
       this.selectedValue, this.selectedValueToCompare,
       100, this.timeStamp, 'average')
-
-    let dataset = this.data.slice(this.firstSlice, this.lastSlice)
-
+    console.log(this.timeStamp)
+    console.log(this.data)
     this.chart = new Chart('chart', {
       type: 'line',
       data: {
         datasets: [{
           backgroundColor: gradientHigh,
-          data: dataset,
+          data: this.data,
           fill: true,
           borderWidth: 2,
           borderColor: 'rgb(75, 192, 192)',
@@ -169,11 +171,5 @@ export class ChartComponent implements AfterViewInit {
         }
       }
     })
-  }
-
-  sliceData() {
-    let ok = this.data.slice(this.firstSlice++, this.lastSlice++)
-    this.chart.data.datasets[0].data = ok
-    this.chart.update()
   }
 }
