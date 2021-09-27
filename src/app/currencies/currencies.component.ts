@@ -3,9 +3,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 
 
 @Component({
-  selector: 'app-coinlist',
-  templateUrl: './coinlist.component.html',
-  styleUrls: ['./coinlist.component.css'],
+  selector: 'app-currencies',
+  templateUrl: './currencies.component.html',
+  styleUrls: ['./currencies.component.css'],
   animations: [
     trigger('detailExpand', [
       state('collapsed', style({ height: '0px', minHeight: '0' })),
@@ -15,7 +15,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   ],
 })
 
-export class CoinlistComponent {
+export class CurrenciesComponent {
 
   dataSource = ELEMENT_DATA;
   columnsToDisplay = ['logo', 'name', 'symbol', 'website', 'launchdate'];

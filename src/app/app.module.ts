@@ -15,25 +15,22 @@ import { MatTableModule } from '@angular/material/table'
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
 import { FormsModule } from '@angular/forms'
-
-import { AppComponent } from './app.component'
-import { ChartComponent } from './chart/chart.component'
-import { Error404Component } from './error404/error404.component'
-import { NewsComponent } from './news/news.component'
-import { AboutComponent } from './about/about.component'
-import { CoinlistComponent } from './coinlist/coinlist.component'
+import { MatIconModule } from '@angular/material/icon'
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatPaginatorModule } from '@angular/material/paginator'
+
+import { AppComponent } from './app.component'
+import { MarketComponent } from './market/market.component'
+import { AboutComponent } from './about/about.component'
+import { CurrenciesComponent } from './currencies/currencies.component'
 import { HighchartsChartComponent } from 'highcharts-angular'
 
 @NgModule({
   declarations: [
     AppComponent,
-    ChartComponent,
-    Error404Component,
-    NewsComponent,
+    MarketComponent,
     AboutComponent,
-    CoinlistComponent,
+    CurrenciesComponent,
   ],
   imports: [
     BrowserModule,
@@ -50,14 +47,14 @@ import { HighchartsChartComponent } from 'highcharts-angular'
     MatTabsModule,
     FormsModule,
     MatPaginatorModule,
+    MatIconModule,
     // HighchartsChartComponent,
     RouterModule.forRoot([
-      { path: 'chart', component: ChartComponent },
-      { path: 'coinlist', component: CoinlistComponent },
-      { path: 'news', component: NewsComponent },
+      { path: 'market', component: MarketComponent },
+      { path: 'coinlist', component: CurrenciesComponent },
       { path: 'about', component: AboutComponent },
-      { path: '', redirectTo: '/chart', pathMatch: 'full' },
-      { path: '**', component: Error404Component }
+      { path: '', redirectTo: '/market', pathMatch: 'full' },
+      { path: '**', redirectTo: '/market', pathMatch: 'full' }
     ]),
     MaterialModule
   ],

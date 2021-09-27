@@ -14,7 +14,7 @@ h1 {
   background-color: rgb(38, 39, 53);
 }
 
-.example-option-img {
+.icon {
   vertical-align: middle;
   margin-right: 8px;
   height: 25px;
@@ -22,4 +22,8 @@ h1 {
 
 mat-form-field {
   margin-right: 1%;
+}
+
+.tab-icon {
+  margin-right: 8px;
 }

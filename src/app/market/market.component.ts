@@ -11,40 +11,17 @@ interface Currency {
   img: string
 }
 
-export interface PeriodicElement {
+interface PeriodicElement {
   name: string
   position: number
   weight: number
   symbol: string
 }
 
-const ELEMENT_DATA: PeriodicElement[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  { position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F' },
-  { position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne' },
-  { position: 11, name: 'Sodium', weight: 22.9897, symbol: 'Na' },
-  { position: 12, name: 'Magnesium', weight: 24.305, symbol: 'Mg' },
-  { position: 13, name: 'Aluminum', weight: 26.9815, symbol: 'Al' },
-  { position: 14, name: 'Silicon', weight: 28.0855, symbol: 'Si' },
-  { position: 15, name: 'Phosphorus', weight: 30.9738, symbol: 'P' },
-  { position: 16, name: 'Sulfur', weight: 32.065, symbol: 'S' },
-  { position: 17, name: 'Chlorine', weight: 35.453, symbol: 'Cl' },
-  { position: 18, name: 'Argon', weight: 39.948, symbol: 'Ar' },
-  { position: 19, name: 'Potassium', weight: 39.0983, symbol: 'K' },
-  { position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca' },
-]
-
 @Component({
-  selector: 'app-chart',
-  templateUrl: './chart.component.html',
-  styleUrls: ['./chart.component.css'],
+  selector: 'app-market',
+  templateUrl: './market.component.html',
+  styleUrls: ['./market.component.css'],
   animations: [
     trigger('openClose', [
       // ...
@@ -68,23 +45,50 @@ const ELEMENT_DATA: PeriodicElement[] = [
   ]
 })
 
-export class ChartComponent implements AfterViewInit {
+export class MarketComponent implements AfterViewInit {
+
+  ELEMENT_DATA: PeriodicElement[] = [
+    { position: 0, name: '', weight: 0, symbol: '' },
+  ]
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+  dataSource = new MatTableDataSource<PeriodicElement>(this.ELEMENT_DATA);
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator
+  columns = [
+    {
+      columnDef: 'position',
+      header: 'No.',
+      cell: (element: PeriodicElement) => `${element.position}`
+    },
+    {
+      columnDef: 'name',
+      header: 'Name',
+      cell: (element: PeriodicElement) => `${element.name}`
+    },
+    {
+      columnDef: 'weight',
+      header: 'Weight',
+      cell: (element: PeriodicElement) => `${element.weight}`
+    },
+    {
+      columnDef: 'symbol',
+      header: 'Symbol',
+      cell: (element: PeriodicElement) => `${element.symbol}`
+    }
+  ];
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator
 
   ngAfterViewInit() {
     this.dataSource.paginator = this.paginator
   }
 
-
   data: any
   chart: any
 
-  selectedValue!: string
-  selectedValueToCompare!: string
+  selectedValue: string = 'BTC'
+  selectedValueToCompare: string = 'USD'
   timeStamp!: string
 
   currencies: Currency[] = [
@@ -106,6 +110,7 @@ export class ChartComponent implements AfterViewInit {
     { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' }
   ];
 
+
   constructor() { }
 
   OnDateChange(date: string) {
@@ -115,6 +120,16 @@ export class ChartComponent implements AfterViewInit {
     //or the API breaks
     this.timeStamp = Date.parse(date).toString().slice(0, 10)
     this.drawGraph()
+    this.ELEMENT_DATA = [
+      { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
+      { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
+      { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
+      { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
+      { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
+      { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
+      { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
+      { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
+    ]
   }
 
   async drawGraph() {
@@ -134,7 +149,6 @@ export class ChartComponent implements AfterViewInit {
     this.data = await new CryptoCompareAPI().getHistorical(
       this.selectedValue, this.selectedValueToCompare,
       100, this.timeStamp, 'average')
-    console.log(this.timeStamp)
     console.log(this.data)
     this.chart = new Chart('chart', {
       type: 'line',

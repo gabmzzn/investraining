@@ -8,9 +8,7 @@ export class CryptoCompareAPI {
             + fsym + '&tsym=' + tsym + '&limit=' + limit
             + '&aggregate=1&toTs=' + timestamp
         // + '&api_key=6e659e1244d9e7ccf3b6bdf6ada561766883d528a2025f01004787c096d1b005'
-        console.log(url)
         const json = await fetch(url).then(res => res.json())
-        console.log(json)
         switch (reference) {
             case 'average':
                 let high = json.Data.Data.map((r: { high: any }) => r.high)
@@ -40,6 +38,5 @@ export class CryptoCompareAPI {
         const json = await fetch(url).then(res => res.json())
         let array = Object.entries(json.Data)
         return array
-
     }
 }
