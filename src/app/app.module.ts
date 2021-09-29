@@ -18,18 +18,19 @@ import { FormsModule } from '@angular/forms'
 import { MatIconModule } from '@angular/material/icon'
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatSnackBarModule } from '@angular/material/snack-bar'
 
 import { AppComponent } from './app.component'
 import { MarketComponent } from './market/market.component'
 import { AboutComponent } from './about/about.component'
 import { CurrenciesComponent } from './currencies/currencies.component'
-import { HighchartsChartComponent } from 'highcharts-angular'
+import { HighchartsChartModule } from "highcharts-angular"
 
 @NgModule({
   declarations: [
     AppComponent,
-    MarketComponent,
     AboutComponent,
+    MarketComponent,
     CurrenciesComponent,
   ],
   imports: [
@@ -48,6 +49,8 @@ import { HighchartsChartComponent } from 'highcharts-angular'
     FormsModule,
     MatPaginatorModule,
     MatIconModule,
+    HighchartsChartModule,
+    MatSnackBarModule,
     // HighchartsChartComponent,
     RouterModule.forRoot([
       { path: 'market', component: MarketComponent },

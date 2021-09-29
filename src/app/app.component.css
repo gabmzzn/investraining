@@ -10,11 +10,7 @@
 
 :host ::ng-deep .content{
        color:orange;
-       width: 600px;
-}
-
-main {
-  padding: 50px;
+       width: 100%;
 }
 
 .toolbar {

@@ -1,3 +1,7 @@
+body {
+  padding: 50px;
+}
+
 h1 {
   position: absolute;
   top: 500px;
@@ -5,13 +9,19 @@ h1 {
 }
 
 #chart {
-  position: relative;
+  /* position: relative;
   top: 20px;
   left: 0px;
   padding: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.80);
   border-radius: 1%;
-  background-color: rgb(38, 39, 53);
+  background-color: rgb(38, 39, 53); */
+}
+
+highcharts-chart {
+  height: 85%;
+  width: 95%;
+  margin: 10px;
 }
 
 .icon {
@@ -20,10 +30,30 @@ h1 {
   height: 25px;
 }
 
+.input-values {
+  width: 100%;
+}
+
+mat-tab-group {
+  height: 100%;
+  width: 100%;
+}
+
 mat-form-field {
   margin-right: 1%;
 }
 
 .tab-icon {
   margin-right: 8px;
+}
+
+table {
+  width: 95%;
+  background-color: rgba(38, 39, 53, 0);
+  border-radius: 8px;
+overflow:hidden !important;
+}
+
+.highcharts-grid-line {
+	background-color: transparent;
 }
