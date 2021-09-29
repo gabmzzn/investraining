@@ -57,3 +57,8 @@ overflow:hidden !important;
 .highcharts-grid-line {
 	background-color: transparent;
 }
+
+highcharts-chart {
+  display: block;
+  width: 88%;
+}

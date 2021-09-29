@@ -53,9 +53,8 @@ interface HistoricalData {
 })
 
 export class MarketComponent implements OnInit {
-  durationInSeconds: number = 5
 
-  constructor(private _snackBar: MatSnackBar) { }
+  constructor(private snackBar: MatSnackBar) { }
 
   // Global Inputs
 
@@ -91,6 +90,7 @@ export class MarketComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.width = 100; this.height = 100
     this.timeStamp = Date.now() * 1000
     this.drawChart()
     this.getHistoricalData()
@@ -106,7 +106,7 @@ export class MarketComponent implements OnInit {
     this.drawChart()
     this.getHistoricalData()
     this.dataSource.paginator = this.paginator
-    this._snackBar.open('Market data has been successfully updated', '', {
+    this.snackBar.open('Market data has been successfully updated', '', {
       duration: 3000
     })
 
@@ -115,12 +115,14 @@ export class MarketComponent implements OnInit {
   //
   // Stats Chart
   //
-
+  width!: number
+  height!: number
   date = new FormControl(new Date());
   Highcharts: typeof Highcharts = Highcharts;
 
   chartOptions: Highcharts.Options = {
     chart: {
+      height: 600,
       backgroundColor: 'transparent',
     },
     xAxis: {
@@ -141,7 +143,7 @@ export class MarketComponent implements OnInit {
       trackBorderRadius: 0
     },
     series: [{
-      type: 'line',
+      type: 'area',
       data: [[Date.now(), 0], [Date.now() - 100000000000, 0]]
     }]
   }
@@ -150,11 +152,7 @@ export class MarketComponent implements OnInit {
     this.data = await new CryptoCompareAPI().getHistorical(
       this.selectedValue, this.selectedValueToCompare,
       999, this.timeStamp, 'average')
-    this.chartOptions = {
-      xAxis: { type: 'datetime' },
-      rangeSelector: { selected: 2 },
-      series: [{ type: 'line', data: this.data }],
-    }
+    this.chartOptions = { series: [{ type: 'line', data: this.data }] }
   }
 
 
@@ -203,23 +201,12 @@ export class MarketComponent implements OnInit {
     },
   ]
 
-  // OnDateChange(date: string) {
-  //   //This is needed because 
-  //   //we need to slice 
-  //   //the timestamp to 10 characters
-  //   //or the API breaks
-  //   this.timeStamp = Date.parse(date).toString().slice(0, 10)
-  //   this.drawGraph()
-  //   this.ELEMENT_DATA = [
-  //     { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  //     { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  //     { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  //     { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  //     { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-  //     { position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C' },
-  //     { position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N' },
-  //     { position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O' },
-  //   ]
-  // }
+
+  //
+  // News Articles
+  //
+  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
+  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
+  originally bred for hunting.`;
 
 }
