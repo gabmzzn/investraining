@@ -24,8 +24,9 @@ import { AppComponent } from './app.component'
 import { MarketComponent } from './market/market.component'
 import { AboutComponent } from './about/about.component'
 import { CurrenciesComponent } from './currencies/currencies.component'
-import { HighchartsChartModule } from "highcharts-angular"
+
 import { NgxEchartsModule } from 'ngx-echarts'
+
 
 
 @NgModule({
@@ -51,10 +52,8 @@ import { NgxEchartsModule } from 'ngx-echarts'
     FormsModule,
     MatPaginatorModule,
     MatIconModule,
-    HighchartsChartModule,
     MatSnackBarModule,
     MaterialModule,
-    // HighchartsChartComponent,
     RouterModule.forRoot([
       { path: 'market', component: MarketComponent },
       { path: 'coinlist', component: CurrenciesComponent },
