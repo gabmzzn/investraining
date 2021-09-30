@@ -65,6 +65,7 @@ export class MarketComponent implements OnInit {
   selectedValueToCompare: string = 'USD'
   timeStamp!: number
   data: any = []
+  chart: any = new CryptoCompareAPI()
 
   currencies: Currency[] = [
     { name: 'BTC', img: 'https://cryptocompare.com/media/37746251/btc.png' },
@@ -90,14 +91,16 @@ export class MarketComponent implements OnInit {
 
   // ngAfterViewInit() {this.dataSource.paginator = this.paginator}
 
-  ngOnInit() {
+  async ngOnInit() {
     this.timeStamp = Date.now() * 1000
     this.drawChart()
     this.getHistoricalData()
+    this.cards = await this.chart.getNewsFeed(this.selectedValue)
+    // console.log(await cp.getCoinList())
     // this.dataSource.paginator = this.paginator
   }
 
-  OnDateChange(date: string) {
+  async OnDateChange(date: string) {
     //This is needed because 
     //we need to slice 
     //the timestamp to 10 characters
@@ -105,6 +108,7 @@ export class MarketComponent implements OnInit {
     this.timeStamp = Date.parse(date) / 1000
     this.drawChart()
     this.getHistoricalData()
+    this.cards = await this.chart.getNewsFeed(this.selectedValue)
     // this.dataSource.paginator = this.paginator
     this.snackBar.open('Market data has been successfully updated', '', {
       duration: 3000
@@ -186,7 +190,7 @@ export class MarketComponent implements OnInit {
   };
 
   async drawChart() {
-    this.data = await new CryptoCompareAPI().getHistorical(
+    this.data = await this.chart.getHistorical(
       this.selectedValue, this.selectedValueToCompare,
       999, this.timeStamp, 'close')
     this.mergeOptions = { series: [{ data: this.data }] }
@@ -240,10 +244,36 @@ export class MarketComponent implements OnInit {
 
 
   //
-  // News Articles
+  // News Feed
   //
-  longText = `The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog
-  from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was
-  originally bred for hunting.`;
+  title = 'Vulnerable: Kraken reveals many US Bitcoin ATMs still use default admin QR codes'
+  body = `Kraken has urged BATMTwo ATM owners and operators to 
+  change the admin QR code for their ATMs to avoid potential attacks.`
+  source_info = 'CoinTelegraph'
+  published_on = 1632973503
+  imageurl = 'https://images.cryptocompare.com/news/default/cointelegraph.png'
+  url = 'https://cointelegraph.com/news/vulnerable-kraken-reveals-many-us-bitcoin-atms-still-use-default-admin-qr-codes'
 
+
+  // cards = [
+  //   {
+  //     title: (e: NewsFeed) => `${e.title}`,
+  //     body: (e: NewsFeed) => `${e.body}`,
+  //     source_info: (e: NewsFeed) => `${e.source_info}`,
+  //     published_on: (e: NewsFeed) => `${e.published_on}`,
+  //     imageurl: (e: NewsFeed) => `${e.imageurl}`,
+  //     url: (e: NewsFeed) => `${e.url}`,
+  //   },
+  // ]
+
+  cards = [
+    {
+      title: '',
+      body: '',
+      source_info: { name: '' },
+      published_on: 0,
+      imageurl: '',
+      url: '',
+    },
+  ]
 }
