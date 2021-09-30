@@ -11,32 +11,33 @@ export class CryptoCompareAPI {
         const json = await fetch(url).then(res => res.json())
 
         switch (reference) {
-            case 'average':
-                // let high = json.Data.Data.map((r: { high: any }) => r.high)
-                // let low = json.Data.Data.map((r: { low: any }) => r.low)
-                // let array: any = [], data: any = []
-                // for (let i = 0; i < limit; i++) {
-                //     array[i] = (high[i] + low[i]) / 2
-                //     data.push({ x: i, y: array[i] })
-                // }
-                let data = json.Data.Data.map((r: { time: any; close: any }) => Object.values(({ time: r.time * 1000, close: r.close })))
-                console.log(data)
-                return data
+            // case 'average':
+            //     let high = json.Data.Data.map((r: { high: any }) => r.high)
+            //     let low = json.Data.Data.map((r: { low: any }) => r.low)
+            //     let array: any = [], data: any = []
+            //     for (let i = 0; i < limit; i++) {
+            //         array[i] = (high[i] + low[i]) / 2
+            //         data.push({ x: i, y: array[i] })
+            //     }
+            //     return data
             case 'high':
-                return json.Data.Data.map((r: { high: any }) => r.high)
+                return json.Data.Data.map((r: { time: any; high: any }) =>
+                    Object.values({ time: r.time * 1000, high: r.high }))
             case 'low':
-                return json.Data.Data.map((r: { low: any }) => r.low)
+                return json.Data.Data.map((r: { time: any; low: any }) =>
+                    Object.values({ time: r.time * 1000, low: r.low }))
             case 'open':
-                return json.Data.Data.map((r: { open: any }) => r.open)
+                return json.Data.Data.map((r: { time: any; open: any }) =>
+                    Object.values({ time: r.time * 1000, open: r.open }))
             case 'close':
-                return json.Data.Data.map((r: { close: any }) => r.close)
+                return json.Data.Data.map((r: { time: any; close: any }) =>
+                    Object.values({ time: r.time * 1000, close: r.close }))
             case 'complete':
                 return json.Data.Data
         }
     }
 
     async getCoinList() {
-
         let url = 'https://min-api.cryptocompare.com/data/all/coinlist'
         const json = await fetch(url).then(res => res.json())
         let array = Object.entries(json.Data)

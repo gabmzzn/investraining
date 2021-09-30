@@ -1,13 +1,14 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
 import { trigger, state, style, animate, transition } from '@angular/animations'
 import { CryptoCompareAPI } from '../app.classes/CryptoCompareAPI'
-import Chart from 'chart.js/auto'
 import { CurrencyPipe } from '@angular/common'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
-import * as Highcharts from "highcharts/highstock"
 import { FormControl } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
+
+import { ECharts, EChartsOption } from 'echarts'
+import * as echarts from 'echarts'
 
 
 interface Currency {
@@ -54,9 +55,11 @@ interface HistoricalData {
 
 export class MarketComponent implements OnInit {
 
-  constructor(private snackBar: MatSnackBar) { }
+  //
+  // Global Variables
+  //
 
-  // Global Inputs
+  constructor(private snackBar: MatSnackBar) { }
 
   selectedValue: string = 'BTC'
   selectedValueToCompare: string = 'USD'
@@ -82,19 +85,16 @@ export class MarketComponent implements OnInit {
     { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' }
   ]
 
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator
+  // @ViewChild(MatPaginator)
+  // paginator!: MatPaginator
 
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator
-  }
+  // ngAfterViewInit() {this.dataSource.paginator = this.paginator}
 
   ngOnInit() {
-    this.width = 100; this.height = 100
     this.timeStamp = Date.now() * 1000
     this.drawChart()
     this.getHistoricalData()
-    this.dataSource.paginator = this.paginator
+    // this.dataSource.paginator = this.paginator
   }
 
   OnDateChange(date: string) {
@@ -105,54 +105,91 @@ export class MarketComponent implements OnInit {
     this.timeStamp = Date.parse(date) / 1000
     this.drawChart()
     this.getHistoricalData()
-    this.dataSource.paginator = this.paginator
+    // this.dataSource.paginator = this.paginator
     this.snackBar.open('Market data has been successfully updated', '', {
       duration: 3000
     })
 
   }
 
+
   //
   // Stats Chart
   //
-  width!: number
-  height!: number
-  date = new FormControl(new Date());
-  Highcharts: typeof Highcharts = Highcharts;
 
-  chartOptions: Highcharts.Options = {
-    chart: {
-      height: 600,
-      backgroundColor: 'transparent',
+  date = new FormControl(new Date());
+  mergeOptions = {};
+  chartOption: EChartsOption = {
+    tooltip: {
+      trigger: 'axis',
+      axisPointer: {
+        type: 'cross',
+        animation: false,
+        label: {
+          backgroundColor: '#505765'
+        }
+      }
     },
+    // title: {
+    //   left: 'center',
+    //   text: this.selectedValue + ' to ' + this.selectedValueToCompare
+    // },
     xAxis: {
-      type: 'datetime',
+      type: 'time',
+      // boundaryGap: false,
+      // data: date
     },
     yAxis: {
-      gridLineColor: 'transparent',
+      type: 'value',
+      boundaryGap: false,
+      splitLine: {
+        show: false
+      }
     },
-    rangeSelector: { selected: 2 },
-    scrollbar: {
-      barBackgroundColor: 'transparent',
-      buttonBackgroundColor: 'transparent',
-      trackBackgroundColor: 'transparent',
-      trackBorderColor: 'transparent',
-      buttonBorderWidth: 0,
-      buttonBorderRadius: 0,
-      trackBorderWidth: 0,
-      trackBorderRadius: 0
-    },
-    series: [{
-      type: 'area',
-      data: [[Date.now(), 0], [Date.now() - 100000000000, 0]]
-    }]
-  }
+    dataZoom: [
+      {
+        type: 'inside',
+        start: 80,
+        end: 100
+      },
+      {
+        start: 80,
+        end: 100
+      }
+    ],
+    series: [
+      {
+        name: this.selectedValueToCompare,
+        type: 'line',
+        animationThreshold: 2000,
+        showSymbol: false,
+        symbolSize: 8,
+        sampling: 'lttb',
+        itemStyle: {
+          color: 'rgb(255, 70, 131)'
+        },
+        areaStyle: {
+          color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
+            {
+              offset: 1,
+              color: 'transparent'
+            },
+            {
+              offset: 0,
+              color: 'rgb(255, 70, 131)'
+            }
+          ])
+        },
+        data: [[Date.now(), 0], [Date.now() - 100000000000, 0]]
+      }
+    ]
+  };
 
   async drawChart() {
     this.data = await new CryptoCompareAPI().getHistorical(
       this.selectedValue, this.selectedValueToCompare,
-      999, this.timeStamp, 'average')
-    this.chartOptions = { series: [{ type: 'line', data: this.data }] }
+      999, this.timeStamp, 'close')
+    this.mergeOptions = { series: [{ data: this.data }] }
   }
 
 

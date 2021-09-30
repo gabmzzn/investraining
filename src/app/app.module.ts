@@ -25,6 +25,8 @@ import { MarketComponent } from './market/market.component'
 import { AboutComponent } from './about/about.component'
 import { CurrenciesComponent } from './currencies/currencies.component'
 import { HighchartsChartModule } from "highcharts-angular"
+import { NgxEchartsModule } from 'ngx-echarts'
+
 
 @NgModule({
   declarations: [
@@ -51,6 +53,7 @@ import { HighchartsChartModule } from "highcharts-angular"
     MatIconModule,
     HighchartsChartModule,
     MatSnackBarModule,
+    MaterialModule,
     // HighchartsChartComponent,
     RouterModule.forRoot([
       { path: 'market', component: MarketComponent },
@@ -59,7 +62,9 @@ import { HighchartsChartModule } from "highcharts-angular"
       { path: '', redirectTo: '/market', pathMatch: 'full' },
       { path: '**', redirectTo: '/market', pathMatch: 'full' }
     ]),
-    MaterialModule
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    })
   ],
   exports: [RouterModule],
   providers: [],

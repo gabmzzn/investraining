@@ -8,7 +8,7 @@ h1 {
   color: white;
 }
 
-#chart {
+/* #chart { */
   /* position: relative;
   top: 20px;
   left: 0px;
@@ -16,13 +16,13 @@ h1 {
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.80);
   border-radius: 1%;
   background-color: rgb(38, 39, 53); */
-}
+/* } */
 
-highcharts-chart {
+/* highcharts-chart {
   height: 85%;
   width: 95%;
   margin: 10px;
-}
+} */
 
 .icon {
   vertical-align: middle;
@@ -54,11 +54,11 @@ table {
 overflow:hidden !important;
 }
 
-.highcharts-grid-line {
+/* .highcharts-grid-line {
 	background-color: transparent;
 }
 
 highcharts-chart {
   display: block;
   width: 88%;
-}
+} */
