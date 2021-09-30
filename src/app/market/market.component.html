@@ -38,14 +38,16 @@
         <mat-icon class="tab-icon">trending_up</mat-icon>
         Stats Chart
       </ng-template>
-      <div echarts [options]="chartOption" [merge]="mergeOptions" class="demo-chart"></div>
+      <div echarts [options]="chartOption" [merge]="mergeOptions" class="demo-chart" style="width: 100%;height: 450px;">
+      </div>
     </mat-tab>
-    <!-- HISTORICAL DATA -->
+
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="tab-icon">view_list</mat-icon>
         Historical Data
       </ng-template>
+      <!-- HISTORICAL DATA -->
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" style="width: 100%;">
           <ng-container matColumnDef="time">
@@ -68,23 +70,37 @@
       </div>
     </mat-tab>
 
-    <!-- NEWS ARTICLES -->
+
     <mat-tab>
       <ng-template mat-tab-label>
         <mat-icon class="tab-icon">star_half</mat-icon>
-        News Articles
+        News Feed
       </ng-template>
-      <mat-card class="example-card">
-        <mat-card-title-group>
-          <mat-card-title>Shiba Inu</mat-card-title>
-          <mat-card-subtitle>Small</mat-card-subtitle>
-          <img mat-card-sm-image src="https://material.angular.io/assets/img/examples/shiba2.jpg">
-        </mat-card-title-group>
-        <mat-card-content>
-          {{longText}}
-        </mat-card-content>
-      </mat-card>
+      <!-- NEWS FEED -->
+      <div class="news-feed">
+        <div fxLayout="row nowrap" fxLayoutGap="16px grid">
+          <ng-container fxFlex="25" fxFlex.sm="33.3" fxFlex.xs="50" *ngFor="let card of cards">
+            <mat-card>
+              <mat-card-title-group>
+                <mat-card-title><a href={{card.url}}>{{card.title}}</a></mat-card-title>
+                <mat-card-subtitle>{{card.published_on * 1000 | date}}</mat-card-subtitle>
+                <img mat-card-sm-image src={{card.imageurl}}>
+              </mat-card-title-group>
+              <mat-card-content>
+                {{card.body}}
+              </mat-card-content>
+              <mat-card-actions>
+                <a mat-stroked-button href={{card.url}} target="_blank">
+                  Source: {{card.source_info['name']}}
+                  <mat-icon style="font-size: 20px;color: grey">
+                    open_in_new
+                  </mat-icon>
+                </a>
+              </mat-card-actions>
+            </mat-card>
+          </ng-container>
+        </div>
+      </div>
     </mat-tab>
   </mat-tab-group>
-
 </body>

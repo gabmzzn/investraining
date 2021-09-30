@@ -11,10 +11,6 @@ import { ECharts, EChartsOption } from 'echarts'
 import * as echarts from 'echarts'
 
 
-interface Currency {
-  name: string
-  img: string
-}
 
 interface HistoricalData {
   time: number
@@ -67,7 +63,7 @@ export class MarketComponent implements OnInit {
   data: any = []
   chart: any = new CryptoCompareAPI()
 
-  currencies: Currency[] = [
+  currencies = [
     { name: 'BTC', img: 'https://cryptocompare.com/media/37746251/btc.png' },
     { name: 'ETH', img: 'https://cryptocompare.com/media/37746238/eth.png' },
     { name: 'XLM', img: 'https://cdn-icons-png.flaticon.com/512/5245/5245869.png' },
@@ -80,7 +76,7 @@ export class MarketComponent implements OnInit {
     { name: 'LINK', img: 'https://cryptocompare.com/media/37746242/link.png' },
   ]
 
-  currenciesToCompare: Currency[] = [
+  currenciesToCompare = [
     { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' },
     { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' },
     { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' }
@@ -208,7 +204,7 @@ export class MarketComponent implements OnInit {
   dataSource = new MatTableDataSource<HistoricalData>(this.HISTORICAL_DATA)
 
   async getHistoricalData() {
-    const HISTORICAL_DATA = await new CryptoCompareAPI().getHistorical(
+    let HISTORICAL_DATA = await new CryptoCompareAPI().getHistorical(
       this.selectedValue, this.selectedValueToCompare,
       20, this.timeStamp, 'complete')
     this.dataSource = new MatTableDataSource<HistoricalData>(HISTORICAL_DATA)
@@ -218,27 +214,27 @@ export class MarketComponent implements OnInit {
     // {
     //   columnDef: 'time',
     //   header: 'Date',
-    //   cell: (element: HistoricalData) => `${element.time * 1000}`
+    //   cell: (e: HistoricalData) => `${e.time * 1000}`
     // },
     {
       columnDef: 'high',
       header: 'High',
-      cell: (element: HistoricalData) => `$${element.high}`
+      cell: (e: HistoricalData) => `$${e.high}`
     },
     {
       columnDef: 'low',
       header: 'Low',
-      cell: (element: HistoricalData) => `$${element.low}`
+      cell: (e: HistoricalData) => `$${e.low}`
     },
     {
       columnDef: 'open',
       header: 'Open',
-      cell: (element: HistoricalData) => `$${element.open}`
+      cell: (e: HistoricalData) => `$${e.open}`
     },
     {
       columnDef: 'close',
       header: 'Close',
-      cell: (element: HistoricalData) => `$${element.close}`
+      cell: (e: HistoricalData) => `$${e.close}`
     },
   ]
 

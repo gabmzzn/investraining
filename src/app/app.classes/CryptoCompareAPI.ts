@@ -33,14 +33,35 @@ export class CryptoCompareAPI {
                 return json.Data.Data.map((r: { time: any; close: any }) =>
                     Object.values({ time: r.time * 1000, close: r.close }))
             case 'complete':
-                return json.Data.Data
+                return json.Data.Data.reverse()
         }
     }
 
-    async getCoinList() {
-        let url = 'https://min-api.cryptocompare.com/data/all/coinlist'
-        const json = await fetch(url).then(res => res.json())
-        let array = Object.entries(json.Data)
-        return array
+    async getNewsFeed(fsym: string) {
+        let url = 'https://min-api.cryptocompare.com/data/v2/news/?categories=' + fsym //+ '&excludeCategories=Sponsored'
+        let json = await fetch(url).then(res => res.json())
+        return json.Data
+        // .map((r: {
+        //     body: any
+        //     imageurl: any
+        //     published_on: any
+        //     source_info: any
+        //     title: any
+        //     url: any
+        // }) => Object.values({
+        //     body: r.body,
+        //     imageurl: r.imageurl,
+        //     published_on: r.published_on,
+        //     source_info: r.source_info['name'],
+        //     title: r.title,
+        //     url: r.url
+        // }))
     }
+
+    // async getCoinList() {
+    //     let url = 'https://min-api.cryptocompare.com/data/all/coinlist'
+    //     const json = await fetch(url).then(res => res.json())
+    //     let array = Object.values(json.Data)
+    //     return array
+    // }
 }
