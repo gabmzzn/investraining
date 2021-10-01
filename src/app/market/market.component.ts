@@ -92,14 +92,6 @@ export class MarketComponent implements OnInit {
     this.mergeOptions = { series: [{ data: this.data }] }
   }
 
-  async CurrencyInfo() {
-    const url = 'https://min-api.cryptocompare.com/data/all/coinlist?fsym=BTC'
-    const json = await fetch(url).then(res => res.json())
-    eval("json.Data." + this.selectedCurrency + ".Description")
-    eval("json.Data." + this.selectedCurrency + ".FullName")
-    eval("json.Data." + this.selectedCurrency + ".SortOrder")
-  }
-
   mergeOptions = {};
   chartOption: EChartsOption = {
     tooltip: {
@@ -163,6 +155,18 @@ export class MarketComponent implements OnInit {
       }
     ]
   };
+
+  titleInfo!: string
+  descriptionInfo!: string
+
+  async CurrencyInfo() {
+    const url = 'https://min-api.cryptocompare.com/data/all/coinlist?fsym=' + this.selectedCurrency
+    const json = await fetch(url).then(res => res.json())
+    this.titleInfo = "What is " + eval("json.Data." + this.selectedCurrency + ".FullName") + "?"
+    this.descriptionInfo = (eval("json.Data." + this.selectedCurrency + ".Description")).replaceAll(/\. /g, '.<br><br>')
+    console.log(this.descriptionInfo)
+    eval("json.Data." + this.selectedCurrency + ".SortOrder")
+  }
 
 
   // Historical Data
