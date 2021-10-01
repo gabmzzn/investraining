@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core'
 import { trigger, state, style, animate, transition } from '@angular/animations'
 import { CurrencyPipe } from '@angular/common'
 import { MatPaginator } from '@angular/material/paginator'
@@ -39,36 +39,19 @@ import * as echarts from 'echarts'
 
 export class MarketComponent implements OnInit {
 
-  //
-  // Global Variables
-  //
-
   constructor(private snackBar: MatSnackBar) { }
 
-  selectedValue: string = 'BTC'
-  selectedValueToCompare: string = 'USD'
-  timeStamp: number = Date.now() * 1000
+  ngOnInit() {
+    this.getMarketData()
+  }
+
+  selectedCurrency: string = 'BTC'
+  selectedCurrencyToCompare: string = 'USD'
+  date: any = new Date()
   data: any = []
   JSONData: any
-
-  currencies = [
-    { name: 'BTC', img: 'https://cryptocompare.com/media/37746251/btc.png' },
-    { name: 'ETH', img: 'https://cryptocompare.com/media/37746238/eth.png' },
-    { name: 'XLM', img: 'https://cdn-icons-png.flaticon.com/512/5245/5245869.png' },
-    { name: 'BNB', img: 'https://www.cryptocompare.com/media/37746880/bnb.png' },
-    { name: 'ADA', img: 'https://cryptocompare.com/media/37746235/ada.png' },
-    { name: 'DOGE', img: 'https://cryptocompare.com/media/37746339/doge.png' },
-    { name: 'XRP', img: 'https://cryptocompare.com/media/38553096/xrp.png' },
-    { name: 'LTC', img: 'https://cryptocompare.com/media/37746243/ltc.png' },
-    { name: 'BCH', img: 'https://cryptocompare.com/media/37746245/bch.png' },
-    { name: 'LINK', img: 'https://cryptocompare.com/media/37746242/link.png' },
-  ]
-
-  currenciesToCompare = [
-    { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' },
-    { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' },
-    { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' }
-  ]
+  isLoading: boolean = false
+  cards!: any
 
   async getJSONData(fsym: string, tsym: string, timestamp: number, limit: number) {
     const url = 'https://min-api.cryptocompare.com/data/v2/histoday?fsym='
@@ -78,38 +61,30 @@ export class MarketComponent implements OnInit {
     return json.Data.Data
   }
 
-  async ngOnInit() {
+  async getMarketData() {
     this.JSONData = await this.getJSONData(
-      this.selectedValue,
-      this.selectedValueToCompare,
-      this.timeStamp,
+      this.selectedCurrency,
+      this.selectedCurrencyToCompare,
+      Date.parse(this.date) / 1000,
       999)
-
     this.StatsChart()
+    this.CurrencyInfo()
     this.HistoricalData()
-    this.cards = await this.NewsFeed(this.selectedValue, this.timeStamp / 1000)
+    this.NewsFeed()
   }
 
-  async updateData(selectedDate: string) {
-    this.timeStamp = Date.parse(selectedDate) / 1000
-    this.JSONData = await this.getJSONData(
-      this.selectedValue,
-      this.selectedValueToCompare,
-      this.timeStamp,
-      999)
-
-    this.StatsChart()
-    this.HistoricalData()
-    this.cards = await this.NewsFeed(this.selectedValue, this.timeStamp)
-    this.snackBar.open('Market data has been successfully updated', '', {
-      duration: 3000
-    })
+  async updateData() {
+    this.isLoading = true
+    this.getMarketData()
+      .then(() => {
+        this.snackBar.open('Market data has been successfully updated', '',
+          { duration: 3000 })
+        this.isLoading = false
+      })
   }
 
 
-  //
   // Stats Chart
-  //
 
   async StatsChart() {
     this.data = await this.JSONData.map((r: { time: any; close: any }) =>
@@ -117,14 +92,14 @@ export class MarketComponent implements OnInit {
     this.mergeOptions = { series: [{ data: this.data }] }
   }
 
-  // async drawChart() {
-  //   this.data = await this.chart.getHistorical(
-  //     this.selectedValue, this.selectedValueToCompare,
-  //     999, this.timeStamp, 'close')
-  //   this.mergeOptions = { series: [{ data: this.data }] }
-  // }
+  async CurrencyInfo() {
+    const url = 'https://min-api.cryptocompare.com/data/all/coinlist?fsym=BTC'
+    const json = await fetch(url).then(res => res.json())
+    eval("json.Data." + this.selectedCurrency + ".Description")
+    eval("json.Data." + this.selectedCurrency + ".FullName")
+    eval("json.Data." + this.selectedCurrency + ".SortOrder")
+  }
 
-  date = new FormControl(new Date());
   mergeOptions = {};
   chartOption: EChartsOption = {
     tooltip: {
@@ -139,12 +114,10 @@ export class MarketComponent implements OnInit {
     },
     // title: {
     //   left: 'center',
-    //   text: this.selectedValue + ' to ' + this.selectedValueToCompare
+    //   text: this.selectedCurrency + ' to ' + this.selectedCurrencyToCompare
     // },
     xAxis: {
       type: 'time',
-      // boundaryGap: false,
-      // data: date
     },
     yAxis: {
       type: 'value',
@@ -166,11 +139,11 @@ export class MarketComponent implements OnInit {
     ],
     series: [
       {
-        name: this.selectedValueToCompare,
+        name: this.selectedCurrencyToCompare,
         type: 'line',
         animationThreshold: 2000,
         showSymbol: false,
-        symbolSize: 8,
+        symbolSize: 9,
         sampling: 'lttb',
         itemStyle: {
           color: 'rgb(255, 70, 131)'
@@ -187,80 +160,74 @@ export class MarketComponent implements OnInit {
             }
           ])
         },
-        data: [[Date.now(), 0], [Date.now() - 100000000000, 0]]
       }
     ]
   };
 
 
-  //
   // Historical Data
-  //
 
   displayedColumns: string[] = ['time', 'high', 'low', 'open', 'close']
-  HISTORICAL_DATA = [{ time: 0, high: 0, low: 0, open: 0, close: 0, volumefrom: 0, volumeto: 0 }]
-  dataSource = new MatTableDataSource(this.HISTORICAL_DATA)
+  dataSource = new MatTableDataSource([{ time: 0, high: 0, low: 0, open: 0, close: 0 }])
 
   async HistoricalData() {
-    let HISTORICAL_DATA = this.JSONData.slice(this.JSONData.length - 50).reverse()
-    this.dataSource = new MatTableDataSource(HISTORICAL_DATA)
+    this.dataSource = new MatTableDataSource(
+      this.JSONData.slice(this.JSONData.length - 50).reverse())
   }
 
-  // async getHistoricalData() {
-  //   let HISTORICAL_DATA = await new CryptoCompareAPI().getHistorical(
-  //     this.selectedValue, this.selectedValueToCompare,
-  //     20, this.timeStamp, 'complete')
-  //   this.dataSource = new MatTableDataSource<HistoricalData>(HISTORICAL_DATA)
-  // }
-
   columns = [
-    // {
-    //   columnDef: 'time',
-    //   header: 'Date',
-    //   cell: (e: HistoricalData) => `${e.time * 1000}`
-    // },
     {
       columnDef: 'high',
       header: 'High',
-      cell: (e: any) => `$${e.high}`
+      cell: (e: any) => `$ ${e.high}`
     },
     {
       columnDef: 'low',
       header: 'Low',
-      cell: (e: any) => `$${e.low}`
+      cell: (e: any) => `$ ${e.low}`
     },
     {
       columnDef: 'open',
       header: 'Open',
-      cell: (e: any) => `$${e.open}`
+      cell: (e: any) => `$ ${e.open}`
     },
     {
       columnDef: 'close',
       header: 'Close',
-      cell: (e: any) => `$${e.close}`
+      cell: (e: any) => `$ ${e.close}`
     },
   ]
 
 
-  //
   // News Feed
-  //
 
-  async NewsFeed(fsym: string, timestamp: number) {
-    let url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories=' + fsym
-      + '&excludeCategories=Sponsored&lTs=' + timestamp
-    let json = await fetch(url).then(res => res.json())
-    return json.Data
+  async NewsFeed() {
+    const url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories=' + this.selectedCurrency
+      + '&excludeCategories=Sponsored&lTs=' + Date.parse(this.date) / 1000
+    const json = await fetch(url).then(res => res.json())
+    this.cards = json.Data
   }
 
-  cards = [
-    {
-      title: '',
-      body: '',
-      source_info: { name: '' },
-      published_on: 0,
-      imageurl: '',
-      url: '',
-    },
+
+  // Form Data
+
+  currencies = [
+    { name: 'BTC', img: 'https://cryptocompare.com/media/37746251/btc.png' },
+    { name: 'ETH', img: 'https://cryptocompare.com/media/37746238/eth.png' },
+    { name: 'XLM', img: 'https://cdn-icons-png.flaticon.com/512/5245/5245869.png' },
+    { name: 'BNB', img: 'https://www.cryptocompare.com/media/37746880/bnb.png' },
+    { name: 'ADA', img: 'https://cryptocompare.com/media/37746235/ada.png' },
+    { name: 'DOGE', img: 'https://cryptocompare.com/media/37746339/doge.png' },
+    { name: 'XRP', img: 'https://cryptocompare.com/media/38553096/xrp.png' },
+    { name: 'LTC', img: 'https://cryptocompare.com/media/37746243/ltc.png' },
+    { name: 'BCH', img: 'https://cryptocompare.com/media/37746245/bch.png' },
+    { name: 'LINK', img: 'https://cryptocompare.com/media/37746242/link.png' },
   ]
+
+  currenciesToCompare = [
+    { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' },
+    { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' },
+    { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' }
+  ]
+
 }

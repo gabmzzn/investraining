@@ -15,6 +15,12 @@ a {
 
 .news-feed {
     padding: 16px;
+    display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: flex-start;
+  align-content: flex-start;
 }
 
 .news-feed > mat-card {
@@ -26,15 +32,10 @@ mat-card {
   width: 600px;
 }
 
-/* .card {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: flex-start;
-  align-content: flex-start;
+.card {
+  
 
-} */
+}
 
 .icon {
   vertical-align: middle;
@@ -49,6 +50,10 @@ mat-card {
 mat-tab-group {
   height: 100%;
   width: 100%;
+}
+
+ p {
+  color: rgb(184, 184, 184);
 }
 
 mat-form-field {

@@ -14,11 +14,12 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatTableModule } from '@angular/material/table'
 import { MatInputModule } from '@angular/material/input'
 import { MatSelectModule } from '@angular/material/select'
-import { FormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { MatIconModule } from '@angular/material/icon'
 import { MatTabsModule } from '@angular/material/tabs'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 
 import { AppComponent } from './app.component'
 import { MarketComponent } from './market/market.component'
@@ -50,9 +51,11 @@ import { NgxEchartsModule } from 'ngx-echarts'
     MatSelectModule,
     MatTabsModule,
     FormsModule,
+    ReactiveFormsModule,
     MatPaginatorModule,
     MatIconModule,
     MatSnackBarModule,
+    MatProgressSpinnerModule,
     MaterialModule,
     RouterModule.forRoot([
       { path: 'market', component: MarketComponent },
