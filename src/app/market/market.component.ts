@@ -1,6 +1,5 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core'
 import { trigger, state, style, animate, transition } from '@angular/animations'
-import { CryptoCompareAPI } from '../app.classes/CryptoCompareAPI'
 import { CurrencyPipe } from '@angular/common'
 import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
@@ -10,17 +9,6 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { ECharts, EChartsOption } from 'echarts'
 import * as echarts from 'echarts'
 
-
-
-interface HistoricalData {
-  time: number
-  high: number
-  low: number
-  open: number
-  close: number
-  volumefrom: number
-  volumeto: number
-}
 
 @Component({
   selector: 'app-market',
@@ -59,9 +47,9 @@ export class MarketComponent implements OnInit {
 
   selectedValue: string = 'BTC'
   selectedValueToCompare: string = 'USD'
-  timeStamp!: number
+  timeStamp: number = Date.now() * 1000
   data: any = []
-  chart: any = new CryptoCompareAPI()
+  JSONData: any
 
   currencies = [
     { name: 'BTC', img: 'https://cryptocompare.com/media/37746251/btc.png' },
@@ -82,40 +70,59 @@ export class MarketComponent implements OnInit {
     { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' }
   ]
 
-  // @ViewChild(MatPaginator)
-  // paginator!: MatPaginator
-
-  // ngAfterViewInit() {this.dataSource.paginator = this.paginator}
-
-  async ngOnInit() {
-    this.timeStamp = Date.now() * 1000
-    this.drawChart()
-    this.getHistoricalData()
-    this.cards = await this.chart.getNewsFeed(this.selectedValue)
-    // console.log(await cp.getCoinList())
-    // this.dataSource.paginator = this.paginator
+  async getJSONData(fsym: string, tsym: string, timestamp: number, limit: number) {
+    const url = 'https://min-api.cryptocompare.com/data/v2/histoday?fsym='
+      + fsym + '&tsym=' + tsym + '&toTs=' + timestamp + '&limit=' + limit
+    // + '&api_key=6e659e1244d9e7ccf3b6bdf6ada561766883d528a2025f01004787c096d1b005'
+    const json = await fetch(url).then(res => res.json())
+    return json.Data.Data
   }
 
-  async OnDateChange(date: string) {
-    //This is needed because 
-    //we need to slice 
-    //the timestamp to 10 characters
-    //or the API breaks
-    this.timeStamp = Date.parse(date) / 1000
-    this.drawChart()
-    this.getHistoricalData()
-    this.cards = await this.chart.getNewsFeed(this.selectedValue)
-    // this.dataSource.paginator = this.paginator
+  async ngOnInit() {
+    this.JSONData = await this.getJSONData(
+      this.selectedValue,
+      this.selectedValueToCompare,
+      this.timeStamp,
+      999)
+
+    this.StatsChart()
+    this.HistoricalData()
+    this.cards = await this.NewsFeed(this.selectedValue, this.timeStamp / 1000)
+  }
+
+  async updateData(selectedDate: string) {
+    this.timeStamp = Date.parse(selectedDate) / 1000
+    this.JSONData = await this.getJSONData(
+      this.selectedValue,
+      this.selectedValueToCompare,
+      this.timeStamp,
+      999)
+
+    this.StatsChart()
+    this.HistoricalData()
+    this.cards = await this.NewsFeed(this.selectedValue, this.timeStamp)
     this.snackBar.open('Market data has been successfully updated', '', {
       duration: 3000
     })
-
   }
 
 
   //
   // Stats Chart
   //
+
+  async StatsChart() {
+    this.data = await this.JSONData.map((r: { time: any; close: any }) =>
+      Object.values({ time: r.time * 1000, close: r.close }))
+    this.mergeOptions = { series: [{ data: this.data }] }
+  }
+
+  // async drawChart() {
+  //   this.data = await this.chart.getHistorical(
+  //     this.selectedValue, this.selectedValueToCompare,
+  //     999, this.timeStamp, 'close')
+  //   this.mergeOptions = { series: [{ data: this.data }] }
+  // }
 
   date = new FormControl(new Date());
   mergeOptions = {};
@@ -185,30 +192,26 @@ export class MarketComponent implements OnInit {
     ]
   };
 
-  async drawChart() {
-    this.data = await this.chart.getHistorical(
-      this.selectedValue, this.selectedValueToCompare,
-      999, this.timeStamp, 'close')
-    this.mergeOptions = { series: [{ data: this.data }] }
-  }
-
 
   //
   // Historical Data
   //
 
   displayedColumns: string[] = ['time', 'high', 'low', 'open', 'close']
-  HISTORICAL_DATA: HistoricalData[] = [
-    { time: 0, high: 0, low: 0, open: 0, close: 0, volumefrom: 0, volumeto: 0 },
-  ]
-  dataSource = new MatTableDataSource<HistoricalData>(this.HISTORICAL_DATA)
+  HISTORICAL_DATA = [{ time: 0, high: 0, low: 0, open: 0, close: 0, volumefrom: 0, volumeto: 0 }]
+  dataSource = new MatTableDataSource(this.HISTORICAL_DATA)
 
-  async getHistoricalData() {
-    let HISTORICAL_DATA = await new CryptoCompareAPI().getHistorical(
-      this.selectedValue, this.selectedValueToCompare,
-      20, this.timeStamp, 'complete')
-    this.dataSource = new MatTableDataSource<HistoricalData>(HISTORICAL_DATA)
+  async HistoricalData() {
+    let HISTORICAL_DATA = this.JSONData.slice(this.JSONData.length - 50).reverse()
+    this.dataSource = new MatTableDataSource(HISTORICAL_DATA)
   }
+
+  // async getHistoricalData() {
+  //   let HISTORICAL_DATA = await new CryptoCompareAPI().getHistorical(
+  //     this.selectedValue, this.selectedValueToCompare,
+  //     20, this.timeStamp, 'complete')
+  //   this.dataSource = new MatTableDataSource<HistoricalData>(HISTORICAL_DATA)
+  // }
 
   columns = [
     // {
@@ -219,22 +222,22 @@ export class MarketComponent implements OnInit {
     {
       columnDef: 'high',
       header: 'High',
-      cell: (e: HistoricalData) => `$${e.high}`
+      cell: (e: any) => `$${e.high}`
     },
     {
       columnDef: 'low',
       header: 'Low',
-      cell: (e: HistoricalData) => `$${e.low}`
+      cell: (e: any) => `$${e.low}`
     },
     {
       columnDef: 'open',
       header: 'Open',
-      cell: (e: HistoricalData) => `$${e.open}`
+      cell: (e: any) => `$${e.open}`
     },
     {
       columnDef: 'close',
       header: 'Close',
-      cell: (e: HistoricalData) => `$${e.close}`
+      cell: (e: any) => `$${e.close}`
     },
   ]
 
@@ -242,25 +245,13 @@ export class MarketComponent implements OnInit {
   //
   // News Feed
   //
-  title = 'Vulnerable: Kraken reveals many US Bitcoin ATMs still use default admin QR codes'
-  body = `Kraken has urged BATMTwo ATM owners and operators to 
-  change the admin QR code for their ATMs to avoid potential attacks.`
-  source_info = 'CoinTelegraph'
-  published_on = 1632973503
-  imageurl = 'https://images.cryptocompare.com/news/default/cointelegraph.png'
-  url = 'https://cointelegraph.com/news/vulnerable-kraken-reveals-many-us-bitcoin-atms-still-use-default-admin-qr-codes'
 
-
-  // cards = [
-  //   {
-  //     title: (e: NewsFeed) => `${e.title}`,
-  //     body: (e: NewsFeed) => `${e.body}`,
-  //     source_info: (e: NewsFeed) => `${e.source_info}`,
-  //     published_on: (e: NewsFeed) => `${e.published_on}`,
-  //     imageurl: (e: NewsFeed) => `${e.imageurl}`,
-  //     url: (e: NewsFeed) => `${e.url}`,
-  //   },
-  // ]
+  async NewsFeed(fsym: string, timestamp: number) {
+    let url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories=' + fsym
+      + '&excludeCategories=Sponsored&lTs=' + timestamp
+    let json = await fetch(url).then(res => res.json())
+    return json.Data
+  }
 
   cards = [
     {
