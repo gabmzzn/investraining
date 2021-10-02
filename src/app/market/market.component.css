@@ -14,17 +14,14 @@ a {
 }
 
 .news-feed {
-    padding: 16px;
-    display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: flex-start;
-  align-content: flex-start;
+  padding: 16px;
+  display: flex;
 }
 
-.news-feed > mat-card {
-    width: 200px;
+mat-card {
+  width: 200px;
+  float: left;
+  flex: 1;
 }
 
 mat-card {
@@ -40,6 +37,15 @@ mat-card {
 
 .input-values {
   width: 100%;
+}
+
+mat-spinner {
+  top: 10px;
+  float: left;
+}
+
+mat-form-field {
+  float: left;
 }
 
 .angular-with-newlines {
@@ -71,11 +77,33 @@ table {
   overflow:hidden !important;
 }
 
-/* .highcharts-grid-line {
-	background-color: transparent;
+mat-card {
+  background-color: rgb(32, 36, 46);
+}
+mat-option {
+  background-color: rgb(32, 36, 46);
 }
 
-highcharts-chart {
-  display: block;
-  width: 88%;
-} */
+.market-container {
+   display: flex;
+}
+
+.left-container {
+  flex: 1;
+}
+
+.right-container {
+  flex: 1;
+}
+
+.right-container > mat-card {
+  width: 300px;
+}
+
+.left-container:first-child {
+  flex: 1;
+}
+
+.right-container:first-child {
+  margin-right: 20px;
+}

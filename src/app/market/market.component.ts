@@ -62,6 +62,7 @@ export class MarketComponent implements OnInit {
   }
 
   async getMarketData() {
+    this.isLoading = true
     this.JSONData = await this.getJSONData(
       this.selectedCurrency,
       this.selectedCurrencyToCompare,
@@ -71,15 +72,15 @@ export class MarketComponent implements OnInit {
     this.CurrencyInfo()
     this.HistoricalData()
     this.NewsFeed()
+    this.isLoading = false
   }
 
   async updateData() {
-    this.isLoading = true
+
     this.getMarketData()
       .then(() => {
         this.snackBar.open('Market data has been successfully updated', '',
           { duration: 3000 })
-        this.isLoading = false
       })
   }
 
@@ -156,16 +157,38 @@ export class MarketComponent implements OnInit {
     ]
   };
 
-  titleInfo!: string
-  descriptionInfo!: string
-
+  Price!: number
+  FullName!: string
+  Description!: string
+  SortOrder!: number
+  Algorithm!: string
+  PlatformType!: string
+  TotalCoinsMined!: number
+  Rating!: string
+  AssetWebsiteUrl!: string
+  TechnologyAdoptionRating!: string
+  MarketPerformanceRating!: string
+  high24!: number
+  low24!: number
   async CurrencyInfo() {
-    const url = 'https://min-api.cryptocompare.com/data/all/coinlist?fsym=' + this.selectedCurrency
-    const json = await fetch(url).then(res => res.json())
-    this.titleInfo = "What is " + eval("json.Data." + this.selectedCurrency + ".FullName") + "?"
-    this.descriptionInfo = (eval("json.Data." + this.selectedCurrency + ".Description")).replaceAll(/\. /g, '.<br><br>')
-    console.log(this.descriptionInfo)
-    eval("json.Data." + this.selectedCurrency + ".SortOrder")
+    const coinlist = 'https://min-api.cryptocompare.com/data/all/coinlist?fsym=' + this.selectedCurrency
+    const json = await fetch(coinlist).then(res => res.json())
+    const singleprice = 'https://min-api.cryptocompare.com/data/price?fsym='
+      + this.selectedCurrency + '&tsyms=' + this.selectedCurrencyToCompare
+    const json2 = await fetch(singleprice).then(res => res.json())
+    this.Price = eval("json2." + this.selectedCurrencyToCompare)
+    this.FullName = eval("json.Data." + this.selectedCurrency + ".FullName")
+    this.Description = (eval("json.Data." + this.selectedCurrency + ".Description")).replaceAll(/\. /g, '.<br><br>')
+    this.high24 = this.JSONData[999].high
+    this.low24 = this.JSONData[999].low
+    this.SortOrder = eval("json.Data." + this.selectedCurrency + ".SortOrder")
+    this.Rating = eval("json.Data." + this.selectedCurrency + ".Rating.Weiss.Rating")
+    this.TechnologyAdoptionRating = eval("json.Data." + this.selectedCurrency + ".Rating.Weiss.TechnologyAdoptionRating")
+    this.MarketPerformanceRating = eval("json.Data." + this.selectedCurrency + ".Rating.Weiss.MarketPerformanceRating")
+    this.TotalCoinsMined = eval("json.Data." + this.selectedCurrency + ".TotalCoinsMined")
+    this.PlatformType = eval("json.Data." + this.selectedCurrency + ".PlatformType")
+    this.Algorithm = eval("json.Data." + this.selectedCurrency + ".Algorithm")
+    this.AssetWebsiteUrl = eval("json.Data." + this.selectedCurrency + ".AssetWebsiteUrl")
   }
 
 

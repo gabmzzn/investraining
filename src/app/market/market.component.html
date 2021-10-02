@@ -29,24 +29,82 @@
       <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
-
     <mat-spinner *ngIf="isLoading" [diameter]="30"></mat-spinner>
   </div>
 
   <!-- Tabs with their content  -->
   <mat-tab-group mat-align-tabs="start">
     <!-- STATS CHART -->
+
     <mat-tab class="stats">
       <ng-template mat-tab-label>
         <mat-icon class="tab-icon">trending_up</mat-icon>
         Stats Chart
       </ng-template>
-      <div echarts [options]="chartOption" [merge]="mergeOptions" class="demo-chart" style="width: 100%;height: 450px;">
-      </div>
+      <div class="market-container">
+        <div class="left-container">
+          <div echarts [options]="chartOption" [merge]="mergeOptions" class="demo-chart"
+            style="width: 100%;height: 450px;">
+          </div>
 
-      <h2>{{titleInfo}}</h2>
-      <p class="descriptionInfo" [innerHTML]="descriptionInfo"></p>
+          <h2>What is {{FullName}}?</h2>
+          <p class="descriptionInfo" [innerHTML]="Description"></p>
+        </div>
+        <div class="right-container">
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>{{selectedCurrency}} price to {{selectedCurrencyToCompare}}</mat-card-title>
+            </mat-card-title-group>
+            <mat-card-content>
+              1 {{selectedCurrency}}
+            </mat-card-content>
+            <mat-card-content>
+              {{selectedCurrencyToCompare}} {{Price}}
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>{{selectedCurrency}} Statistics and info</mat-card-title>
+            </mat-card-title-group>
+            <mat-card-content>
+              Price:{{Price}}
+            </mat-card-content>
+            <mat-card-content>
+              Price Change:{{FullName}}
+            </mat-card-content>
+            <mat-card-content>
+              High - Low: ${{high24}} - ${{low24}}
+            </mat-card-content>
+            <mat-card-content>
+              Ranking: #{{SortOrder}}
+            </mat-card-content>
+            <mat-card-content>
+              General Weiss Rating: {{Rating}}
+            </mat-card-content>
+            <mat-card-content>
+              Technology Adoption Rating: {{TechnologyAdoptionRating}}
+            </mat-card-content>
+            <mat-card-content>
+              Market Performance Rating: {{MarketPerformanceRating}}
+            </mat-card-content>
+            <mat-card-content>
+              Total coins mined: {{TotalCoinsMined}}
+            </mat-card-content>
+            <mat-card-content>
+              Platform Type: {{PlatformType}}
+            </mat-card-content>
+            <mat-card-content>
+              Algorithm: {{Algorithm}}
+            </mat-card-content>
+            <mat-card-content>
+              Website: {{AssetWebsiteUrl}}
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
     </mat-tab>
+
 
     <!-- HISTORICAL DATA -->
     <mat-tab>
