@@ -1,32 +1,42 @@
-body {
-  padding: 50px;
-}
-
-h1 {
-  position: absolute;
-  top: 500px;
-  color: white;
-}
-
 a {
   color:white;
   text-decoration: none;
 }
 
-.news-feed {
-  padding: 16px;
-  display: flex;
+p {
+  color: rgb(184, 184, 184);
+  line-height: 1.4;
 }
 
-mat-card {
-  width: 200px;
+/*  Currency Info */
+
+.currencyHeader {
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+.selectedCurrencyActions {
+  font-size: 30px;
   float: left;
-  flex: 1;
 }
 
-mat-card {
-  margin: 15px;
-  width: 600px;
+.selectedCurrencyActions > button > span {
+  font-size: 6px !important;
+  float: left;
+}
+
+.selectedCurrencyPrice {
+  font-size: 24px;
+  float: right;
+}
+
+/* Input data */
+
+mat-progress-bar {
+  z-index: 100;
+  position: fixed;
+  top:61px;
+  left: 0;
 }
 
 .icon {
@@ -39,57 +49,37 @@ mat-card {
   width: 100%;
 }
 
-mat-spinner {
+/* mat-spinner {
   top: 10px;
   float: left;
-}
+} */
 
 mat-form-field {
   float: left;
+  margin-right: 1%;
 }
 
-.angular-with-newlines {
-    white-space: pre-line;
+.mat-select-panel {
+  background: rgba(37, 37, 44) !important;
 }
+
+
+/* Tabs */
 
 mat-tab-group {
   height: 100%;
   width: 100%;
-}
-
- p {
-  color: rgb(184, 184, 184);
-  line-height: 1.2;
-}
-
-mat-form-field {
-  margin-right: 1%;
+  display: inline-block;
 }
 
 .tab-icon {
   margin-right: 8px;
 }
 
-table {
-  width: 95%;
-  background-color: rgba(38, 39, 53, 0);
-  border-radius: 8px;
-  overflow:hidden !important;
-}
-
-mat-card {
-  background-color: rgb(32, 36, 46);
-}
-mat-option {
-  background-color: rgb(32, 36, 46);
-}
+/* Market info */
 
 .market-container {
    display: flex;
-}
-
-.left-container {
-  flex: 1;
 }
 
 .right-container {
@@ -101,9 +91,49 @@ mat-option {
 }
 
 .left-container:first-child {
-  flex: 1;
+  width: 100%;
 }
 
 .right-container:first-child {
   margin-right: 20px;
+}
+
+/* .angular-with-newlines {
+    white-space: pre-line;
+} */
+
+/* News Feed */
+
+.news-feed {
+  padding: 16px;
+  /* display: flex; */
+  column-count: 2;
+  /* column-gap: 10px; */
+  margin: 1.5em auto;
+  column-gap: 1.5em;
+}
+
+mat-card {
+  display: inline-block;
+  margin: 10px;
+  width: 95%;
+  background-color: rgb(32, 36, 46);
+  line-height: 1.4;
+}
+
+mat-card-title{
+  line-height: 1.2;
+}
+
+mat-card-content {
+  line-height: 1.5;
+}
+
+/* History Data */
+
+table {
+  width: 95%;
+  background-color: rgba(38, 39, 53, 0);
+  border-radius: 8px;
+  overflow:hidden !important;
 }
