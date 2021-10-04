@@ -1,172 +1,179 @@
 <!-- Data input -->
-
-<body>
-  <!-- INPUT VALUES -->
-  <div class="inputvalues">
-    <mat-form-field appearance="fill">
-      <mat-label>Currency to evaluate</mat-label>
-      <mat-select [(ngModel)]="selectedCurrency" name="currency" (selectionChange)="updateData()">
-        <mat-option *ngFor="let currency of currencies" [value]="currency.name">
-          <img class="icon" aria-hidden src="{{currency.img}}">
-          <span>{{currency.name}}</span>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Currency to compare to</mat-label>
-      <mat-select [(ngModel)]="selectedCurrencyToCompare" name="currency" (selectionChange)="updateData()">
-        <mat-option *ngFor="let currency of currenciesToCompare" [value]="currency.name">
-          <img class="icon" aria-hidden src="{{currency.img}}">
-          <span>{{currency.name}}</span>
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>Choose a date from</mat-label>
-      <input matInput [matDatepicker]="picker" [(ngModel)]="date" (dateChange)="updateData()">
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </mat-form-field>
-    <mat-spinner *ngIf="isLoading" [diameter]="30"></mat-spinner>
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<div class="currencyHeader">
+  <div class="selectedCurrencyActions">
+    {{CoinName}} <button mat-stroked-button disabled>{{Symbol}}</button>
   </div>
+  <div class="selectedCurrencyPrice">
+    ${{Price}}
+  </div>
+</div>
+<!-- INPUT VALUES -->
 
-  <!-- Tabs with their content  -->
-  <mat-tab-group mat-align-tabs="start">
-    <!-- STATS CHART -->
+<div class="inputva3lues">
+  <mat-form-field appearance="fill">
+    <mat-label>Currency to evaluate</mat-label>
+    <mat-select [(ngModel)]="selectedCurrency" name="currency" (selectionChange)="updateData()">
+      <mat-option *ngFor="let currency of currency" [value]="currency.name">
+        <img class="icon" aria-hidden src="{{currency.img}}">
+        <span>{{currency.name}}</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-    <mat-tab class="stats">
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">trending_up</mat-icon>
-        Stats Chart
-      </ng-template>
-      <div class="market-container">
-        <div class="left-container">
-          <div echarts [options]="chartOption" [merge]="mergeOptions" class="demo-chart"
-            style="width: 100%;height: 450px;">
-          </div>
+  <mat-form-field appearance="fill">
+    <mat-label>Currency to compare to</mat-label>
+    <mat-select [(ngModel)]="selectedCurrencyToCompare" name="currency" (selectionChange)="updateData()">
+      <mat-option *ngFor="let currency of currenciesToCompare" [value]="currency.name">
+        <img class="icon" aria-hidden src="{{currency.img}}">
+        <span>{{currency.name}}</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 
-          <h2>What is {{FullName}}?</h2>
-          <p class="descriptionInfo" [innerHTML]="Description"></p>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date from</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="date" (dateChange)="updateData()">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <!-- <mat-spinner *ngIf="isLoading" [diameter]="30"></mat-spinner> -->
+</div>
+
+<!-- Tabs with their content  -->
+<mat-tab-group mat-align-tabs="start">
+  <!-- STATS CHART -->
+
+  <mat-tab class="stats">
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">trending_up</mat-icon>
+      Stats Chart
+    </ng-template>
+    <div class="market-container" *ngIf="isFirstLoading">
+      <div class="left-container">
+        <div echarts [options]="chartOption" [merge]="mergeOptions" class="demo-chart"
+          style="width: 100%;height: 450px; margin-bottom: 50px;">
         </div>
-        <div class="right-container">
-          <mat-card>
-            <mat-card-title-group>
-              <mat-card-title>{{selectedCurrency}} price to {{selectedCurrencyToCompare}}</mat-card-title>
-            </mat-card-title-group>
-            <mat-card-content>
-              1 {{selectedCurrency}}
-            </mat-card-content>
-            <mat-card-content>
-              {{selectedCurrencyToCompare}} {{Price}}
-            </mat-card-content>
-          </mat-card>
 
-          <mat-card>
-            <mat-card-title-group>
-              <mat-card-title>{{selectedCurrency}} Statistics and info</mat-card-title>
-            </mat-card-title-group>
-            <mat-card-content>
-              Price:{{Price}}
-            </mat-card-content>
-            <mat-card-content>
-              Price Change:{{FullName}}
-            </mat-card-content>
-            <mat-card-content>
-              High - Low: ${{high24}} - ${{low24}}
-            </mat-card-content>
-            <mat-card-content>
-              Ranking: #{{SortOrder}}
-            </mat-card-content>
-            <mat-card-content>
-              General Weiss Rating: {{Rating}}
-            </mat-card-content>
-            <mat-card-content>
-              Technology Adoption Rating: {{TechnologyAdoptionRating}}
-            </mat-card-content>
-            <mat-card-content>
-              Market Performance Rating: {{MarketPerformanceRating}}
-            </mat-card-content>
-            <mat-card-content>
-              Total coins mined: {{TotalCoinsMined}}
-            </mat-card-content>
-            <mat-card-content>
-              Platform Type: {{PlatformType}}
-            </mat-card-content>
-            <mat-card-content>
-              Algorithm: {{Algorithm}}
-            </mat-card-content>
-            <mat-card-content>
-              Website: {{AssetWebsiteUrl}}
-            </mat-card-content>
-          </mat-card>
-        </div>
+        <h2>What is {{CoinName}} ({{Symbol}})?</h2>
+        <p class="descriptionInfo" [innerHTML]="Description"></p>
       </div>
-    </mat-tab>
+      <div class="right-container">
+        <mat-card>
+          <mat-card-title-group>
+            <mat-card-title>{{selectedCurrency}} price to {{selectedCurrencyToCompare}}</mat-card-title>
+          </mat-card-title-group>
+          <mat-card-content>
+            {{selectedCurrency}} 1
+          </mat-card-content>
+          <mat-card-content>
+            {{selectedCurrencyToCompare}} ${{Price}}
+          </mat-card-content>
+        </mat-card>
+
+        <mat-card>
+          <mat-card-title-group>
+            <mat-card-title>{{selectedCurrency}} Statistics and info</mat-card-title>
+          </mat-card-title-group>
+          <!-- <mat-card-content>
+            Price: ${{Price}}
+          </mat-card-content> -->
+          <mat-card-content>
+            Price Change: ${{PriceChange}}
+          </mat-card-content>
+          <mat-card-content>
+            High - Low: ${{high24}} - ${{low24}}
+          </mat-card-content>
+          <mat-card-content>
+            Ranking: #{{SortOrder}}
+          </mat-card-content>
+          <mat-card-content>
+            General Weiss Rating: {{Rating}}
+          </mat-card-content>
+          <mat-card-content>
+            Technology Adoption Rating: {{TechnologyAdoptionRating}}
+          </mat-card-content>
+          <mat-card-content>
+            Market Performance Rating: {{MarketPerformanceRating}}
+          </mat-card-content>
+          <mat-card-content>
+            Total coins mined: {{TotalCoinsMined}}
+          </mat-card-content>
+          <mat-card-content>
+            Platform Type: {{PlatformType}}
+          </mat-card-content>
+          <mat-card-content>
+            Algorithm: {{Algorithm}}
+          </mat-card-content>
+          <mat-card-content>
+            Website: {{AssetWebsiteUrl}}
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </mat-tab>
 
 
-    <!-- HISTORICAL DATA -->
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">view_list</mat-icon>
-        Historical Data
-      </ng-template>
+  <!-- HISTORICAL DATA -->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">view_list</mat-icon>
+      Historical Data
+    </ng-template>
 
-      <div class="mat-elevation-z8">
-        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" style="width: 100%;">
-          <ng-container matColumnDef="time">
-            <th mat-header-cell *matHeaderCellDef>Date</th>
-            <td mat-cell *matCellDef="let element"> {{element.time * 1000 | date}} </td>
-          </ng-container>
-          <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-            <th mat-header-cell *matHeaderCellDef>
-              {{column.header}}
-            </th>
-            <td mat-cell *matCellDef="let row">
-              {{column.cell(row)}}
-            </td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
-        <!-- <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" style="width: 100%;">
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef>Date</th>
+          <td mat-cell *matCellDef="let element"> {{element.time * 1000 | date}} </td>
+        </ng-container>
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+          <th mat-header-cell *matHeaderCellDef>
+            {{column.header}}
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{column.cell(row)}}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <!-- <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons>
         </mat-paginator> -->
+    </div>
+  </mat-tab>
+
+
+  <!-- NEWS FEED -->
+  <mat-tab>
+    <ng-template mat-tab-label>
+      <mat-icon class="tab-icon">star_half</mat-icon>
+      News Feed
+    </ng-template>
+
+    <div class="news-feed">
+      <div fxLayout="row nowrap" fxLayoutGap="16px grid">
+        <ng-container fxFlex="25" fxFlex.sm="33.3" fxFlex.xs="50" *ngFor="let card of cards">
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>{{card.title}}</mat-card-title>
+              <mat-card-subtitle>{{card.published_on * 1000 | date}}</mat-card-subtitle>
+              <img mat-card-sm-image src={{card.imageurl}}>
+            </mat-card-title-group>
+            <mat-card-content>
+              {{card.body}}
+            </mat-card-content>
+            <mat-card-actions>
+              <a mat-stroked-button href={{card.url}} target="_blank">
+                Source: {{card.source_info['name']}}
+                <mat-icon style="font-size: 20px;color: grey">
+                  open_in_new
+                </mat-icon>
+              </a>
+            </mat-card-actions>
+          </mat-card>
+        </ng-container>
       </div>
-    </mat-tab>
-
-
-    <!-- NEWS FEED -->
-    <mat-tab>
-      <ng-template mat-tab-label>
-        <mat-icon class="tab-icon">star_half</mat-icon>
-        News Feed
-      </ng-template>
-
-      <div class="news-feed">
-        <div fxLayout="row nowrap" fxLayoutGap="16px grid">
-          <ng-container fxFlex="25" fxFlex.sm="33.3" fxFlex.xs="50" *ngFor="let card of cards">
-            <mat-card>
-              <mat-card-title-group>
-                <mat-card-title><a href={{card.url}}>{{card.title}}</a></mat-card-title>
-                <mat-card-subtitle>{{card.published_on * 1000 | date}}</mat-card-subtitle>
-                <img mat-card-sm-image src={{card.imageurl}}>
-              </mat-card-title-group>
-              <mat-card-content>
-                {{card.body}}
-              </mat-card-content>
-              <mat-card-actions>
-                <a mat-stroked-button href={{card.url}} target="_blank">
-                  Source: {{card.source_info['name']}}
-                  <mat-icon style="font-size: 20px;color: grey">
-                    open_in_new
-                  </mat-icon>
-                </a>
-              </mat-card-actions>
-            </mat-card>
-          </ng-container>
-        </div>
-      </div>
-    </mat-tab>
-  </mat-tab-group>
-</body>
+    </div>
+  </mat-tab>
+</mat-tab-group>

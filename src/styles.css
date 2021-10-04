@@ -6,8 +6,8 @@ html {
 }
 
 body {
-  margin: 0;
   color: white;
+  overflow: overlay;
 }
 
 /* This ensures that fadeAnimation is being applied */
@@ -15,15 +15,21 @@ body {
   position: absolute;
   width: 100%;
 } */
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+html, body { height: 100%; font-family: Roboto, sans-serif;margin: 0}
 ::-webkit-scrollbar {
-  width: 5px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
+  width: 4px;
 }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.25);
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

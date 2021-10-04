@@ -9,7 +9,6 @@ import { MatSnackBar } from '@angular/material/snack-bar'
 import { ECharts, EChartsOption } from 'echarts'
 import * as echarts from 'echarts'
 
-
 @Component({
   selector: 'app-market',
   templateUrl: './market.component.html',
@@ -48,10 +47,10 @@ export class MarketComponent implements OnInit {
   selectedCurrency: string = 'BTC'
   selectedCurrencyToCompare: string = 'USD'
   date: any = new Date()
-  data: any = []
+  data: any
   JSONData: any
   isLoading: boolean = false
-  cards!: any
+  isFirstLoading: boolean = false
 
   async getJSONData(fsym: string, tsym: string, timestamp: number, limit: number) {
     const url = 'https://min-api.cryptocompare.com/data/v2/histoday?fsym='
@@ -73,10 +72,10 @@ export class MarketComponent implements OnInit {
     this.HistoricalData()
     this.NewsFeed()
     this.isLoading = false
+    this.isFirstLoading = true
   }
 
   async updateData() {
-
     this.getMarketData()
       .then(() => {
         this.snackBar.open('Market data has been successfully updated', '',
@@ -158,7 +157,6 @@ export class MarketComponent implements OnInit {
   };
 
   Price!: number
-  FullName!: string
   Description!: string
   SortOrder!: number
   Algorithm!: string
@@ -170,27 +168,35 @@ export class MarketComponent implements OnInit {
   MarketPerformanceRating!: string
   high24!: number
   low24!: number
+  PriceChange!: any
+  img!: string
+  CoinName!: string
+  Symbol!: string
+
   async CurrencyInfo() {
     const coinlist = 'https://min-api.cryptocompare.com/data/all/coinlist?fsym=' + this.selectedCurrency
     const json = await fetch(coinlist).then(res => res.json())
+
     const singleprice = 'https://min-api.cryptocompare.com/data/price?fsym='
       + this.selectedCurrency + '&tsyms=' + this.selectedCurrencyToCompare
     const json2 = await fetch(singleprice).then(res => res.json())
-    this.Price = eval("json2." + this.selectedCurrencyToCompare)
-    this.FullName = eval("json.Data." + this.selectedCurrency + ".FullName")
-    this.Description = (eval("json.Data." + this.selectedCurrency + ".Description")).replaceAll(/\. /g, '.<br><br>')
+
+    this.Price = json2[this.selectedCurrencyToCompare]
+    this.Symbol = json.Data[this.selectedCurrency].Symbol
+    this.CoinName = json.Data[this.selectedCurrency].CoinName
+    this.Description = json.Data[this.selectedCurrency].Description.replaceAll(/\. /g, '.<br><br>')
     this.high24 = this.JSONData[999].high
     this.low24 = this.JSONData[999].low
-    this.SortOrder = eval("json.Data." + this.selectedCurrency + ".SortOrder")
-    this.Rating = eval("json.Data." + this.selectedCurrency + ".Rating.Weiss.Rating")
-    this.TechnologyAdoptionRating = eval("json.Data." + this.selectedCurrency + ".Rating.Weiss.TechnologyAdoptionRating")
-    this.MarketPerformanceRating = eval("json.Data." + this.selectedCurrency + ".Rating.Weiss.MarketPerformanceRating")
-    this.TotalCoinsMined = eval("json.Data." + this.selectedCurrency + ".TotalCoinsMined")
-    this.PlatformType = eval("json.Data." + this.selectedCurrency + ".PlatformType")
-    this.Algorithm = eval("json.Data." + this.selectedCurrency + ".Algorithm")
-    this.AssetWebsiteUrl = eval("json.Data." + this.selectedCurrency + ".AssetWebsiteUrl")
+    this.PriceChange = (this.Price - this.low24).toFixed(2)
+    this.SortOrder = json.Data[this.selectedCurrency].SortOrder
+    this.Rating = json.Data[this.selectedCurrency].Rating.Weiss.Rating
+    this.TechnologyAdoptionRating = json.Data[this.selectedCurrency].Rating.Weiss.TechnologyAdoptionRating
+    this.MarketPerformanceRating = json.Data[this.selectedCurrency].Rating.Weiss.MarketPerformanceRating
+    this.TotalCoinsMined = json.Data[this.selectedCurrency].TotalCoinsMined
+    this.PlatformType = json.Data[this.selectedCurrency].PlatformType
+    this.Algorithm = json.Data[this.selectedCurrency].Algorithm
+    this.AssetWebsiteUrl = json.Data[this.selectedCurrency].AssetWebsiteUrl
   }
-
 
   // Historical Data
 
@@ -228,6 +234,8 @@ export class MarketComponent implements OnInit {
 
   // News Feed
 
+  cards: any
+
   async NewsFeed() {
     const url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories=' + this.selectedCurrency
       + '&excludeCategories=Sponsored&lTs=' + Date.parse(this.date) / 1000
@@ -235,20 +243,19 @@ export class MarketComponent implements OnInit {
     this.cards = json.Data
   }
 
-
   // Form Data
 
-  currencies = [
-    { name: 'BTC', img: 'https://cryptocompare.com/media/37746251/btc.png' },
-    { name: 'ETH', img: 'https://cryptocompare.com/media/37746238/eth.png' },
-    { name: 'XLM', img: 'https://cdn-icons-png.flaticon.com/512/5245/5245869.png' },
-    { name: 'BNB', img: 'https://www.cryptocompare.com/media/37746880/bnb.png' },
-    { name: 'ADA', img: 'https://cryptocompare.com/media/37746235/ada.png' },
-    { name: 'DOGE', img: 'https://cryptocompare.com/media/37746339/doge.png' },
-    { name: 'XRP', img: 'https://cryptocompare.com/media/38553096/xrp.png' },
-    { name: 'LTC', img: 'https://cryptocompare.com/media/37746243/ltc.png' },
-    { name: 'BCH', img: 'https://cryptocompare.com/media/37746245/bch.png' },
-    { name: 'LINK', img: 'https://cryptocompare.com/media/37746242/link.png' },
+  currency = [
+    { name: 'BTC', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png' },
+    { name: 'ETH', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1027.png' },
+    { name: 'XLM', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/512.png' },
+    { name: 'BNB', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/4687.png' },
+    { name: 'ADA', img: 'https://cdn4.iconfinder.com/data/icons/crypto-currency-and-coin-2/256/cardano_ada-512.png' },
+    { name: 'DOGE', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/74.png' },
+    { name: 'XRP', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/52.png' },
+    { name: 'LTC', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/2.png' },
+    { name: 'BCH', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1831.png' },
+    { name: 'LINK', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1975.png' },
   ]
 
   currenciesToCompare = [
@@ -257,4 +264,22 @@ export class MarketComponent implements OnInit {
     { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' }
   ]
 
+  // currency = [
+  //   { "BTC": { name: 'BTC', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png' } },
+  //   { "ETH": { name: 'ETH', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1027.png' } },
+  //   { "XLM": { name: 'XLM', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/512.png' } },
+  //   { "BNB": { name: 'BNB', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/4687.png' } },
+  //   { "ADA": { name: 'ADA', img: 'https://cdn4.iconfinder.com/data/icons/crypto-currency-and-coin-2/256/cardano_ada-512.png' } },
+  //   { "DOGE": { name: 'DOGE', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/74.png' } },
+  //   { "XRP": { name: 'XRP', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/52.png' } },
+  //   { "LTC": { name: 'LTC', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/2.png' } },
+  //   { "BCH": { name: 'BCH', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1831.png' } },
+  //   { "LINK": { name: 'LINK', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1975.png' } },
+  // ]
+
+  // currenciesToCompare = [
+  //   { 'USD': { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' } },
+  //   { 'ARS': { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' } },
+  //   { 'EUR': { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' } }
+  // ]
 }

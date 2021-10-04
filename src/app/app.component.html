@@ -1,14 +1,27 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
-  <span>investraining </span>
-  <div class='buttons'>
-    <span class="button" routerLink="/market" routerLinkActive="active">MARKET DATA</span>
-    <span class="button" routerLink="/coinlist" routerLinkActive="active">CURRENCIES</span>
-    <span class="button" routerLink="/about" routerLinkActive="active">ABOUT</span>
+  <div class="toolbar-content">
+    <span>investraining </span>
+    <div class='buttons'>
+      <button mat-button routerLink="/coinlist" routerLinkActive="active">
+        CURRENCIES
+      </button>
+      <button mat-button routerLink="/market" routerLinkActive="active">
+        MARKET DATA
+      </button>
+      <button mat-button routerLink="/invest" routerLinkActive="active">
+        INVEST
+      </button>
+      <button mat-button routerLink="/about" routerLinkActive="active">
+        ABOUT
+      </button>
+    </div>
   </div>
 </div>
+<div class="space"></div>
+
 <div class="content">
-  <main [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
-    <router-outlet #o="outlet"></router-outlet>
+  <main [@fadeAnimation]="outlet.isActivated ? outlet.activatedRoute : ''">
+    <router-outlet #outlet="outlet"></router-outlet>
   </main>
 </div>

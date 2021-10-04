@@ -1,14 +1,17 @@
-import {
-    trigger,
-    animate,
-    transition,
-    style,
-    query
-} from '@angular/animations';
+import { trigger, animate, transition, style, query } from '@angular/animations'
 
 export const fadeAnimation = trigger('fadeAnimation', [
     // The '* => *' will trigger the animation to change between any two states
-    transition('* => *', [
+    transition('* <=> *', [
+        style({ position: 'relative' }),
+        query(':enter, :leave', [
+            style({
+                position: 'absolute',
+                top: 0,
+                right: 0,
+                width: '100%'
+            })
+        ], { optional: true }),
         // The query function has three params.
         // First is the event, so this will apply on entering or when the element is added to the DOM.
         // Second is a list of styles or animations to apply.
@@ -18,13 +21,13 @@ export const fadeAnimation = trigger('fadeAnimation', [
         query(
             ':leave',
             // here we apply a style and use the animate function to apply the style over 0.3 seconds
-            [style({ opacity: 1 }), animate('0.3s', style({ opacity: 0 }))],
+            [style({ opacity: 1 }), animate('0.25s', style({ opacity: 0 }))],
             { optional: true }
         ),
         query(
             ':enter',
-            [style({ opacity: 0 }), animate('0.3s', style({ opacity: 1 }))],
+            [style({ opacity: 0 }), animate('0.25s', style({ opacity: 1 }))],
             { optional: true }
         )
     ])
-]);
+])

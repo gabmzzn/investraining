@@ -25,6 +25,11 @@ p {
   float: left;
 }
 
+.selectedCurrencyActions > span {
+  font-size: 6px !important;
+  float: left;
+}
+
 .selectedCurrencyPrice {
   font-size: 24px;
   float: right;
@@ -125,8 +130,9 @@ mat-card-title{
   line-height: 1.2;
 }
 
-mat-card-content {
+.news-feed mat-card-content {
   line-height: 1.5;
+  color: rgb(211, 211, 211);
 }
 
 /* History Data */

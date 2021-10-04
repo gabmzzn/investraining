@@ -20,6 +20,7 @@ import { MatTabsModule } from '@angular/material/tabs'
 import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
+import { MatProgressBarModule } from '@angular/material/progress-bar'
 
 import { AppComponent } from './app.component'
 import { MarketComponent } from './market/market.component'
@@ -27,8 +28,7 @@ import { AboutComponent } from './about/about.component'
 import { CurrenciesComponent } from './currencies/currencies.component'
 
 import { NgxEchartsModule } from 'ngx-echarts'
-
-
+import { InvestComponent } from './invest/invest.component'
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { NgxEchartsModule } from 'ngx-echarts'
     AboutComponent,
     MarketComponent,
     CurrenciesComponent,
+    InvestComponent
   ],
   imports: [
     BrowserModule,
@@ -56,10 +57,12 @@ import { NgxEchartsModule } from 'ngx-echarts'
     MatIconModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     MaterialModule,
     RouterModule.forRoot([
       { path: 'market', component: MarketComponent },
       { path: 'coinlist', component: CurrenciesComponent },
+      { path: 'invest', component: InvestComponent },
       { path: 'about', component: AboutComponent },
       { path: '', redirectTo: '/market', pathMatch: 'full' },
       { path: '**', redirectTo: '/market', pathMatch: 'full' }
