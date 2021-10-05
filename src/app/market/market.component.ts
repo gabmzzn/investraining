@@ -36,11 +36,12 @@ import * as echarts from 'echarts'
   ]
 })
 
-export class MarketComponent implements OnInit {
+export class MarketComponent {
 
   constructor(private snackBar: MatSnackBar) { }
 
   ngOnInit() {
+
     this.getMarketData()
   }
 
@@ -52,6 +53,13 @@ export class MarketComponent implements OnInit {
   isLoading: boolean = false
   isFirstLoading: boolean = false
 
+  setCurrency(c: string) {
+    console.log('value recieved:' + c)
+    this.selectedCurrency = c
+    console.log('after set:' + this.selectedCurrency)
+    this.updateData()
+  }
+
   async getJSONData(fsym: string, tsym: string, timestamp: number, limit: number) {
     const url = 'https://min-api.cryptocompare.com/data/v2/histoday?fsym='
       + fsym + '&tsym=' + tsym + '&toTs=' + timestamp + '&limit=' + limit
@@ -62,6 +70,8 @@ export class MarketComponent implements OnInit {
 
   async getMarketData() {
     this.isLoading = true
+    this.isFirstLoading = true
+    console.log('value in getMarket:' + this.selectedCurrency)
     this.JSONData = await this.getJSONData(
       this.selectedCurrency,
       this.selectedCurrencyToCompare,
@@ -72,7 +82,6 @@ export class MarketComponent implements OnInit {
     this.HistoricalData()
     this.NewsFeed()
     this.isLoading = false
-    this.isFirstLoading = true
   }
 
   async updateData() {
@@ -204,8 +213,7 @@ export class MarketComponent implements OnInit {
   dataSource = new MatTableDataSource([{ time: 0, high: 0, low: 0, open: 0, close: 0 }])
 
   async HistoricalData() {
-    this.dataSource = new MatTableDataSource(
-      this.JSONData.slice(this.JSONData.length - 50).reverse())
+    this.dataSource = this.JSONData.slice(this.JSONData.length - 50).reverse()
   }
 
   columns = [
