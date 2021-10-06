@@ -54,6 +54,34 @@ mat-progress-bar {
   width: 100%;
 }
 
+ .mat-focused .mat-form-field-label {
+ /*change color of label*/
+ color: white !important;
+}
+
+.mat-form-field-underline {
+ /*change color of underline*/
+ background-color: white !important;
+} 
+
+.mat-form-field-ripple {
+ /*change color of underline when focused*/
+ background-color: white !important;;
+}
+
+.mat-form-field-label {
+ /*change color of label*/
+ color: white !important;
+}
+::ng-deep .mat-calendar-body-selected{
+/* background-color: green; */
+}
+
+::ng-deep mat-datepicker-content {
+  backdrop-filter: blur(15px);
+  background: rgba(37, 37, 44, 0.65) !important;
+}
+
 /* mat-spinner {
   top: 10px;
   float: left;
@@ -72,6 +100,7 @@ mat-form-field {
 /* Tabs */
 
 mat-tab-group {
+  margin: auto;
   height: 100%;
   width: 100%;
   display: inline-block;

@@ -17,12 +17,10 @@ export class CurrenciesComponent {
 
   isFirstLoading: boolean = true
 
-  dataSource: any = new MatTableDataSource([{
-    rank: '', logo: '', name: '', symbol: '', price: '', totalvolume: '',
-    circulatingsupply: '', marketcap: ''
-  }])
+  dataSource!: any
+  performers!: any
 
-  columnsToDisplay = ['rank', 'logo', 'name', 'price', 'totalvolume',
+  columnsToDisplay = ['rank', 'logo', 'name', 'price', 'changepct', 'totalvolume',
     'circulatingsupply', 'marketcap', 'buy', 'info'];
 
   async getCurrencyData() {
@@ -35,12 +33,12 @@ export class CurrenciesComponent {
         'BTC,ETH,BNB,ADA,SOL,USDT,XRP,USDC,DOT,DOGE,LUNA,UNI,AVAX,BUSD,LINK,ALGO,LTC,BCH,WBTC,' +
         'MATIC,AXS,ATOM,ICP,FIL,XTZ,XLM,VET,FTT,ETC,TRX,DAI&tsyms=USD').then(res => res.json())
 
-      let jsonArray: any = Object.values(await json), composedData: any = [], i = 0
+      let jsonArray: any = Object.values(await json), composedData = [], i = 0
+      this.performers = []
       for (let crypto of currencieslist) {
-
-        // let valueChange: number = (jsonArray[0][crypto].USD.PRICE - jsonArray[0][crypto].USD.LOW24HOUR) / jsonArray[0][crypto].USD.PRICE * 100
-        // console.log(valueChange)
         // 0 = RAW Value, 1 = DISPLAY Value  
+        let plussign
+        jsonArray[1][crypto].USD.CHANGEPCT24HOUR >= 0 ? plussign = '+' : plussign = ''
         composedData.push(
           {
             rank: i + 1,
@@ -48,15 +46,23 @@ export class CurrenciesComponent {
             name: '',
             symbol: crypto,
             price: jsonArray[1][crypto].USD.PRICE,
+            changepct: plussign + jsonArray[1][crypto].USD.CHANGEPCT24HOUR,
             totalvolume: jsonArray[1][crypto].USD.TOTALTOPTIERVOLUME24HTO,
             circulatingsupply: jsonArray[1][crypto].USD.CIRCULATINGSUPPLY,
             marketcap: jsonArray[1][crypto].USD.MKTCAP,
           })
+        this.performers.push({
+          name: crypto,
+          logo: jsonArray[1][crypto].USD.IMAGEURL,
+          changepct: plussign + jsonArray[1][crypto].USD.CHANGEPCT24HOUR,
+          price: jsonArray[1][crypto].USD.PRICE,
+        })
         i++
       }
+      this.performers.sort((a: { changepct: number }, b: { changepct: number }) => b.changepct - a.changepct)
       this.dataSource = composedData
       this.isFirstLoading = false
-    }, 2000)
+    }, 1000)
   }
 
   ngOnInit() {
@@ -66,7 +72,7 @@ export class CurrenciesComponent {
     // for (let crypto of currencieslist) {
     //   let json2 = await fetch('https://min-api.cryptocompare.com/data/all/coinlist?fsym='
     //     + crypto).then(res => res.json())
-    //   const t4 = performance.now()
+    //   const t4 = performers.now()
     //   console.log(`JSON2 took ${t4 - t0} milliseconds.`)
     //   composedJSON.push(Object.assign(json1array[i], json2))
     //   composedData.push(

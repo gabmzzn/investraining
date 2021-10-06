@@ -1,65 +1,138 @@
 <mat-progress-bar mode="indeterminate" *ngIf="isFirstLoading"></mat-progress-bar>
-<div class="currencies">
-  <div class="top-currencies">
-    <div class="card">
-      <mat-card>
-        <mat-card-title-group>
-          <mat-card-title>BTC</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div class="card">
-      <mat-card>
-        <mat-card-title-group>
-          <mat-card-title>BTC</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div class="card">
-      <mat-card>
-        <mat-card-title-group>
-          <mat-card-title>BTC</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-  <div class="worst-currencies">
-    <div class="card">
-      <mat-card>
-        <mat-card-title-group>
-          <mat-card-title>BTC</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div class="card">
-      <mat-card>
-        <mat-card-title-group>
-          <mat-card-title>BTC</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-        </mat-card-content>
-      </mat-card>
-    </div>
-    <div class="card">
-      <mat-card>
-        <mat-card-title-group>
-          <mat-card-title>BTC</mat-card-title>
-        </mat-card-title-group>
-        <mat-card-content>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </div>
-</div>
 <div *ngIf="!isFirstLoading">
+  <h1>Markets</h1>
+  <div class="currencies">
+    <div class="top-currencies">
+      <div class="title">
+        <h2>Best performing assets</h2>
+      </div>
+      <div class="content">
+        <ng-container>
+          <div class="card">
+            <mat-card>
+              <mat-card-title-group>
+                <mat-card-title>
+                  {{performers[0].name}}
+                </mat-card-title>
+                <img src="https://www.cryptocompare.com{{performers[0].logo}}" />
+              </mat-card-title-group>
+              <mat-card-content [ngClass]="{
+            'positive' : performers[0].changepct > 0,
+            'negative' : performers[0].changepct < 0
+         }">
+                {{performers[0].changepct}}%
+              </mat-card-content>
+              <mat-card-content>
+                {{performers[0].price}}
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
+        <ng-container>
+          <div class="card">
+            <mat-card>
+              <mat-card-title-group>
+                <mat-card-title>{{performers[1].name}}</mat-card-title>
+                <img src="https://www.cryptocompare.com{{performers[1].logo}}" />
+              </mat-card-title-group>
+              <mat-card-content [ngClass]="{
+            'positive' : performers[1].changepct > 0,
+            'negative' : performers[1].changepct < 0
+         }">
+                {{performers[1].changepct}}%
+              </mat-card-content>
+              <mat-card-content>
+                {{performers[1].price}}
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
+        <ng-container>
+          <div class="card">
+            <mat-card>
+              <mat-card-title-group>
+                <mat-card-title>{{performers[2].name}}</mat-card-title>
+                <img src="https://www.cryptocompare.com{{performers[2].logo}}" />
+              </mat-card-title-group>
+              <mat-card-content [ngClass]="{
+            'positive' : performers[2].changepct > 0,
+            'negative' : performers[2].changepct < 0
+         }">
+                {{performers[2].changepct}}%
+              </mat-card-content>
+              <mat-card-content>
+                {{performers[2].price}}
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+    <div class="worst-currencies">
+      <div class="title">
+        <h2>Worst performing assets</h2>
+      </div>
+      <div class="content">
+        <ng-container>
+          <div class="card">
+            <mat-card>
+              <mat-card-title-group>
+                <mat-card-title>{{performers[performers.length - 1].name}}</mat-card-title>
+                <img src="https://www.cryptocompare.com{{performers[performers.length - 1].logo}}" />
+              </mat-card-title-group>
+              <mat-card-content [ngClass]="{
+            'positive' : performers[performers.length - 1].changepct > 0,
+            'negative' : performers[performers.length - 1].changepct < 0
+         }">
+                {{performers[performers.length - 1].changepct}}%
+              </mat-card-content>
+              <mat-card-content>
+                {{performers[performers.length - 1].price}}
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
+        <ng-container>
+          <div class="card">
+            <mat-card>
+              <mat-card-title-group>
+                <mat-card-title>{{performers[performers.length - 2].name}}</mat-card-title>
+                <img src="https://www.cryptocompare.com{{performers[performers.length - 2].logo}}" />
+              </mat-card-title-group>
+              <mat-card-content [ngClass]="{
+            'positive' : performers[performers.length - 2].changepct > 0,
+            'negative' : performers[performers.length - 2].changepct < 0
+         }">
+                {{performers[performers.length - 2].changepct}}%
+              </mat-card-content>
+              <mat-card-content>
+                {{performers[performers.length - 2].price}}
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
+        <ng-container>
+          <div class="card">
+            <mat-card>
+              <mat-card-title-group>
+                <mat-card-title>{{performers[performers.length - 3].name}}</mat-card-title>
+                <img src="https://www.cryptocompare.com{{performers[performers.length - 3].logo}}" />
+              </mat-card-title-group>
+              <mat-card-content [ngClass]="{
+            'positive' : performers[performers.length - 3].changepct > 0,
+            'negative' : performers[performers.length - 3].changepct < 0
+         }">
+                {{performers[performers.length - 3].changepct}}%
+              </mat-card-content>
+              <mat-card-content>
+                {{performers[performers.length - 3].price}}
+              </mat-card-content>
+            </mat-card>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </div>
   <table #myTable mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z0">
     <ng-container matColumnDef="rank">
       <th mat-header-cell *matHeaderCellDef style="width: 50px;">RANK</th>
@@ -83,6 +156,14 @@
             'positive' : element.price > 45000,
             'negative' : element.price < 45000
          }"> {{element.price}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="changepct">
+      <th mat-header-cell *matHeaderCellDef="let row" class="changepct">24h %</th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{
+            'positive' : element.changepct > 0,
+            'negative' : element.changepct < 0
+         }"> {{element.changepct}} %</td>
     </ng-container>
 
     <ng-container matColumnDef="totalvolume">
