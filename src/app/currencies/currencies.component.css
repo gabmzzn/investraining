@@ -50,6 +50,11 @@ h1 {
   width: 100%;
 }
 
+mat-card-content {
+  display: flex;
+  flex-direction: row;
+}
+
 .content {
   display: flex;
   flex-direction: row;
@@ -74,6 +79,7 @@ mat-card {
 }
 
 .card mat-card-subtitle {
+  font-size: 13px;
   color: rgb(96, 104, 116);
 }
 

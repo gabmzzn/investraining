@@ -19,19 +19,24 @@
             <mat-card>
               <mat-card-title-group>
                 <mat-card-title>
-                  {{performers[0].symbol}}
+                  {{performersSource[0].symbol}}
                 </mat-card-title>
-                <mat-card-subtitle>{{performers[0].name}}</mat-card-subtitle>
-                <img src="https://www.cryptocompare.com{{performers[0].logo}}" />
+                <mat-card-subtitle>{{performersSource[0].name}}</mat-card-subtitle>
+                <img src="https://www.cryptocompare.com{{performersSource[0].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
-            'positive' : performers[0].changepct > 0,
-            'negative' : performers[0].changepct < 0
+            'positive' : performersSource[0].changepct > 0,
+            'negative' : performersSource[0].changepct < 0
          }">
-                {{performers[0].changepct}}%
+                {{performersSource[0].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                {{performers[0].price}}
+                <div [ngClass]="{
+                    'positive' : performersSource[0].updown == '▲',
+                    'negative' : performersSource[0].updown == '▼'
+                 }">
+                  {{performersSource[0].updown}}
+                </div>{{performersSource[0].price}}
               </mat-card-content>
             </mat-card>
           </div>
@@ -40,18 +45,23 @@
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[1].symbol}}</mat-card-title>
-                <mat-card-subtitle>{{performers[1].name}}</mat-card-subtitle>
-                <img src="https://www.cryptocompare.com{{performers[1].logo}}" />
+                <mat-card-title>{{performersSource[1].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performersSource[1].name}}</mat-card-subtitle>
+                <img src="https://www.cryptocompare.com{{performersSource[1].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
-            'positive' : performers[1].changepct > 0,
-            'negative' : performers[1].changepct < 0
+            'positive' : performersSource[1].changepct > 0,
+            'negative' : performersSource[1].changepct < 0
          }">
-                {{performers[1].changepct}}%
+                {{performersSource[1].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                {{performers[1].price}}
+                <div [ngClass]="{
+                  'positive' : performersSource[1].updown == '▲',
+                  'negative' : performersSource[1].updown == '▼'
+                   }">
+                  {{performersSource[1].updown}}
+                </div>{{performersSource[1].price}}
               </mat-card-content>
             </mat-card>
           </div>
@@ -60,18 +70,24 @@
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[2].symbol}}</mat-card-title>
-                <mat-card-subtitle>{{performers[2].name}}</mat-card-subtitle>
-                <img src="https://www.cryptocompare.com{{performers[2].logo}}" />
+                <mat-card-title>{{performersSource[2].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performersSource[2].name}}</mat-card-subtitle>
+                <img src="https://www.cryptocompare.com{{performersSource[2].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
-            'positive' : performers[2].changepct > 0,
-            'negative' : performers[2].changepct < 0
+            'positive' : performersSource[2].changepct > 0,
+            'negative' : performersSource[2].changepct < 0
          }">
-                {{performers[2].changepct}}%
+                {{performersSource[2].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                {{performers[2].price}}
+                <div [ngClass]="{
+                'positive' : performersSource[2].updown == '▲',
+                'negative' : performersSource[2].updown == '▼'
+                }">
+                  {{performersSource[2].updown}}
+                </div>
+                {{performersSource[2].price}}
               </mat-card-content>
             </mat-card>
           </div>
@@ -87,18 +103,23 @@
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[performers.length - 1].symbol}}</mat-card-title>
-                <mat-card-subtitle>{{performers[performers.length - 1].name}}</mat-card-subtitle>
-                <img src="https://www.cryptocompare.com{{performers[performers.length - 1].logo}}" />
+                <mat-card-title>{{performersSource[performersSource.length - 1].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performersSource[performersSource.length - 1].name}}</mat-card-subtitle>
+                <img src="https://www.cryptocompare.com{{performersSource[performersSource.length - 1].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
-            'positive' : performers[performers.length - 1].changepct > 0,
-            'negative' : performers[performers.length - 1].changepct < 0
+            'positive' : performersSource[performersSource.length - 1].changepct > 0,
+            'negative' : performersSource[performersSource.length - 1].changepct < 0
          }">
-                {{performers[performers.length - 1].changepct}}%
+                {{performersSource[performersSource.length - 1].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                {{performers[performers.length - 1].price}}
+                <div [ngClass]="{
+                'positive' : performersSource[performersSource.length - 1].updown == '▲',
+                  'negative' : performersSource[performersSource.length - 1].updown == '▼'
+                   }">
+                  {{performersSource[performersSource.length - 1].updown}}
+                </div>{{performersSource[performersSource.length - 1].price}}
               </mat-card-content>
             </mat-card>
           </div>
@@ -107,18 +128,23 @@
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[performers.length - 2].symbol}}</mat-card-title>
-                <mat-card-subtitle>{{performers[performers.length - 2].name}}</mat-card-subtitle>
-                <img src="https://www.cryptocompare.com{{performers[performers.length - 2].logo}}" />
+                <mat-card-title>{{performersSource[performersSource.length - 2].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performersSource[performersSource.length - 2].name}}</mat-card-subtitle>
+                <img src="https://www.cryptocompare.com{{performersSource[performersSource.length - 2].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
-            'positive' : performers[performers.length - 2].changepct > 0,
-            'negative' : performers[performers.length - 2].changepct < 0
+            'positive' : performersSource[performersSource.length - 2].changepct > 0,
+            'negative' : performersSource[performersSource.length - 2].changepct < 0
          }">
-                {{performers[performers.length - 2].changepct}}%
+                {{performersSource[performersSource.length - 2].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                {{performers[performers.length - 2].price}}
+                <div [ngClass]="{
+                  'positive' : performersSource[performersSource.length - 2].updown == '▲',
+                  'negative' : performersSource[performersSource.length - 2].updown == '▼'
+                   }">
+                  {{performersSource[performersSource.length - 2].updown}}
+                </div>{{performersSource[performersSource.length - 2].price}}
               </mat-card-content>
             </mat-card>
           </div>
@@ -127,18 +153,23 @@
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[performers.length - 3].symbol}}</mat-card-title>
-                <mat-card-subtitle>{{performers[performers.length - 3].name}}</mat-card-subtitle>
-                <img src="https://www.cryptocompare.com{{performers[performers.length - 3].logo}}" />
+                <mat-card-title>{{performersSource[performersSource.length - 3].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performersSource[performersSource.length - 3].name}}</mat-card-subtitle>
+                <img src="https://www.cryptocompare.com{{performersSource[performersSource.length - 3].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
-            'positive' : performers[performers.length - 3].changepct > 0,
-            'negative' : performers[performers.length - 3].changepct < 0
+            'positive' : performersSource[performersSource.length - 3].changepct > 0,
+            'negative' : performersSource[performersSource.length - 3].changepct < 0
          }">
-                {{performers[performers.length - 3].changepct}}%
+                {{performersSource[performersSource.length - 3].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                {{performers[performers.length - 3].price}}
+                <div [ngClass]="{
+                  'positive' : performersSource[performersSource.length - 3].updown == '▲',
+                   'negative' : performersSource[performersSource.length - 3].updown == '▼'
+                    }">
+                  {{performersSource[performersSource.length - 3].updown}}
+                </div>{{performersSource[performersSource.length - 3].price}}
               </mat-card-content>
             </mat-card>
           </div>
@@ -161,6 +192,14 @@
     <ng-container matColumnDef="name" class="name">
       <th mat-header-cell *matHeaderCellDef></th>
       <td mat-cell *matCellDef="let element">{{element.name}} {{element.symbol}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="updown">
+      <th mat-header-cell *matHeaderCellDef="let row" class="updown"></th>
+      <td mat-cell *matCellDef="let element" [ngClass]="{
+                    'positive' : element.updown == '▲',
+                    'negative' : element.updown == '▼'
+                 }"> {{element.updown}} </td>
     </ng-container>
 
     <ng-container matColumnDef="price">
