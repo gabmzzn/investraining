@@ -1,7 +1,13 @@
 table {
   background-color: rgba(38, 39, 53, 0);
   border-radius: 8px;
-  overflow:hidden !important;
+  overflow: hidden !important;
+}
+
+.tables {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
 }
 
 tr.example-detail-row {
@@ -39,17 +45,16 @@ tr.example-element-row:not(.example-expanded-row):active {
   opacity: 0.5;
 }
 
-
 mat-card {
   display: inline-block;
   margin: 10px;
   width: 100%;
   background-color: rgb(43, 48, 61);
   line-height: 1.4;
-    box-shadow: none;
+  box-shadow: none;
 }
 
-mat-card-title{
+mat-card-title {
   line-height: 1.2;
 }
 

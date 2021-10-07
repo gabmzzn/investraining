@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
 /* You can add global styles to this file, and also import other style files */
+
 html {
-  background: rgb(34,36,48);
-  background: linear-gradient(180deg, rgba(34,36,48,1) 20%, rgba(23,23,26,1) 100%);
+  background: rgb(34, 36, 48);
+  background: linear-gradient(180deg, rgba(34, 36, 48, 1) 20%, rgba(23, 23, 26, 1) 100%);
   background-attachment: fixed;
 }
 
@@ -12,24 +13,34 @@ body {
 }
 
 /* This ensures that fadeAnimation is being applied */
+
 /* router-outlet ~ * { 
   position: absolute;
   width: 100%;
 } */
-html, body { height: 100%; font-family: Roboto, sans-serif;margin: 0}
+
+html, body {
+  height: 100%;
+  font-family: Roboto, sans-serif;
+  margin: 0
+}
+
 ::-webkit-scrollbar {
   width: 4px;
 }
+
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.25);
 }
 
 /* Track */
+
 ::-webkit-scrollbar-track {
   background: transparent;
 }
 
 /* Handle on hover */
+
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

@@ -30,8 +30,10 @@
     "highcharts": "^9.2.2",
     "highcharts-angular": "^2.10.0",
     "ngx-echarts": "^7.0.2",
-    "rxjs": "~6.6.0",
+    "rxjs": "^6.6.7",
+    "rxjs-websockets": "^9.0.0",
     "tslib": "^2.3.0",
+    "websocket": "^1.0.34",
     "zone.js": "~0.11.4"
   },
   "devDependencies": {
@@ -39,7 +41,7 @@
     "@angular/cli": "~12.2.4",
     "@angular/compiler-cli": "~12.2.0",
     "@types/jasmine": "~3.8.0",
-    "@types/node": "^12.11.1",
+    "@types/node": "^12.20.28",
     "jasmine-core": "~3.8.0",
     "karma": "~6.3.0",
     "karma-chrome-launcher": "~3.1.0",

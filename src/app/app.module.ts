@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { RouterModule } from '@angular/router'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+import { webSocket } from "rxjs/webSocket"
 
 //Material Modules 
 import { MaterialModule } from './material/material.module'
@@ -64,8 +65,8 @@ import { InvestComponent } from './invest/invest.component'
       { path: 'coinlist', component: CurrenciesComponent },
       { path: 'invest', component: InvestComponent },
       { path: 'about', component: AboutComponent },
-      { path: '', redirectTo: '/market', pathMatch: 'full' },
-      { path: '**', redirectTo: '/market', pathMatch: 'full' }
+      { path: '', redirectTo: '/coinlist', pathMatch: 'full' },
+      { path: '**', redirectTo: '/coinlist', pathMatch: 'full' }
     ]),
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')

@@ -71,7 +71,6 @@ export class MarketComponent {
   async getMarketData() {
     this.isLoading = true
     this.isFirstLoading = true
-    console.log('value in getMarket:' + this.selectedCurrency)
     this.JSONData = await this.getJSONData(
       this.selectedCurrency,
       this.selectedCurrencyToCompare,
@@ -113,6 +112,12 @@ export class MarketComponent {
         }
       }
     },
+    grid: {
+      left: 60,
+      top: 30,
+      right: 30,
+      bottom: 30
+    },
     // title: {
     //   left: 'center',
     //   text: this.selectedCurrency + ' to ' + this.selectedCurrencyToCompare
@@ -124,7 +129,10 @@ export class MarketComponent {
       type: 'value',
       boundaryGap: false,
       splitLine: {
-        show: false
+        show: true,
+        lineStyle: {
+          color: 'rgb(50, 50, 65, 0.85)'
+        }
       }
     },
     dataZoom: [

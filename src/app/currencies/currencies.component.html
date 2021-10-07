@@ -1,10 +1,17 @@
 <mat-progress-bar mode="indeterminate" *ngIf="isFirstLoading"></mat-progress-bar>
 <div *ngIf="!isFirstLoading">
+  <!-- <div class="news-feed">
+    <div class="news-title">News Feed:</div>
+    <div class="news-content">
+      <span>I'm having this particular issue where Dolby Atmos for Headphones or Windows Sonic is not getting</span>
+      <span>I'm having this particular issue where Dolby Atmos for Headphones or Windows Sonic is not getting</span>
+    </div>
+  </div> -->
   <h1>Markets</h1>
   <div class="currencies">
     <div class="top-currencies">
       <div class="title">
-        <h2>Best performing assets</h2>
+        <h2>Best performing assets last 24h</h2>
       </div>
       <div class="content">
         <ng-container>
@@ -12,8 +19,9 @@
             <mat-card>
               <mat-card-title-group>
                 <mat-card-title>
-                  {{performers[0].name}}
+                  {{performers[0].symbol}}
                 </mat-card-title>
+                <mat-card-subtitle>{{performers[0].name}}</mat-card-subtitle>
                 <img src="https://www.cryptocompare.com{{performers[0].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
@@ -32,7 +40,8 @@
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[1].name}}</mat-card-title>
+                <mat-card-title>{{performers[1].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performers[1].name}}</mat-card-subtitle>
                 <img src="https://www.cryptocompare.com{{performers[1].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
@@ -51,7 +60,8 @@
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[2].name}}</mat-card-title>
+                <mat-card-title>{{performers[2].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performers[2].name}}</mat-card-subtitle>
                 <img src="https://www.cryptocompare.com{{performers[2].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
@@ -70,14 +80,15 @@
     </div>
     <div class="worst-currencies">
       <div class="title">
-        <h2>Worst performing assets</h2>
+        <h2>Worst performing assets last 24h</h2>
       </div>
       <div class="content">
         <ng-container>
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[performers.length - 1].name}}</mat-card-title>
+                <mat-card-title>{{performers[performers.length - 1].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performers[performers.length - 1].name}}</mat-card-subtitle>
                 <img src="https://www.cryptocompare.com{{performers[performers.length - 1].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
@@ -96,7 +107,8 @@
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[performers.length - 2].name}}</mat-card-title>
+                <mat-card-title>{{performers[performers.length - 2].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performers[performers.length - 2].name}}</mat-card-subtitle>
                 <img src="https://www.cryptocompare.com{{performers[performers.length - 2].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
@@ -115,7 +127,8 @@
           <div class="card">
             <mat-card>
               <mat-card-title-group>
-                <mat-card-title>{{performers[performers.length - 3].name}}</mat-card-title>
+                <mat-card-title>{{performers[performers.length - 3].symbol}}</mat-card-title>
+                <mat-card-subtitle>{{performers[performers.length - 3].name}}</mat-card-subtitle>
                 <img src="https://www.cryptocompare.com{{performers[performers.length - 3].logo}}" />
               </mat-card-title-group>
               <mat-card-content [ngClass]="{
@@ -159,7 +172,7 @@
     </ng-container>
 
     <ng-container matColumnDef="changepct">
-      <th mat-header-cell *matHeaderCellDef="let row" class="changepct">24h %</th>
+      <th mat-header-cell *matHeaderCellDef="let row" class="changepct">24h</th>
       <td mat-cell *matCellDef="let element" [ngClass]="{
             'positive' : element.changepct > 0,
             'negative' : element.changepct < 0
@@ -191,7 +204,7 @@
           (click)="this.comp.setCurrency(element.symbol)">Info</a></td>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="columnsToDisplay" style="background-color: rgb(27, 27, 32, 0.85)"></tr>
+    <tr mat-header-row class="mat-header-row" *matHeaderRowDef="columnsToDisplay"></tr>
     <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row">
     </tr>
 
