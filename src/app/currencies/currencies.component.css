@@ -127,14 +127,6 @@ tr.example-element-row:not(.example-expanded-row):active {
   line-height: normal;
 }
 
-.example-element-description {
-  padding: 16px;
-}
-
-.example-element-description-attribution {
-  opacity: 0.5;
-}
-
 .mat-column-name {
   font-size: 14px;
   font-weight: 500;

@@ -31,7 +31,7 @@
                 {{performersSource[0].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                <div [ngClass]="{
+                <div style="width: 15px;"[ngClass]="{
                     'positive' : performersSource[0].updown == '▲',
                     'negative' : performersSource[0].updown == '▼'
                  }">
@@ -56,7 +56,7 @@
                 {{performersSource[1].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                <div [ngClass]="{
+                <div style="width: 15px;"[ngClass]="{
                   'positive' : performersSource[1].updown == '▲',
                   'negative' : performersSource[1].updown == '▼'
                    }">
@@ -81,7 +81,7 @@
                 {{performersSource[2].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                <div [ngClass]="{
+                <div style="width: 15px;" [ngClass]="{
                 'positive' : performersSource[2].updown == '▲',
                 'negative' : performersSource[2].updown == '▼'
                 }">
@@ -114,7 +114,7 @@
                 {{performersSource[performersSource.length - 1].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                <div [ngClass]="{
+                <div style="width: 15px;" [ngClass]="{
                 'positive' : performersSource[performersSource.length - 1].updown == '▲',
                   'negative' : performersSource[performersSource.length - 1].updown == '▼'
                    }">
@@ -139,7 +139,7 @@
                 {{performersSource[performersSource.length - 2].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                <div [ngClass]="{
+                <div style="width: 15px;"[ngClass]="{
                   'positive' : performersSource[performersSource.length - 2].updown == '▲',
                   'negative' : performersSource[performersSource.length - 2].updown == '▼'
                    }">
@@ -164,7 +164,7 @@
                 {{performersSource[performersSource.length - 3].changepct}}%
               </mat-card-content>
               <mat-card-content>
-                <div [ngClass]="{
+                <div style="width: 15px;" [ngClass]="{
                   'positive' : performersSource[performersSource.length - 3].updown == '▲',
                    'negative' : performersSource[performersSource.length - 3].updown == '▼'
                     }">
@@ -196,7 +196,7 @@
 
     <ng-container matColumnDef="updown">
       <th mat-header-cell *matHeaderCellDef="let row" class="updown"></th>
-      <td mat-cell *matCellDef="let element" [ngClass]="{
+      <td mat-cell *matCellDef="let element" style="width: 15px;" [ngClass]="{
                     'positive' : element.updown == '▲',
                     'negative' : element.updown == '▼'
                  }"> {{element.updown}} </td>
@@ -204,15 +204,12 @@
 
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef="let row" class="price">PRICE</th>
-      <td mat-cell *matCellDef="let element" [ngClass]="{
-            'positive' : element.price > 45000,
-            'negative' : element.price < 45000
-         }"> {{element.price}} </td>
+      <td mat-cell *matCellDef="let element" style="width: 100px;"> {{element.price}} </td>
     </ng-container>
 
     <ng-container matColumnDef="changepct">
       <th mat-header-cell *matHeaderCellDef="let row" class="changepct">24h</th>
-      <td mat-cell *matCellDef="let element" [ngClass]="{
+      <td mat-cell *matCellDef="let element" style="width: 100px;" [ngClass]="{
             'positive' : element.changepct > 0,
             'negative' : element.changepct < 0
          }"> {{element.changepct}} %</td>

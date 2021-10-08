@@ -48,7 +48,7 @@ export class CurrenciesComponent {
     for (let currency of currencieslist) {
       // 0 = RAW Value, 1 = DISPLAY Value  
       let plussign, updown
-      jsonArray[1][currency].USD.CHANGEPCT24HOUR > 0 ? plussign = '+' : plussign = ''
+      jsonArray[0][currency].USD.CHANGEPCT24HOUR > 0 ? plussign = '+' : plussign = ''
       composedData.push(
         {
           rank: i + 1,
@@ -57,7 +57,6 @@ export class CurrenciesComponent {
           symbol: currency,
           price: '$ ' + jsonArray[0][currency].USD.PRICE.toFixed(2),
           changepct: plussign + jsonArray[1][currency].USD.CHANGEPCT24HOUR,
-          plussign: plussign,
           updown: updown,
           open24: jsonArray[0][currency].USD.OPEN24HOUR,
           totalvolume: jsonArray[1][currency].USD.TOTALTOPTIERVOLUME24HTO,
@@ -77,8 +76,6 @@ export class CurrenciesComponent {
     performers.sort((a: { changepct: number }, b: { changepct: number }) => b.changepct - a.changepct)
     this.dataSource = composedData
     this.performersSource = performers
-    this.isFirstLoading = false
-
     let apiKey = "6e659e1244d9e7ccf3b6bdf6ada561766883d528a2025f01004787c096d1b005"
     const subject = new WebSocketSubject('wss://streamer.cryptocompare.com/v2?api_key=' + apiKey)
     subject.next({
@@ -93,33 +90,45 @@ export class CurrenciesComponent {
           "5~CCCAGG~XTZ~USD", "5~CCCAGG~XLM~USD", "5~CCCAGG~VET~USD", "5~CCCAGG~FTT~USD",
           "5~CCCAGG~ETC~USD", "5~CCCAGG~TRX~USD", "5~CCCAGG~DAI~USD"]
     })
+    let subibaja: any = [], subibajaicon:string
+    let ix = 0
+    for (let currencies of currencieslist) {
+      console.log(currencies + ' ' + composedData[ix].price)
+      subibaja.push({
+        price: composedData[ix].price
+      })
+      ix++
+    }
+    let that = this
     subject.subscribe(data => pushWebSocketData(data))
-    let subibaja = composedData[0].price
-    let subibajaicon = ''
+
     function pushWebSocketData(data: any) {
       let pricesocket, symbol: string
-      pricesocket = data.PRICE
-      symbol = data.FROMSYMBOL
-      if (pricesocket !== undefined) {
+      if (data.PRICE !== undefined) {
+        pricesocket = data.PRICE
+        symbol = data.FROMSYMBOL
         let i1 = composedData.findIndex(((obj: { symbol: string }) => obj.symbol == symbol))
         composedData[i1].price = '$ ' + pricesocket.toFixed(2)
-        if (subibaja > composedData[i1].price) {
-          subibaja = composedData[i1].price
+        if (composedData[i1].price > subibaja[i1].price) {
+          subibaja[i1].price = composedData[i1].price
           subibajaicon = '▲'
           composedData[i1].updown = subibajaicon
-        } else if (subibaja < composedData[i1].price) {
-          subibaja = composedData[0].price
+        } else if (composedData[i1].price < subibaja) {
+          subibaja[i1].price = composedData[i1].price
           subibajaicon = '▼'
           composedData[i1].updown = subibajaicon
         }
-        composedData[i1].changepct = composedData[i1].plussign + (((pricesocket - composedData[i1].open24) / pricesocket) * 100).toFixed(2)
+        let plussign: string
+        composedData[i1].changepct > 0 ? plussign = '+' : plussign = ''
+        composedData[i1].changepct = plussign + (((pricesocket - composedData[i1].open24) / pricesocket) * 100).toFixed(2)
 
         //Best assets / Worst assets
         let i2 = performers.findIndex(((obj: { symbol: string }) => obj.symbol == symbol))
         performers[i2].price = '$ ' + pricesocket.toFixed(2)
-        performers[i2].changepct = composedData[i1].plussign + (((pricesocket - composedData[i1].open24) / pricesocket) * 100).toFixed(2)
+        performers[i2].changepct = plussign + (((pricesocket - composedData[i1].open24) / pricesocket) * 100).toFixed(2)
         performers[i2].updown = subibajaicon
         performers.sort((a: { changepct: number }, b: { changepct: number }) => b.changepct - a.changepct)
+        that.isFirstLoading = false
       }
     }
   }
