@@ -26,8 +26,8 @@ footer {
 
 .space {
   position: relative;
-  height: 60px;
-  margin-bottom: 40px;
+  height: 55px;
+  margin-bottom: 30px;
 }
 
 .toolbar {
@@ -36,7 +36,7 @@ footer {
   margin-top: 0;
   left: 0;
   right: 0;
-  height: 60px;
+  height: 55px;
   display: flex;
   align-items: center;
   color: white;

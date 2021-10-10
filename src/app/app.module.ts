@@ -30,6 +30,7 @@ import { CurrenciesComponent } from './currencies/currencies.component'
 
 import { NgxEchartsModule } from 'ngx-echarts'
 import { InvestComponent } from './invest/invest.component'
+import { MatSortModule } from '@angular/material/sort'
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { InvestComponent } from './invest/invest.component'
     MatInputModule,
     MatSelectModule,
     MatTabsModule,
+    MatSortModule,
     FormsModule,
     ReactiveFormsModule,
     MatPaginatorModule,

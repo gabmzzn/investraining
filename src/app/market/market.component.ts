@@ -5,9 +5,9 @@ import { MatPaginator } from '@angular/material/paginator'
 import { MatTableDataSource } from '@angular/material/table'
 import { FormControl } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
-
 import { ECharts, EChartsOption } from 'echarts'
 import * as echarts from 'echarts'
+import { DataService } from '../data.service'
 
 @Component({
   selector: 'app-market',
@@ -38,27 +38,27 @@ import * as echarts from 'echarts'
 
 export class MarketComponent {
 
-  constructor(private snackBar: MatSnackBar) { }
+  constructor(
+    private snackBar: MatSnackBar,
+    private dataService: DataService
+    ) { }
 
   ngOnInit() {
-
+    if (this.dataService.sharedData == undefined) {
+      this.selectedCurrency = 'BTC'
+    } else {
+      this.selectedCurrency = this.dataService.sharedData
+    }
     this.getMarketData()
-  }
-
+  } 
+  
   selectedCurrency: string = 'BTC'
   selectedCurrencyToCompare: string = 'USD'
   date: any = new Date()
   data: any
   JSONData: any
-  isLoading: boolean = false
-  isFirstLoading: boolean = false
-
-  setCurrency(c: string) {
-    console.log('value recieved:' + c)
-    this.selectedCurrency = c
-    console.log('after set:' + this.selectedCurrency)
-    this.updateData()
-  }
+  isLoading: boolean = true
+  isFirstLoading: boolean = true
 
   async getJSONData(fsym: string, tsym: string, timestamp: number, limit: number) {
     const url = 'https://min-api.cryptocompare.com/data/v2/histoday?fsym='
@@ -69,26 +69,24 @@ export class MarketComponent {
   }
 
   async getMarketData() {
+    let that = this
     this.isLoading = true
-    this.isFirstLoading = true
     this.JSONData = await this.getJSONData(
       this.selectedCurrency,
       this.selectedCurrencyToCompare,
       Date.parse(this.date) / 1000,
       999)
     this.StatsChart()
-    this.CurrencyInfo()
     this.HistoricalData()
     this.NewsFeed()
-    this.isLoading = false
+    this.CurrencyInfo().then(() => {
+      this.isLoading = false
+      this.isFirstLoading = false
+    })
   }
 
   async updateData() {
     this.getMarketData()
-      .then(() => {
-        this.snackBar.open('Market data has been successfully updated', '',
-          { duration: 3000 })
-      })
   }
 
 

@@ -1,8 +1,9 @@
 <!-- Data input -->
 <mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<div *ngIf="!isFirstLoading">
 <div class="currencyHeader">
   <div class="selectedCurrencyActions">
-    {{CoinName}} <button mat-stroked-button disabled>{{Symbol}}</button>
+    {{CoinName}} <span class="symbol">{{Symbol}}</span>
   </div>
   <div class="selectedCurrencyPrice">
     ${{Price}}
@@ -10,7 +11,7 @@
 </div>
 <!-- INPUT VALUES -->
 
-<div class="inputva3lues">
+<!-- <div class="inputva3lues">
   <mat-form-field appearance="fill">
     <mat-label>Currency to evaluate</mat-label>
     <mat-select [(ngModel)]="selectedCurrency" name="currency" (selectionChange)="updateData()">
@@ -37,19 +38,27 @@
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
-  <!-- <mat-spinner *ngIf="isLoading" [diameter]="30"></mat-spinner> -->
-</div>
-
+  
+</div> -->
+<!-- <mat-spinner *ngIf="isLoading" [diameter]="30"></mat-spinner> -->
 <!-- Tabs with their content  -->
 <mat-tab-group mat-align-tabs="start">
   <!-- STATS CHART -->
-
+  <mat-form-field appearance="fill">
+    <mat-label>Currency to evaluate</mat-label>
+    <mat-select [(ngModel)]="selectedCurrency" name="currency" (selectionChange)="updateData()">
+      <mat-option *ngFor="let currency of currency" [value]="currency.name">
+        <img class="icon" aria-hidden src="{{currency.img}}">
+        <span>{{currency.name}}</span>
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
   <mat-tab class="stats">
     <ng-template mat-tab-label>
       <mat-icon class="tab-icon">trending_up</mat-icon>
       Stats Chart
     </ng-template>
-    <div class="market-container" *ngIf="isFirstLoading">
+    <div class="market-container">
       <div class="left-container">
         <div echarts [options]="chartOption" [merge]="mergeOptions" class="demo-chart"
           style="width: 100%;height: 450px; margin-bottom: 50px;">
@@ -177,3 +186,4 @@
     </div>
   </mat-tab>
 </mat-tab-group>
+</div>

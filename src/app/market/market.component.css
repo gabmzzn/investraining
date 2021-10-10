@@ -1,5 +1,5 @@
 a {
-  color:white;
+  color: white;
   text-decoration: none;
 }
 
@@ -15,20 +15,22 @@ p {
   margin-bottom: 20px;
 }
 
+.symbol {
+  vertical-align: middle;
+  font-size: 12px;;
+  font-weight: 400;
+  padding: 4px 5px;
+  border-radius: 12%;
+  color: rgb(190, 190, 190);
+  background-color: rgb(50, 50, 65);
+  border-radius: 10%;
+}
+
 .selectedCurrencyActions {
   font-size: 30px;
   float: left;
 }
 
-.selectedCurrencyActions > button > span {
-  font-size: 6px !important;
-  float: left;
-}
-
-.selectedCurrencyActions > span {
-  font-size: 6px !important;
-  float: left;
-}
 
 .selectedCurrencyPrice {
   font-size: 24px;
@@ -40,7 +42,7 @@ p {
 mat-progress-bar {
   z-index: 100;
   position: fixed;
-  top:61px;
+  top: 56px;
   left: 0;
 }
 
@@ -54,27 +56,29 @@ mat-progress-bar {
   width: 100%;
 }
 
- .mat-focused .mat-form-field-label {
- /*change color of label*/
- color: white !important;
+.mat-focused .mat-form-field-label {
+  /*change color of label*/
+  color: white !important;
 }
 
 .mat-form-field-underline {
- /*change color of underline*/
- background-color: white !important;
-} 
+  /*change color of underline*/
+  background-color: white !important;
+}
 
 .mat-form-field-ripple {
- /*change color of underline when focused*/
- background-color: white !important;;
+  /*change color of underline when focused*/
+  background-color: white !important;
+  ;
 }
 
 .mat-form-field-label {
- /*change color of label*/
- color: white !important;
+  /*change color of label*/
+  color: white !important;
 }
-::ng-deep .mat-calendar-body-selected{
-/* background-color: green; */
+
+::ng-deep .mat-calendar-body-selected {
+  /* background-color: green; */
 }
 
 ::ng-deep mat-datepicker-content {
@@ -96,7 +100,6 @@ mat-form-field {
   background: rgba(37, 37, 44) !important;
 }
 
-
 /* Tabs */
 
 mat-tab-group {
@@ -113,14 +116,14 @@ mat-tab-group {
 /* Market info */
 
 .market-container {
-   display: flex;
+  display: flex;
 }
 
 .right-container {
   flex: 1;
 }
 
-.right-container > mat-card {
+.right-container>mat-card {
   width: 300px;
 }
 
@@ -155,7 +158,7 @@ mat-card {
   line-height: 1.4;
 }
 
-mat-card-title{
+mat-card-title {
   line-height: 1.2;
 }
 
@@ -170,5 +173,5 @@ table {
   width: 95%;
   background-color: rgba(38, 39, 53, 0);
   border-radius: 8px;
-  overflow:hidden !important;
+  overflow: hidden !important;
 }
