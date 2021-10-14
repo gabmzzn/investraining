@@ -111,7 +111,7 @@ export class MarketComponent {
       }
     },
     grid: {
-      left: 60,
+      left: 45,
       top: 30,
       right: 30,
       bottom: 30
@@ -148,7 +148,7 @@ export class MarketComponent {
       {
         name: this.selectedCurrencyToCompare,
         type: 'line',
-        animationThreshold: 2000,
+        animationThreshold: 5000,
         showSymbol: false,
         symbolSize: 9,
         sampling: 'lttb',
@@ -184,14 +184,13 @@ export class MarketComponent {
   high24!: number
   low24!: number
   PriceChange!: any
-  img!: string
+  ImageUrl!: string
   CoinName!: string
   Symbol!: string
 
   async CurrencyInfo() {
     const coinlist = 'https://min-api.cryptocompare.com/data/all/coinlist?fsym=' + this.selectedCurrency
     const json = await fetch(coinlist).then(res => res.json())
-
     const singleprice = 'https://min-api.cryptocompare.com/data/price?fsym='
       + this.selectedCurrency + '&tsyms=' + this.selectedCurrencyToCompare
     const json2 = await fetch(singleprice).then(res => res.json())
@@ -211,6 +210,7 @@ export class MarketComponent {
     this.PlatformType = json.Data[this.selectedCurrency].PlatformType
     this.Algorithm = json.Data[this.selectedCurrency].Algorithm
     this.AssetWebsiteUrl = json.Data[this.selectedCurrency].AssetWebsiteUrl
+    this.ImageUrl = json.Data[this.selectedCurrency].ImageUrl
   }
 
   // Historical Data
@@ -249,12 +249,14 @@ export class MarketComponent {
   // News Feed
 
   cards: any
-
   async NewsFeed() {
     const url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories=' + this.selectedCurrency
       + '&excludeCategories=Sponsored&lTs=' + Date.parse(this.date) / 1000
     const json = await fetch(url).then(res => res.json())
     this.cards = json.Data
+    for (let i=0;i < json.Data.length; i++) {
+      this.cards[i].body = json.Data[i].body.replaceAll(/\. /g, '.<br><br>')
+    }
   }
 
   // Form Data

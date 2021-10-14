@@ -12,20 +12,19 @@ import { DataService } from '../data.service';
 
 export class CurrenciesComponent {
 
+  ngOnInit() {
+    this.getCurrencyData()
+  }
+
   constructor(private dataService: DataService) { }
 
   set Data(value:string) {
     this.dataService.sharedData = value
   }
 
-  ngOnInit() {
-    this.getCurrencyData()
-  }
-
   setRowInfo(row:any){
     this.Data = row.symbol
   }
-
 
   isFirstLoading: boolean = true
   dataSource!: any
@@ -40,7 +39,7 @@ export class CurrenciesComponent {
       'DOT', 'DOGE', 'LUNA', 'UNI', 'AVAX', 'LINK', 'ALGO', 'LTC', 'BCH',
       'WBTC', 'MATIC', 'AXS', 'ATOM', 'ICP', 'FIL', 'XTZ', 'XLM', 'VET',
       'FTT', 'ETC', 'TRX', 'DAI', 'DASH', 'FTM', 'EGLD', 'XMR', 'CAKE',
-      'EOS', 'XEC', 'AAVE', 'SUSHI', 'NEAR', 'MIOTA', 'QNT', 'GRT', 'NEO',
+      'EOS', 'XEC', 'AAVE', 'SUSHI', 'NEAR', 'SNX', 'QNT', 'GRT', 'NEO',
       'WAVES', 'KSM', 'LEO', 'MKR', 'BTT', 'ONE', 'HNT', 'AMP']
     const currenciesnames = ['Bitcoin', 'Ethereum', 'Binance', 'Cardano',
       'Solana', 'XRP', 'Polkadot', 'Dogecoin', 'Terra', 'Uniswap', 'Avalanche',
@@ -48,7 +47,7 @@ export class CurrenciesComponent {
       'Polygon', 'Axie Infinity', 'Cosmos', 'Internet Computer', 'Filecoin', 
       'Tezos','Stellar', 'VeChain', 'FTX Token', 'Ethereum Classic', 'TRON', 
       'Dai', 'Dash', 'Fantom', 'Elrond', 'Monero', 'PancakeSwap', 'EOS', 
-      'eCash', 'Aave', 'SushiSwap', 'NEAR Protocol', 'IOTA', 'Quant', 
+      'eCash', 'Aave', 'SushiSwap', 'NEAR Protocol', 'Synthetix', 'Quant', 
       'The Graph', 'Neo', 'Waves', 'Kusama', 'LEO Token', 'Maker', 
       'BitTorrent Token', 'Harmony', 'Helium', 'Amp']
     currencieslist.forEach(element => {
@@ -91,7 +90,7 @@ export class CurrenciesComponent {
 
     this.dataSource = composedData
     this.performersSource = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
-
+    this.performersSource.splice(3, 44)
     this.isFirstLoading = false
 
     // WebSocket Connection 
@@ -109,7 +108,7 @@ export class CurrenciesComponent {
           '5~CCCAGG~FTT~USD', '5~CCCAGG~ETC~USD', '5~CCCAGG~TRX~USD', '5~CCCAGG~DAI~USD',
           '5~CCCAGG~DASH~USD', '5~CCCAGG~FTM~USD', '5~CCCAGG~EGLD~USD', '5~CCCAGG~XMR~USD',
           '5~CCCAGG~CAKE~USD', '5~CCCAGG~EOS~USD', '5~CCCAGG~XEC~USD', '5~CCCAGG~AAVE~USD',
-          '5~CCCAGG~SUSHI~USD', '5~CCCAGG~NEAR~USD', '5~CCCAGG~MIOTA~USD', '5~CCCAGG~QNT~USD',
+          '5~CCCAGG~SUSHI~USD', '5~CCCAGG~NEAR~USD', '5~CCCAGG~SNX~USD', '5~CCCAGG~QNT~USD',
           '5~CCCAGG~GRT~USD', '5~CCCAGG~NEO~USD', '5~CCCAGG~WAVES~USD', '5~CCCAGG~KSM~USD',
           '5~CCCAGG~LEO~USD', '5~CCCAGG~MKR~USD', '5~CCCAGG~BTT~USD', '5~CCCAGG~ONE~USD',
           '5~CCCAGG~HNT~USD', '5~CCCAGG~AMP~USD',
@@ -143,7 +142,8 @@ export class CurrenciesComponent {
           subibaja[i1].price = composedData[i1].price
           composedData[i1].updown = '▼'
         }
-        that.performersSource = composedData.sort((a: any, b: any) => b.changepct - a.changepct)
+        that.performersSource = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
+        that.performersSource.splice(3,44)
       }
     }
   }

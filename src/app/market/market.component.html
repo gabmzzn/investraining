@@ -3,7 +3,14 @@
 <div *ngIf="!isFirstLoading">
 <div class="currencyHeader">
   <div class="selectedCurrencyActions">
-    {{CoinName}} <span class="symbol">{{Symbol}}</span>
+    <img src="https://www.cryptocompare.com{{ImageUrl}}" style="width: 30px;"><span style="padding: 4px 5px;">{{CoinName}}</span> <span class="symbol">{{Symbol}}</span>
+  </div>
+  <div class="input-values">
+    <mat-form-field appearance="fill">
+      <input matInput [matDatepicker]="picker" [(ngModel)]="date" (dateChange)="updateData()">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
   </div>
   <div class="selectedCurrencyPrice">
     ${{Price}}
@@ -11,8 +18,8 @@
 </div>
 <!-- INPUT VALUES -->
 
-<!-- <div class="inputva3lues">
-  <mat-form-field appearance="fill">
+
+  <!-- <mat-form-field appearance="fill">
     <mat-label>Currency to evaluate</mat-label>
     <mat-select [(ngModel)]="selectedCurrency" name="currency" (selectionChange)="updateData()">
       <mat-option *ngFor="let currency of currency" [value]="currency.name">
@@ -20,9 +27,9 @@
         <span>{{currency.name}}</span>
       </mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
 
-  <mat-form-field appearance="fill">
+  <!-- <mat-form-field appearance="fill">
     <mat-label>Currency to compare to</mat-label>
     <mat-select [(ngModel)]="selectedCurrencyToCompare" name="currency" (selectionChange)="updateData()">
       <mat-option *ngFor="let currency of currenciesToCompare" [value]="currency.name">
@@ -30,16 +37,8 @@
         <span>{{currency.name}}</span>
       </mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
 
-  <mat-form-field appearance="fill">
-    <mat-label>Choose a date from</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="date" (dateChange)="updateData()">
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  
-</div> -->
 <!-- <mat-spinner *ngIf="isLoading" [diameter]="30"></mat-spinner> -->
 <!-- Tabs with their content  -->
 <mat-tab-group mat-align-tabs="start">
@@ -121,8 +120,6 @@
       </div>
     </div>
   </mat-tab>
-
-
   <!-- HISTORICAL DATA -->
   <mat-tab>
     <ng-template mat-tab-label>
@@ -151,8 +148,6 @@
         </mat-paginator> -->
     </div>
   </mat-tab>
-
-
   <!-- NEWS FEED -->
   <mat-tab>
     <ng-template mat-tab-label>
@@ -162,15 +157,15 @@
 
     <div class="news-feed">
       <div fxLayout="row nowrap" fxLayoutGap="16px grid">
-        <ng-container fxFlex="25" fxFlex.sm="33.3" fxFlex.xs="50" *ngFor="let card of cards">
-          <mat-card>
+        <ng-container *ngFor="let card of cards">
+          <mat-card style="border: 1px solid rgba(255, 255, 255, 0.096);">
             <mat-card-title-group>
               <mat-card-title>{{card.title}}</mat-card-title>
               <mat-card-subtitle>{{card.published_on * 1000 | date}}</mat-card-subtitle>
               <img mat-card-sm-image src={{card.imageurl}}>
             </mat-card-title-group>
             <mat-card-content>
-              {{card.body}}
+              <div id="card-body" [innerHTML]="card.body"></div>
             </mat-card-content>
             <mat-card-actions>
               <a mat-stroked-button href={{card.url}} target="_blank">

@@ -14,7 +14,7 @@ mat-progress-bar {
 
 .symbol {
   vertical-align: middle;
-  font-size: 9px;
+  font-size: 10px;
   font-weight: bold;
   padding: 4px 5px;
   border-radius: 12%;
@@ -35,24 +35,20 @@ h1 {
   margin-bottom: 15px;
 }
 
-.mat-header-row {
-  background-color: rgb(27, 27, 32, 0.85) !important;
-  font-size: medium !important;
-}
-
-.currencies {
+.titles {
   display: flex;
   flex-direction: row;
   width: 100%;
 }
 
-.top-currencies {
-  margin-bottom: 20px;
-  width: 100%;
+.title {
+  width: 50%;
+  margin-bottom: 5px;
 }
 
-.worst-currencies {
-  margin-bottom: 20px;
+.currencies {
+  display: flex;
+  flex-direction: row;
   width: 100%;
 }
 
@@ -65,6 +61,7 @@ mat-card-content {
   display: flex;
   flex-direction: row;
   width: 100%;
+  margin-bottom: 20px;
 }
 
 .card {
@@ -103,6 +100,11 @@ mat-card-title-group img {
 
 .card mat-card-title {
   margin-top: 5px;
+}
+
+.mat-header-row {
+  background-color: rgb(27, 27, 32, 0.85) !important;
+  font-size: medium !important;
 }
 
 tr.detail-row {

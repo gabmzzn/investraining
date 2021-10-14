@@ -17,7 +17,8 @@ p {
 
 .symbol {
   vertical-align: middle;
-  font-size: 12px;;
+  font-size: 12px;
+  ;
   font-weight: 400;
   padding: 4px 5px;
   border-radius: 12%;
@@ -30,7 +31,6 @@ p {
   font-size: 30px;
   float: left;
 }
-
 
 .selectedCurrencyPrice {
   font-size: 24px;
@@ -53,8 +53,26 @@ mat-progress-bar {
 }
 
 .input-values {
+  position: relative;
   width: 100%;
+  left: 50px;
 }
+
+::ng-deep mat-form-field {
+  width: 120px !important;
+  height: 40px !important;
+}
+
+::ng-deep .mat-form-field-flex {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-right: 0px !important;
+  height: 40px !important;
+}
+
+/* ::ng-deep mat-tab-header {
+  width: 80%;
+} */
 
 .mat-focused .mat-form-field-label {
   /*change color of label*/
@@ -139,6 +157,11 @@ mat-tab-group {
     white-space: pre-line;
 } */
 
+.mat-header-row {
+  background-color: #282a38 !important;
+  font-size: medium !important;
+}
+
 /* News Feed */
 
 .news-feed {
@@ -154,12 +177,22 @@ mat-card {
   display: inline-block;
   margin: 10px;
   width: 95%;
-  background-color: rgb(32, 36, 46);
   line-height: 1.4;
+  background-color: rgb(29, 30, 39);
+  border: 1px solid rgba(56, 58, 71, 0.685);
 }
 
 mat-card-title {
-  line-height: 1.2;
+  line-height: 1.25;
+}
+
+mat-card img {
+  border-radius: 12%;
+  margin-left: 10px;
+}
+
+#card-body {
+  line-height: 1.35;
 }
 
 .news-feed mat-card-content {

@@ -22,6 +22,7 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { AppComponent } from './app.component'
 import { MarketComponent } from './market/market.component'
@@ -44,6 +45,7 @@ import { MatSortModule } from '@angular/material/sort'
     BrowserModule,
     BrowserAnimationsModule,
     MatListModule,
+    MatDialogModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatNativeDateModule,
