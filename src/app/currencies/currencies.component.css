@@ -137,6 +137,7 @@ tr.element-row:not(.expanded-row):active {
 .mat-column-price {
   font-size: 16px;
   font-weight: 500;
+  width: 135px;
 }
 
 .mat-column-changepct {
@@ -153,5 +154,27 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .negative {
+  color: red;
+}
+
+.positivenum {
+  background-color: rgba(0, 128, 0, 0.3);
+  border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 300ms linear;
+}
+
+.positivenum .updown {
+  color: green;
+}
+
+.negativenum {
+  background-color: rgba(255, 0, 0, 0.3);
+  border-radius: 5px;
+  padding: 4px 6px;
+  transition: background-color 300ms linear;
+}
+
+.negativenum .updown {
   color: red;
 }

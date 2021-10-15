@@ -26,7 +26,8 @@ export class CurrenciesComponent {
     this.Data = row.symbol
   }
 
-  isFirstLoading: boolean = true
+  isLoading: boolean = true
+  isWebSocketLoading: boolean = true
   dataSource!: any
   performersSource!: any
   columnsToDisplay = ['rank', 'logo', 'name', 'updown', 'price', 'changepct', 'totalvolume',
@@ -89,9 +90,10 @@ export class CurrenciesComponent {
     }
 
     this.dataSource = composedData
-    this.performersSource = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
-    this.performersSource.splice(3, 44)
-    this.isFirstLoading = false
+    let performers = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
+    performers.splice(3, 44)
+    this.performersSource = performers
+    this.isLoading = false
 
     // WebSocket Connection 
     let apiKey = '6e659e1244d9e7ccf3b6bdf6ada561766883d528a2025f01004787c096d1b005'
@@ -142,8 +144,10 @@ export class CurrenciesComponent {
           subibaja[i1].price = composedData[i1].price
           composedData[i1].updown = '▼'
         }
-        that.performersSource = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
-        that.performersSource.splice(3,44)
+        that.isWebSocketLoading = false
+        let performers = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
+        performers.splice(3, 44)
+        that.performersSource = performers
       }
     }
   }

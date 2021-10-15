@@ -23,14 +23,21 @@ import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { AppComponent } from './app.component'
 import { MarketComponent } from './market/market.component'
 import { AboutComponent } from './about/about.component'
 import { CurrenciesComponent } from './currencies/currencies.component'
+import { InvestComponent } from './invest/invest.component'
+import { AddFundsDialog } from './invest/invest.component'
+import { BuyCryptoDialog } from './invest/invest.component'
+import { ConvertCryptoDialog } from './invest/invest.component'
+import { TransactionDetailsDialog } from './invest/invest.component'
+import { WithdrawDialog } from './invest/invest.component'
 
 import { NgxEchartsModule } from 'ngx-echarts'
-import { InvestComponent } from './invest/invest.component'
+
 import { MatSortModule } from '@angular/material/sort'
 
 @NgModule({
@@ -39,7 +46,12 @@ import { MatSortModule } from '@angular/material/sort'
     AboutComponent,
     MarketComponent,
     CurrenciesComponent,
-    InvestComponent
+    InvestComponent,
+    AddFundsDialog,
+    BuyCryptoDialog,
+    ConvertCryptoDialog,
+    TransactionDetailsDialog,
+    WithdrawDialog
   ],
   imports: [
     BrowserModule,
@@ -62,6 +74,7 @@ import { MatSortModule } from '@angular/material/sort'
     MatIconModule,
     MatSnackBarModule,
     MatProgressSpinnerModule,
+    MatStepperModule,
     MatProgressBarModule,
     MaterialModule,
     RouterModule.forRoot([

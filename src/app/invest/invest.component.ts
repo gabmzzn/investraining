@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { animate, state, style, transition, trigger } from '@angular/animations'
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-invest',
@@ -29,13 +30,17 @@ export class InvestComponent {
 
   openAddFundsDialog(): void {
     this.dialog.open(AddFundsDialog, {
-      width: '250px',
+      width: '500px',
+      height: '450px',
+      backdropClass: 'backdropBackground'
     })
   }
 
   openWithdrawDialog(): void {
     this.dialog.open(WithdrawDialog, {
-      width: '250px',
+      width: '500px',
+      height: '450px',
+      backdropClass: 'backdropBackground'
     })
   }
 
@@ -51,7 +56,6 @@ export class InvestComponent {
   selector: 'buycrypto',
   templateUrl: 'dialogs/buycrypto.dialog.html',
 })
-
 export class BuyCryptoDialog {
 
   constructor(
@@ -66,7 +70,6 @@ export class BuyCryptoDialog {
   selector: 'convertcrypto',
   templateUrl: 'dialogs/convertcrypto.dialog.html',
 })
-
 export class ConvertCryptoDialog {
 
   constructor(
@@ -81,11 +84,14 @@ export class ConvertCryptoDialog {
   selector: 'addfunds',
   templateUrl: 'dialogs/addfunds.dialog.html',
 })
-
 export class AddFundsDialog {
+  firstFormGroup!: FormGroup
+  secondFormGroup!: FormGroup
 
   constructor(
-    public dialogRef: MatDialogRef<AddFundsDialog>) { }
+    private _formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<AddFundsDialog>
+  ) { }
 
   onNoClick(): void {
     this.dialogRef.close()
@@ -96,11 +102,23 @@ export class AddFundsDialog {
   selector: 'withdraw',
   templateUrl: 'dialogs/withdraw.dialog.html',
 })
-
 export class WithdrawDialog {
+  firstFormGroup!: FormGroup
+  secondFormGroup!: FormGroup
 
   constructor(
-    public dialogRef: MatDialogRef<WithdrawDialog>) { }
+    private _formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<WithdrawDialog>
+    ) { }
+
+  // ngOnInit() {
+  //   this.firstFormGroup = this._formBuilder.group({
+  //     firstCtrl: ['', Validators.required]
+  //   })
+  //   this.secondFormGroup = this._formBuilder.group({
+  //     secondCtrl: ['', Validators.required]
+  //   })
+  // }
 
   onNoClick(): void {
     this.dialogRef.close()
@@ -111,7 +129,6 @@ export class WithdrawDialog {
   selector: 'transactiondetails',
   templateUrl: 'dialogs/transactiondetails.dialog.html',
 })
-
 export class TransactionDetailsDialog {
 
   constructor(
