@@ -18,12 +18,16 @@ export class CurrenciesComponent {
 
   constructor(private dataService: DataService) { }
 
-  set Data(value:string) {
-    this.dataService.sharedData = value
+  set selectedCurrencyData(value:string) {
+    this.dataService.selectedCurrency = value
+  }
+
+  set currencyListData(value: any) {
+    this.dataService.currencyList = value
   }
 
   setRowInfo(row:any){
-    this.Data = row.symbol
+    this.selectedCurrencyData = row.symbol
   }
 
   isLoading: boolean = true
@@ -31,7 +35,7 @@ export class CurrenciesComponent {
   dataSource!: any
   performersSource!: any
   columnsToDisplay = ['rank', 'logo', 'name', 'updown', 'price', 'changepct', 'totalvolume',
-    'circulatingsupply', 'marketcap', 'buy', 'info'];
+    'marketcap', 'sparkchart', 'buy', 'info'];
 
   async getCurrencyData() {
     let composedData: any = [], clist='', i = 0
@@ -57,6 +61,10 @@ export class CurrenciesComponent {
     let json: any = Object.values(await fetch('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' +
       clist + '&tsyms=USD').then(res => res.json()))
 
+    // Last hour timestamp
+
+    let d = (new Date()).toString(), timestampLastHour = Date.parse((d.substr(0, 19) + ':00:00' + d.substr(24))) / 1000
+
     for (let currency of currencieslist) {
       // 0 = RAW Value, 1 = DISPLAY Value  
       let plussign, updown
@@ -68,26 +76,18 @@ export class CurrenciesComponent {
           logo: json[1][currency].USD.IMAGEURL, //Ex: json.DISPLAY.BTC.USD.IMAGEURL
           name: currenciesnames[i],
           symbol: currency,
-          price: '$ ' + json[0][currency].USD.PRICE.toLocaleString(
-            'en-GB', {
-            style: 'decimal',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }),
+          price: json[1][currency].USD.PRICE,
           changepct: plussign + json[1][currency].USD.CHANGEPCT24HOUR,
           updown: updown,
           open24: json[0][currency].USD.OPEN24HOUR,
           totalvolume: json[1][currency].USD.TOTALTOPTIERVOLUME24HTO,
-          circulatingsupply: currency + ' ' + json[0][currency].USD.CIRCULATINGSUPPLY.toLocaleString(
-            'en-GB', {
-            style: 'decimal',
-            minimumFractionDigits: 2,
-            maximumFractionDigits: 2
-          }),
           marketcap: json[1][currency].USD.MKTCAP,
+          sparkchart: 'https://images.cryptocompare.com/sparkchart/' + currency + '/USD/latest.png?ts=' + timestampLastHour
         })
       i++
     }
+
+    this.currencyListData = composedData
 
     this.dataSource = composedData
     let performers = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
@@ -96,7 +96,7 @@ export class CurrenciesComponent {
     this.isLoading = false
 
     // WebSocket Connection 
-    let apiKey = '6e659e1244d9e7ccf3b6bdf6ada561766883d528a2025f01004787c096d1b005'
+    const apiKey = '6e659e1244d9e7ccf3b6bdf6ada561766883d528a2025f01004787c096d1b005'
     const subject = new WebSocketSubject('wss://streamer.cryptocompare.com/v2?api_key=' + apiKey)
     subject.next({
       'action': 'SubAdd',
@@ -127,12 +127,14 @@ export class CurrenciesComponent {
     subject.subscribe(data => pushWebSocketData(data))
     function pushWebSocketData(data: any) {
       if (data.PRICE !== undefined) {
+
+        that.isWebSocketLoading = false
         let i1 = composedData.findIndex(((obj: any) => obj.symbol == data.FROMSYMBOL))
         composedData[i1].price = '$ ' + (data.PRICE.toLocaleString(
           'en-GB', {
           style: 'decimal',
           minimumFractionDigits: 2,
-          maximumFractionDigits: 2
+          maximumFractionDigits: 7,
         }))
         composedData[i1].changepct = (composedData[i1].changepct > 0 ? '+' : '') +
           (((data.PRICE - composedData[i1].open24) / data.PRICE) * 100).toFixed(2)
@@ -144,7 +146,6 @@ export class CurrenciesComponent {
           subibaja[i1].price = composedData[i1].price
           composedData[i1].updown = '▼'
         }
-        that.isWebSocketLoading = false
         let performers = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
         performers.splice(3, 44)
         that.performersSource = performers

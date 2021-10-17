@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
-import { RouterModule } from '@angular/router'
+import { RouterModule, PreloadAllModules } from '@angular/router'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { webSocket } from "rxjs/webSocket"
 
@@ -22,8 +22,8 @@ import { MatPaginatorModule } from '@angular/material/paginator'
 import { MatSnackBarModule } from '@angular/material/snack-bar'
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatStepperModule } from '@angular/material/stepper';
+import { MatDialogModule } from '@angular/material/dialog'
+import { MatStepperModule } from '@angular/material/stepper'
 
 import { AppComponent } from './app.component'
 import { MarketComponent } from './market/market.component'
@@ -84,7 +84,7 @@ import { MatSortModule } from '@angular/material/sort'
       { path: 'about', component: AboutComponent },
       { path: '', redirectTo: '/coinlist', pathMatch: 'full' },
       { path: '**', redirectTo: '/coinlist', pathMatch: 'full' }
-    ]),
+    ], { preloadingStrategy: PreloadAllModules }),
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     })

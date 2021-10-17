@@ -32,6 +32,11 @@ p {
   float: left;
 }
 
+.selectedCurrencyActions img {
+  border-radius: 50%;
+  background-color: rgb(50, 50, 65);
+}
+
 .selectedCurrencyPrice {
   font-size: 24px;
   float: right;
@@ -46,21 +51,56 @@ mat-progress-bar {
   left: 0;
 }
 
+mat-option img {
+  border-radius: 50%;
+  background-color: rgb(50, 50, 65);
+}
+
+mat-option {
+  border-radius: 7px;
+}
+
+::ng-deep .mat-select-panel {
+  backdrop-filter: blur(60px);
+  background: rgba(37, 37, 44, 0.0) !important;
+}
+
 .icon {
   vertical-align: middle;
   margin-right: 8px;
   height: 25px;
 }
 
-.input-values {
-  position: relative;
-  width: 100%;
-  left: 50px;
+::ng-deep mat-form-field {
+  width: 77px !important;
+  height: 40px !important;
+  margin-right: 10px !important;
 }
 
-::ng-deep mat-form-field {
+::ng-deep .mat-form-field-flex {
+  padding-top: 0px !important;
+  padding-bottom: 0px !important;
+  padding-right: 0px !important;
+  border: 1px solid rgba(255, 255, 255, 0.158) !important;
+  border-radius: 7px !important;
+  /* height: 60px !important; */
+}
+
+::ng-deep .mat-form-field-infix {
+  padding: 0 0 0.75em 0 !important;
+}
+
+::ng-deep .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .datepicker {
   width: 120px !important;
   height: 40px !important;
+}
+
+::ng-deep .mat-tab-label.mat-tab-disabled {
+  padding: 0 0 0 250px !important;
 }
 
 ::ng-deep .mat-form-field-flex {

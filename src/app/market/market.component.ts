@@ -44,10 +44,10 @@ export class MarketComponent {
     ) { }
 
   ngOnInit() {
-    if (this.dataService.sharedData == undefined) {
+    if (this.dataService.selectedCurrency == undefined) {
       this.selectedCurrency = 'BTC'
     } else {
-      this.selectedCurrency = this.dataService.sharedData
+      this.selectedCurrency = this.dataService.selectedCurrency
     }
     this.getMarketData()
   } 
@@ -261,18 +261,7 @@ export class MarketComponent {
 
   // Form Data
 
-  currency = [
-    { name: 'BTC', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png' },
-    { name: 'ETH', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1027.png' },
-    { name: 'XLM', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/512.png' },
-    { name: 'BNB', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/4687.png' },
-    { name: 'ADA', img: 'https://cdn4.iconfinder.com/data/icons/crypto-currency-and-coin-2/256/cardano_ada-512.png' },
-    { name: 'DOGE', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/74.png' },
-    { name: 'XRP', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/52.png' },
-    { name: 'LTC', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/2.png' },
-    { name: 'BCH', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1831.png' },
-    { name: 'LINK', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1975.png' },
-  ]
+  currency = this.dataService.currencyList
 
   currenciesToCompare = [
     { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' },

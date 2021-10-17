@@ -5,7 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class DataService {
 
-  sharedData!: string;
+  selectedCurrency!: string;
+  currencyList!: any;
 
   constructor() { }
 }

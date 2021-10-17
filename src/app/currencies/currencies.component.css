@@ -107,6 +107,10 @@ mat-card-title-group img {
   font-size: medium !important;
 }
 
+th {
+  font-size: 15px !important;
+}
+
 tr.detail-row {
   height: 0;
 }
@@ -161,7 +165,7 @@ tr.element-row:not(.expanded-row):active {
   background-color: rgba(0, 128, 0, 0.3);
   border-radius: 5px;
   padding: 4px 5px;
-  transition: background-color 300ms linear;
+  transition: background-color 350ms linear;
 }
 
 .positivenum .updown {
@@ -172,7 +176,7 @@ tr.element-row:not(.expanded-row):active {
   background-color: rgba(255, 0, 0, 0.3);
   border-radius: 5px;
   padding: 4px 6px;
-  transition: background-color 300ms linear;
+  transition: background-color 350ms linear;
 }
 
 .negativenum .updown {
