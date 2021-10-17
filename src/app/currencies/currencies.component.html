@@ -24,20 +24,22 @@
               <mat-card-subtitle>{{performer.name}}</mat-card-subtitle>
               <img src="https://www.cryptocompare.com{{performer.logo}}" />
             </mat-card-title-group>
-            <mat-card-content [ngClass]="{
-            'positive' : performer.changepct > 0,
-            'negative' : performer.changepct < 0}">
-              {{performer.changepct}}%
-            </mat-card-content>
-            <mat-card-content>
+            <div style="display: flex;flex-direction: row;">
+            <mat-card-content style="font-size: 12px;">
               <span [ngClass]="{
-                'positivenum' : performer.updown == '▲',
-                'negativenum' : performer.updown == '▼'
+                'positive-price-per' : performer.updown == '▲',
+                'negative-price-per' : performer.updown == '▼'
               }"><span class="updown">{{performer.updown}}</span> {{performer.price}}</span>
             </mat-card-content>
-            <!-- <mat-card-content>
+            <mat-card-content style="font-size: 12px;margin-left: 6px;" [ngClass]="{
+                'positive-pct-per' : performer.changepct > 0,
+                'negative-pct-per' : performer.changepct < 0}"><span>
+              {{performer.changepct}}%</span>
+            </mat-card-content>
+            </div>
+            <mat-card-content>
               <img src="{{performer.sparkchart}}" />
-            </mat-card-content> -->
+            </mat-card-content>
           </mat-card>
         </div>
       </ng-container>
@@ -45,7 +47,7 @@
   </div>
   <table #myTable mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z0">
     <ng-container matColumnDef="rank">
-      <th mat-header-cell *matHeaderCellDef style="width: 50px;">RANK</th>
+      <th mat-header-cell *matHeaderCellDef style="width: 50px;">#</th>
       <td mat-cell *matCellDef="let row">{{row.rank}}</td>
     </ng-container>
     <ng-container matColumnDef="logo" class="logo">
@@ -64,16 +66,17 @@
     <ng-container matColumnDef="price">
       <th mat-header-cell *matHeaderCellDef="let row" class="price">PRICE</th>
       <td mat-cell *matCellDef="let row" style="width: 115px;"> <span [ngClass]="{
-                    'positivenum' : row.updown == '▲',
-                    'negativenum' : row.updown == '▼'
+                    'positive-price' : row.updown == '▲',
+                    'negative-price' : row.updown == '▼'
                  }"><span class="updown">{{row.updown}}</span> {{row.price}}</span> </td>
     </ng-container>
     <ng-container matColumnDef="changepct">
       <th mat-header-cell *matHeaderCellDef="let row" class="changepct">LAST 24h</th>
-      <td mat-cell *matCellDef="let row" style="width: 100px;" [ngClass]="{
-            'positive' : row.changepct > 0,
-            'negative' : row.changepct < 0
-         }"> {{row.changepct}} %</td>
+      <td mat-cell *matCellDef="let row" style="width: 100px;">
+      <span [ngClass]="{
+            'positive-pct' : row.changepct > 0,
+            'negative-pct' : row.changepct < 0
+         }"> {{row.changepct}}%</span></td>
     </ng-container>
     <ng-container matColumnDef="totalvolume">
       <th mat-header-cell *matHeaderCellDef>TOTAL VOL.</th>

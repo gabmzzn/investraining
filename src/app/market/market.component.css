@@ -16,24 +16,24 @@ p {
 }
 
 .symbol {
-  vertical-align: middle;
-  font-size: 12px;
-  ;
-  font-weight: 400;
-  padding: 4px 5px;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 5px 7px;
   border-radius: 12%;
   color: rgb(190, 190, 190);
   background-color: rgb(50, 50, 65);
   border-radius: 10%;
+  vertical-align: text-top;
 }
 
 .selectedCurrencyActions {
-  font-size: 30px;
+  font-size: 36px;
   float: left;
 }
 
 .selectedCurrencyActions img {
   border-radius: 50%;
+  width: 50px;
   background-color: rgb(50, 50, 65);
 }
 
@@ -140,14 +140,13 @@ mat-option {
 }
 
 ::ng-deep mat-datepicker-content {
-  backdrop-filter: blur(15px);
-  background: rgba(37, 37, 44, 0.65) !important;
+  backdrop-filter: blur(50px);
+  background: rgba(37, 37, 44, 0.75) !important;
 }
 
-/* mat-spinner {
-  top: 10px;
-  float: left;
-} */
+mat-spinner {
+  margin-right: 10px;
+}
 
 mat-form-field {
   float: left;
@@ -167,6 +166,10 @@ mat-tab-group {
   display: inline-block;
 }
 
+::ng-deep .mat-tab-body-wrapper {
+  margin-top: 15px;
+}
+
 .tab-icon {
   margin-right: 8px;
 }
@@ -177,12 +180,16 @@ mat-tab-group {
   display: flex;
 }
 
-.right-container {
+.info-container {
   flex: 1;
 }
 
-.right-container>mat-card {
+.info-container mat-card {
   width: 300px;
+}
+
+.info-container mat-card-content, .info-container mat-card-title {
+  padding: 5px;
 }
 
 .left-container:first-child {
@@ -202,24 +209,72 @@ mat-tab-group {
   font-size: medium !important;
 }
 
+th img {
+  border-radius: 50% !important;
+}
+
+th {
+  color: rgb(201, 201, 201);
+  width: 100%;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 13px 0;
+}
+
+td {
+  color: rgb(255, 255, 255);
+  font-size: 16px;
+  font-weight: bold;
+  text-align: right;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 13px 0;
+  width: 50px;
+}
+
+td span {
+  vertical-align: middle;
+  font-size: 16px;
+  padding: 5px 8px;
+  border-radius: 12%;
+  color: rgb(190, 190, 190);
+  background-color: rgb(50, 50, 65);
+  border-radius: 5px;
+}
+
+.weissA, .weissB, .weissC, .weissD, .weissE {
+  color: white !important;
+}
+
+.weissA, .weissB {
+  background-color: green !important;
+}
+
+.weissC {
+  background-color: rgba(255, 145, 0, 0.788) !important;
+}
+
+.weissD, .weissE {
+  background-color: rgba(255, 0, 0, 0.555) !important;
+}
+
 /* News Feed */
 
 .news-feed {
-  padding: 16px;
   /* display: flex; */
   column-count: 2;
+  padding: 5px 8px 0 0;
   /* column-gap: 10px; */
-  margin: 1.5em auto;
   column-gap: 1.5em;
 }
 
 mat-card {
   display: inline-block;
-  margin: 10px;
   width: 95%;
+  margin-bottom: 16px;
   line-height: 1.4;
   background-color: rgb(29, 30, 39);
   border: 1px solid rgba(56, 58, 71, 0.685);
+  border-radius: 6px;
 }
 
 mat-card-title {

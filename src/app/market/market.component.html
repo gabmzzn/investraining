@@ -3,11 +3,8 @@
 <div *ngIf="!isFirstLoading">
   <div class="currencyHeader">
     <div class="selectedCurrencyActions">
-      <img src="https://www.cryptocompare.com{{ImageUrl}}" style="width: 30px;"><span
-        style="padding: 4px 5px;">{{CoinName}}</span> <span class="symbol">{{Symbol}}</span>
-    </div>
-    <div class="selectedCurrencyPrice">
-      ${{Price}}
+      <img src="https://www.cryptocompare.com{{ImageUrl}}">
+      <span style="padding: 4px 5px;  vertical-align: super;">{{CoinName}}</span> <span class="symbol">{{Symbol}}</span>
     </div>
   </div>
 
@@ -20,7 +17,7 @@
         Stats Chart
       </ng-template>
       <div class="market-container">
-        <div class="left-container">
+        <div class="left-container" style="padding-right: 20px">
           <div echarts [options]="chartOption" [merge]="mergeOptions" class="demo-chart"
             style="width: 100%;height: 450px; margin-bottom: 50px;">
           </div>
@@ -28,55 +25,108 @@
           <h2>What is {{CoinName}} ({{Symbol}})?</h2>
           <p class="descriptionInfo" [innerHTML]="Description"></p>
         </div>
-        <div class="right-container">
+        <div class="info-container">
           <mat-card>
             <mat-card-title-group>
               <mat-card-title>{{selectedCurrency}} price to {{selectedCurrencyToCompare}}</mat-card-title>
             </mat-card-title-group>
             <mat-card-content>
-              {{selectedCurrency}} 1
-            </mat-card-content>
-            <mat-card-content>
-              {{selectedCurrencyToCompare}} ${{Price}}
+              <tr>
+                <th style="font-size: 18px;" class="logo" >
+                  <img src="https://www.cryptocompare.com{{ImageUrl}}" style="width: 25px;"> <span style="vertical-align: super;"> {{selectedCurrency}}</span>
+                </th>
+                <td style="font-size: 20px;">
+                  1
+                </td>
+              </tr>
+              <tr>
+                <th style="font-size: 18px;" class="logo">
+                  <img  src="{{ImageUrlTC}}" style="width: 25px;"> <span style="vertical-align: super;"> {{selectedCurrencyToCompare}}</span>
+                </th>
+                <td style="font-size: 20px;">
+                  ${{Price}}
+                </td>
+              </tr>
             </mat-card-content>
           </mat-card>
-
           <mat-card>
+
             <mat-card-title-group>
               <mat-card-title>{{selectedCurrency}} Statistics and info</mat-card-title>
             </mat-card-title-group>
-            <!-- <mat-card-content>
-            Price: ${{Price}}
-          </mat-card-content> -->
             <mat-card-content>
-              Price Change: ${{PriceChange}}
-            </mat-card-content>
-            <mat-card-content>
-              High - Low: ${{high24}} - ${{low24}}
-            </mat-card-content>
-            <mat-card-content>
-              Ranking: #{{SortOrder}}
-            </mat-card-content>
-            <mat-card-content>
-              General Weiss Rating: {{Rating}}
-            </mat-card-content>
-            <mat-card-content>
-              Technology Adoption Rating: {{TechnologyAdoptionRating}}
-            </mat-card-content>
-            <mat-card-content>
-              Market Performance Rating: {{MarketPerformanceRating}}
-            </mat-card-content>
-            <mat-card-content>
-              Total coins mined: {{TotalCoinsMined}}
-            </mat-card-content>
-            <mat-card-content>
-              Platform Type: {{PlatformType}}
-            </mat-card-content>
-            <mat-card-content>
-              Algorithm: {{Algorithm}}
-            </mat-card-content>
-            <mat-card-content>
-              Website: {{AssetWebsiteUrl}}
+              <tr>
+                <th>Price Change:</th>
+                <td>${{PriceChange}}</td>
+              </tr>
+              <tr>
+                <th>High - Low:</th>
+                <td>
+                  <div style="margin-bottom: 15px;">
+                    <span style="border: 1px solid rgba(0, 128, 0, 0.5);background: transparent;">${{high24}}</span>
+                  </div>
+                  <div>
+                    <span style="border: 1px solid rgba(255, 0, 0, 0.5);background: transparent;">${{low24}}</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>Ranking:</th>
+                <td><span>#{{SortOrder}}</span></td>
+              </tr>
+              <tr>
+                <th>General Weiss Rating:</th>
+                <td><span [ngClass]="{
+                'weissA' : Rating.substr(0, 1) == 'A',
+                'weissB' : Rating.substr(0, 1) == 'B',
+                'weissC' : Rating.substr(0, 1) == 'C',
+                'weissD' : Rating.substr(0, 1) == 'D',
+                'weissE' : Rating.substr(0, 1) == 'E'
+              }">{{Rating}}</span></td>
+              </tr>
+              <tr>
+                <th>Technology Adoption:</th>
+                <td><span [ngClass]="{
+                'weissA' : TechnologyAdoptionRating.substr(0, 1) == 'A',
+                'weissB' : TechnologyAdoptionRating.substr(0, 1) == 'B',
+                'weissC' : TechnologyAdoptionRating.substr(0, 1) == 'C',
+                'weissD' : TechnologyAdoptionRating.substr(0, 1) == 'D',
+                'weissE' : TechnologyAdoptionRating.substr(0, 1) == 'E'
+              }">{{TechnologyAdoptionRating}}</span></td>
+              </tr>
+              <tr>
+                <th>Market Performance:</th>
+                <td><span [ngClass]="{
+                'weissA' : MarketPerformanceRating.substr(0, 1) == 'A',
+                'weissB' : MarketPerformanceRating.substr(0, 1) == 'B',
+                'weissC' : MarketPerformanceRating.substr(0, 1) == 'C',
+                'weissD' : MarketPerformanceRating.substr(0, 1) == 'D',
+                'weissE' : MarketPerformanceRating.substr(0, 1) == 'E'
+              }">{{MarketPerformanceRating}}</span></td>
+              </tr>
+              <tr>
+                <th>Total coins mined:</th>
+                <td>{{TotalCoinsMined}}</td>
+              </tr>
+              <tr>
+                <th>Platform Type:</th>
+                <td>{{PlatformType}}</td>
+              </tr>
+              <tr>
+                <th>Algorithm:</th>
+                <td>{{Algorithm}}</td>
+              </tr>
+              <tr>
+                <th style="border-bottom: none;">Website:</th>
+                <td style="border-bottom: none;">
+                  <a mat-stroked-button href={{AssetWebsiteUrl}} target="_blank">
+                    External Link
+                    <mat-icon style="font-size: 20px;color: grey">
+                      open_in_new
+                    </mat-icon>
+                  </a>
+                </td>
+              </tr>
             </mat-card-content>
           </mat-card>
         </div>
@@ -146,12 +196,14 @@
     <!-- INPUT VALUES -->
     <mat-tab disabled style="width: 600px !important; padding: 0 0 0 300px;">
       <ng-template mat-tab-label>
-        <div style="width: 30px;">
-        <mat-spinner *ngIf="isLoading" [diameter]="30"></mat-spinner>
+        <div style="width: 30px; margin-right: 10px">
+          <mat-spinner *ngIf="isLoading" [diameter]="30"></mat-spinner>
         </div>
         <mat-form-field appearance="fill">
-          <mat-select [(ngModel)]="selectedCurrency" name="currency" (selectionChange)="updateData()" style="padding: 0;">
-            <mat-option *ngFor="let currency of currency" [value]="currency.symbol" style="display:inline-block; width:33.33%; text-align:left;">
+          <mat-select [(ngModel)]="selectedCurrency" name="currency" (selectionChange)="updateData()"
+            style="padding: 0;">
+            <mat-option *ngFor="let currency of currency" [value]="currency.symbol"
+              style="display:inline-block; width:33.33%; text-align:left;">
               <img class="icon" aria-hidden src="https://www.cryptocompare.com{{currency.logo}}">
               <span>{{currency.symbol}}</span>
             </mat-option>

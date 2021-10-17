@@ -185,6 +185,7 @@ export class MarketComponent {
   low24!: number
   PriceChange!: any
   ImageUrl!: string
+  ImageUrlTC!: string
   CoinName!: string
   Symbol!: string
 
@@ -206,11 +207,16 @@ export class MarketComponent {
     this.Rating = json.Data[this.selectedCurrency].Rating.Weiss.Rating
     this.TechnologyAdoptionRating = json.Data[this.selectedCurrency].Rating.Weiss.TechnologyAdoptionRating
     this.MarketPerformanceRating = json.Data[this.selectedCurrency].Rating.Weiss.MarketPerformanceRating
-    this.TotalCoinsMined = json.Data[this.selectedCurrency].TotalCoinsMined
+    this.TotalCoinsMined = (json.Data[this.selectedCurrency].TotalCoinsMined).toFixed(0)
     this.PlatformType = json.Data[this.selectedCurrency].PlatformType
     this.Algorithm = json.Data[this.selectedCurrency].Algorithm
     this.AssetWebsiteUrl = json.Data[this.selectedCurrency].AssetWebsiteUrl
     this.ImageUrl = json.Data[this.selectedCurrency].ImageUrl
+    let i = this.currenciesToCompare.findIndex(((obj: any) => obj.name == this.selectedCurrencyToCompare))
+    this.ImageUrlTC = this.currenciesToCompare[i].img
+    if (this.Rating=='') {
+      this.Rating = this.TechnologyAdoptionRating = this.MarketPerformanceRating = 'N/A'
+    } 
   }
 
   // Historical Data

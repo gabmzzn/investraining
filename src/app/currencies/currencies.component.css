@@ -70,7 +70,7 @@ mat-card-content {
 }
 
 mat-card {
-  height: 120px;
+  height: 140px;
   background-color: rgb(29, 30, 39);
   border: 1px solid rgba(56, 58, 71, 0.685);
   padding-top: 10px !important;
@@ -96,6 +96,10 @@ mat-card-title-group img {
   height: 30px;
   border-radius: 50%;
   background-color: rgb(50, 50, 65);
+}
+
+mat-card-content img {
+  width: 100%;
 }
 
 .card mat-card-title {
@@ -153,32 +157,42 @@ tr.element-row:not(.expanded-row):active {
   font-size: 16px;
 }
 
-.positive {
-  color: green;
-}
-
-.negative {
-  color: red;
-}
-
-.positivenum {
-  background-color: rgba(0, 128, 0, 0.3);
+.positive-pct, .positive-pct-per, 
+.negative-pct, .negative-pct-per, 
+.positive-price, .positive-price-per, 
+.negative-price, .negative-price-per {
   border-radius: 5px;
   padding: 4px 5px;
   transition: background-color 350ms linear;
 }
 
-.positivenum .updown {
+.positive-pct, .positive-pct-per {
+  color: green;
+  border: 1px solid rgba(0, 128, 0, 0.3);
+}
+
+.negative-pct, .negative-pct-per {
+  color: red;
+  border: 1px solid rgba(255, 0, 0, 0.3);
+}
+
+.positive-price, .positive-price-per {
+  background-color: rgba(0, 128, 0, 0.3);
+}
+
+.negative-price, .negative-price-per {
+  background-color: rgba(255, 0, 0, 0.3);
+}
+
+.positive-pct-per, .negative-pct-per, 
+.positive-price-per, .negative-price-per {
+  padding: 0 5px !important;
+}
+
+.positive-price .updown {
   color: green;
 }
 
-.negativenum {
-  background-color: rgba(255, 0, 0, 0.3);
-  border-radius: 5px;
-  padding: 4px 6px;
-  transition: background-color 350ms linear;
-}
-
-.negativenum .updown {
+.negative-price .updown {
   color: red;
 }

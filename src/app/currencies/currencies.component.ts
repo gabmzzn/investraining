@@ -62,8 +62,7 @@ export class CurrenciesComponent {
       clist + '&tsyms=USD').then(res => res.json()))
 
     // Last hour timestamp
-
-    let d = (new Date()).toString(), timestampLastHour = Date.parse((d.substr(0, 19) + ':00:00' + d.substr(24))) / 1000
+    let d = (new Date()).toString(), timestampLastHour = Date.parse((d.substr(0, 18) + ':00:00' + d.substr(24))) / 1000
 
     for (let currency of currencieslist) {
       // 0 = RAW Value, 1 = DISPLAY Value  
@@ -134,7 +133,7 @@ export class CurrenciesComponent {
           'en-GB', {
           style: 'decimal',
           minimumFractionDigits: 2,
-          maximumFractionDigits: 7,
+          maximumFractionDigits: 5,
         }))
         composedData[i1].changepct = (composedData[i1].changepct > 0 ? '+' : '') +
           (((data.PRICE - composedData[i1].open24) / data.PRICE) * 100).toFixed(2)
