@@ -74,6 +74,7 @@ mat-card {
   background-color: rgb(29, 30, 39);
   border: 1px solid rgba(56, 58, 71, 0.685);
   padding-top: 10px !important;
+  border-radius: 8px;
 }
 
 .card mat-card-content {

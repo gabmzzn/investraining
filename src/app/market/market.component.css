@@ -213,7 +213,7 @@ th img {
   border-radius: 50% !important;
 }
 
-th {
+mat-card-content th {
   color: rgb(201, 201, 201);
   width: 100%;
   text-align: left;
@@ -221,7 +221,7 @@ th {
   padding: 13px 0;
 }
 
-td {
+mat-card-content td {
   color: rgb(255, 255, 255);
   font-size: 16px;
   font-weight: bold;
@@ -231,7 +231,7 @@ td {
   width: 50px;
 }
 
-td span {
+mat-card-content td span {
   vertical-align: middle;
   font-size: 16px;
   padding: 5px 8px;
@@ -274,7 +274,7 @@ mat-card {
   line-height: 1.4;
   background-color: rgb(29, 30, 39);
   border: 1px solid rgba(56, 58, 71, 0.685);
-  border-radius: 6px;
+  border-radius: 12px;
 }
 
 mat-card-title {

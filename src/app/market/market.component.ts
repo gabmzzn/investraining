@@ -153,7 +153,7 @@ export class MarketComponent {
         symbolSize: 9,
         sampling: 'lttb',
         itemStyle: {
-          color: 'rgb(255, 70, 131)'
+          color: '#20c689'
         },
         areaStyle: {
           color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [
@@ -163,7 +163,7 @@ export class MarketComponent {
             },
             {
               offset: 0,
-              color: 'rgb(255, 70, 131)'
+              color: '#20c689'
             }
           ])
         },
