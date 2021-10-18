@@ -43,7 +43,9 @@ export class MarketComponent {
     private dataService: DataService
     ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.dataService.getData()
+    this.currency = this.dataService.currencyList
     if (this.dataService.selectedCurrency == undefined) {
       this.selectedCurrency = 'BTC'
     } else {
@@ -267,7 +269,7 @@ export class MarketComponent {
 
   // Form Data
 
-  currency = this.dataService.currencyList
+  currency!: any
 
   currenciesToCompare = [
     { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' },

@@ -16,6 +16,10 @@ export class CurrenciesComponent {
     this.getCurrencyData()
   }
 
+  // ngAfterViewInit() {
+  //   this.getCurrencyData()
+  // }
+
   constructor(private dataService: DataService) { }
 
   set selectedCurrencyData(value:string) {
@@ -30,74 +34,31 @@ export class CurrenciesComponent {
     this.selectedCurrencyData = row.symbol
   }
 
+  ngOnDestroy() {
+    this.subject.complete()
+  }
+
   isLoading: boolean = true
   isWebSocketLoading: boolean = true
+  subject!: any
   dataSource!: any
   performersSource!: any
   columnsToDisplay = ['rank', 'logo', 'name', 'updown', 'price', 'changepct', 'totalvolume',
     'marketcap', 'sparkchart', 'buy', 'info'];
 
   async getCurrencyData() {
-    let composedData: any = [], clist='', i = 0
 
-    const currencieslist = ['BTC', 'ETH', 'BNB', 'ADA', 'SOL', 'XRP',
-      'DOT', 'DOGE', 'LUNA', 'UNI', 'AVAX', 'LINK', 'ALGO', 'LTC', 'BCH',
-      'WBTC', 'MATIC', 'AXS', 'ATOM', 'ICP', 'FIL', 'XTZ', 'XLM', 'VET',
-      'FTT', 'ETC', 'TRX', 'DAI', 'DASH', 'FTM', 'EGLD', 'XMR', 'CAKE',
-      'EOS', 'XEC', 'AAVE', 'SUSHI', 'NEAR', 'SNX', 'QNT', 'GRT', 'NEO',
-      'WAVES', 'KSM', 'LEO', 'MKR', 'BTT', 'ONE', 'HNT', 'AMP']
-    const currenciesnames = ['Bitcoin', 'Ethereum', 'Binance', 'Cardano',
-      'Solana', 'XRP', 'Polkadot', 'Dogecoin', 'Terra', 'Uniswap', 'Avalanche',
-      'Chainlink', 'Algorand', 'Litecoin', 'Bitcoin Cash', 'Wrapped Bitcoin',
-      'Polygon', 'Axie Infinity', 'Cosmos', 'Internet Computer', 'Filecoin', 
-      'Tezos','Stellar', 'VeChain', 'FTX Token', 'Ethereum Classic', 'TRON', 
-      'Dai', 'Dash', 'Fantom', 'Elrond', 'Monero', 'PancakeSwap', 'EOS', 
-      'eCash', 'Aave', 'SushiSwap', 'NEAR Protocol', 'Synthetix', 'Quant', 
-      'The Graph', 'Neo', 'Waves', 'Kusama', 'LEO Token', 'Maker', 
-      'BitTorrent Token', 'Harmony', 'Helium', 'Amp']
-    currencieslist.forEach(element => {
-      clist += element + ','
-    });
-    let json: any = Object.values(await fetch('https://min-api.cryptocompare.com/data/pricemultifull?fsyms=' +
-      clist + '&tsyms=USD').then(res => res.json()))
-
-    // Last hour timestamp
-    let d = (new Date()).toString(), timestampLastHour = Date.parse((d.substr(0, 18) + ':00:00' + d.substr(24))) / 1000
-
-    for (let currency of currencieslist) {
-      // 0 = RAW Value, 1 = DISPLAY Value  
-      let plussign, updown
-      Math.random() > 0.5 ? updown = '▲' : updown = '▼'
-      json[0][currency].USD.CHANGEPCT24HOUR > 0 ? plussign = '+' : plussign = ''
-      composedData.push(
-        {
-          rank: i + 1,
-          logo: json[1][currency].USD.IMAGEURL, //Ex: json.DISPLAY.BTC.USD.IMAGEURL
-          name: currenciesnames[i],
-          symbol: currency,
-          price: json[1][currency].USD.PRICE,
-          changepct: plussign + json[1][currency].USD.CHANGEPCT24HOUR,
-          updown: updown,
-          open24: json[0][currency].USD.OPEN24HOUR,
-          totalvolume: json[1][currency].USD.TOTALTOPTIERVOLUME24HTO,
-          marketcap: json[1][currency].USD.MKTCAP,
-          sparkchart: 'https://images.cryptocompare.com/sparkchart/' + currency + '/USD/latest.png?ts=' + timestampLastHour
-        })
-      i++
-    }
-
-    this.currencyListData = composedData
-
-    this.dataSource = composedData
-    let performers = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
+    await this.dataService.getData()
+    this.dataSource = this.dataService.currencyList
+    let performers = [...this.dataService.currencyList].sort((a: any, b: any) => b.changepct - a.changepct)
     performers.splice(3, 44)
     this.performersSource = performers
     this.isLoading = false
 
     // WebSocket Connection 
     const apiKey = '6e659e1244d9e7ccf3b6bdf6ada561766883d528a2025f01004787c096d1b005'
-    const subject = new WebSocketSubject('wss://streamer.cryptocompare.com/v2?api_key=' + apiKey)
-    subject.next({
+    this.subject = new WebSocketSubject('wss://streamer.cryptocompare.com/v2?api_key=' + apiKey)
+    this.subject.next({
       'action': 'SubAdd',
       'subs':
         ['5~CCCAGG~BTC~USD', '5~CCCAGG~ETH~USD', '5~CCCAGG~BNB~USD', '5~CCCAGG~ADA~USD',
@@ -117,35 +78,34 @@ export class CurrenciesComponent {
     })
 
     let subibaja: any = [], that = this
-    for (let i = 0; i < currencieslist.length; i++) {
+    for (let i = 0; i < 50; i++) {
       subibaja.push({
-        price: composedData[i].price
+        price: that.dataService.currencyList[i].price
       })
     }
+    this.subject.subscribe((data: any) => pushWebSocketData(data))
 
-    subject.subscribe(data => pushWebSocketData(data))
     function pushWebSocketData(data: any) {
+      that.isWebSocketLoading = false
       if (data.PRICE !== undefined) {
-
-        that.isWebSocketLoading = false
-        let i1 = composedData.findIndex(((obj: any) => obj.symbol == data.FROMSYMBOL))
-        composedData[i1].price = '$ ' + (data.PRICE.toLocaleString(
+        let i1 = that.dataService.currencyList.findIndex(((obj: any) => obj.symbol == data.FROMSYMBOL))
+        that.dataService.currencyList[i1].price = '$ ' + (data.PRICE.toLocaleString(
           'en-GB', {
           style: 'decimal',
           minimumFractionDigits: 2,
-          maximumFractionDigits: 5,
+          maximumFractionDigits: 6,
         }))
-        composedData[i1].changepct = (composedData[i1].changepct > 0 ? '+' : '') +
-          (((data.PRICE - composedData[i1].open24) / data.PRICE) * 100).toFixed(2)
+        that.dataService.currencyList[i1].changepct = (that.dataService.currencyList[i1].changepct > 0 ? '+' : '') +
+          (((data.PRICE - that.dataService.currencyList[i1].open24) / data.PRICE) * 100).toFixed(2)
 
-        if (composedData[i1].price > subibaja[i1].price) {
-          subibaja[i1].price = composedData[i1].price
-          composedData[i1].updown = '▲'
-        } else if (composedData[i1].price < subibaja) {
-          subibaja[i1].price = composedData[i1].price
-          composedData[i1].updown = '▼'
+        if (that.dataService.currencyList[i1].price > subibaja[i1].price) {
+          subibaja[i1].price = that.dataService.currencyList[i1].price
+          that.dataService.currencyList[i1].updown = '▲'
+        } else if (that.dataService.currencyList[i1].price < subibaja) {
+          subibaja[i1].price = that.dataService.currencyList[i1].price
+          that.dataService.currencyList[i1].updown = '▼'
         }
-        let performers = [...composedData].sort((a: any, b: any) => b.changepct - a.changepct)
+        let performers = [...that.dataService.currencyList].sort((a: any, b: any) => b.changepct - a.changepct)
         performers.splice(3, 44)
         that.performersSource = performers
       }

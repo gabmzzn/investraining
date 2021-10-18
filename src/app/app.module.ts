@@ -38,7 +38,8 @@ import { WithdrawDialog } from './invest/invest.component'
 
 import { NgxEchartsModule } from 'ngx-echarts'
 
-import { MatSortModule } from '@angular/material/sort'
+import { MatSortModule } from '@angular/material/sort';
+import { AppRoutingModule } from './app-routing.module'
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { MatSortModule } from '@angular/material/sort'
     WithdrawDialog
   ],
   imports: [
+    AppRoutingModule,
     BrowserModule,
     BrowserAnimationsModule,
     MatListModule,
@@ -77,14 +79,6 @@ import { MatSortModule } from '@angular/material/sort'
     MatStepperModule,
     MatProgressBarModule,
     MaterialModule,
-    RouterModule.forRoot([
-      { path: 'market', component: MarketComponent },
-      { path: 'coinlist', component: CurrenciesComponent },
-      { path: 'invest', component: InvestComponent },
-      { path: 'about', component: AboutComponent },
-      { path: '', redirectTo: '/coinlist', pathMatch: 'full' },
-      { path: '**', redirectTo: '/coinlist', pathMatch: 'full' }
-    ], { preloadingStrategy: PreloadAllModules }),
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     })
