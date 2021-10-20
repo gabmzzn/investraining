@@ -14,18 +14,18 @@ export class DataService {
     let composedData: any = [], clist = '', i = 0
 
     const currencieslist = ['BTC', 'ETH', 'BNB', 'ADA', 'SOL', 'XRP',
-      'DOT', 'DOGE', 'LUNA', 'UNI', 'AVAX', 'LINK', 'ALGO', 'LTC', 'BCH',
+      'DOGE', 'LUNA', 'UNI', 'AVAX', 'LINK', 'ALGO', 'LTC', 'BCH',
       'WBTC', 'MATIC', 'AXS', 'ATOM', 'ICP', 'FIL', 'XTZ', 'XLM', 'VET',
-      'FTT', 'ETC', 'TRX', 'DAI', 'DASH', 'FTM', 'EGLD', 'XMR', 'CAKE',
-      'EOS', 'XEC', 'AAVE', 'SUSHI', 'NEAR', 'SNX', 'QNT', 'GRT', 'NEO',
+      'FTT', 'ETC', 'TRX', 'DAI', 'DASH', 'OXT', 'FTM', 'EGLD', 'XMR', 'CAKE',
+      'EOS', 'STX', 'AAVE', 'SUSHI', 'NEAR', 'SNX', 'QNT', 'GRT', 'NEO',
       'WAVES', 'KSM', 'LEO', 'MKR', 'BTT', 'ONE', 'HNT', 'AMP']
     const currenciesnames = ['Bitcoin', 'Ethereum', 'Binance', 'Cardano',
-      'Solana', 'XRP', 'Polkadot', 'Dogecoin', 'Terra', 'Uniswap', 'Avalanche',
+      'Solana', 'XRP', 'Dogecoin', 'Terra', 'Uniswap', 'Avalanche',
       'Chainlink', 'Algorand', 'Litecoin', 'Bitcoin Cash', 'Wrapped Bitcoin',
       'Polygon', 'Axie Infinity', 'Cosmos', 'Internet Computer', 'Filecoin',
       'Tezos', 'Stellar', 'VeChain', 'FTX Token', 'Ethereum Classic', 'TRON',
-      'Dai', 'Dash', 'Fantom', 'Elrond', 'Monero', 'PancakeSwap', 'EOS',
-      'eCash', 'Aave', 'SushiSwap', 'NEAR Protocol', 'Synthetix', 'Quant',
+      'Dai', 'Dash', 'Orchid Protocol', 'Fantom', 'Elrond', 'Monero', 'PancakeSwap', 'EOS',
+      'Stacks', 'Aave', 'SushiSwap', 'NEAR Protocol', 'Synthetix', 'Quant',
       'The Graph', 'Neo', 'Waves', 'Kusama', 'LEO Token', 'Maker',
       'BitTorrent Token', 'Harmony', 'Helium', 'Amp']
     currencieslist.forEach(element => {
@@ -52,7 +52,7 @@ export class DataService {
             'en-GB', {
             style: 'decimal',
             minimumFractionDigits: 2,
-            maximumFractionDigits: 6,
+            maximumFractionDigits: 5,
           }),
           changepct: plussign + json[1][currency].USD.CHANGEPCT24HOUR,
           updown: updown,

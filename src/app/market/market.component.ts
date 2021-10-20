@@ -138,11 +138,11 @@ export class MarketComponent {
     dataZoom: [
       {
         type: 'inside',
-        start: 80,
+        start: 70,
         end: 100
       },
       {
-        start: 80,
+        start: 70,
         end: 100
       }
     ],
@@ -209,7 +209,8 @@ export class MarketComponent {
     this.Rating = json.Data[this.selectedCurrency].Rating.Weiss.Rating
     this.TechnologyAdoptionRating = json.Data[this.selectedCurrency].Rating.Weiss.TechnologyAdoptionRating
     this.MarketPerformanceRating = json.Data[this.selectedCurrency].Rating.Weiss.MarketPerformanceRating
-    this.TotalCoinsMined = (json.Data[this.selectedCurrency].TotalCoinsMined).toFixed(0)
+    if (json.Data[this.selectedCurrency].TotalCoinsMined == undefined) { this.TotalCoinsMined = 18822158} // This is because sometimes the API fails
+    else { this.TotalCoinsMined = (json.Data[this.selectedCurrency].TotalCoinsMined).toFixed(0)}
     this.PlatformType = json.Data[this.selectedCurrency].PlatformType
     this.Algorithm = json.Data[this.selectedCurrency].Algorithm
     this.AssetWebsiteUrl = json.Data[this.selectedCurrency].AssetWebsiteUrl
@@ -223,36 +224,11 @@ export class MarketComponent {
 
   // Historical Data
 
-  displayedColumns: string[] = ['time', 'high', 'low', 'open', 'close']
-  dataSource = new MatTableDataSource([{ time: 0, high: 0, low: 0, open: 0, close: 0 }])
+  dataSource = new MatTableDataSource()
 
   async HistoricalData() {
     this.dataSource = this.JSONData.slice(this.JSONData.length - 50).reverse()
   }
-
-  columns = [
-    {
-      columnDef: 'high',
-      header: 'High',
-      cell: (e: any) => `$ ${e.high}`
-    },
-    {
-      columnDef: 'low',
-      header: 'Low',
-      cell: (e: any) => `$ ${e.low}`
-    },
-    {
-      columnDef: 'open',
-      header: 'Open',
-      cell: (e: any) => `$ ${e.open}`
-    },
-    {
-      columnDef: 'close',
-      header: 'Close',
-      cell: (e: any) => `$ ${e.close}`
-    },
-  ]
-
 
   // News Feed
 
@@ -277,22 +253,4 @@ export class MarketComponent {
     { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' }
   ]
 
-  // currency = [
-  //   { "BTC": { name: 'BTC', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1.png' } },
-  //   { "ETH": { name: 'ETH', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1027.png' } },
-  //   { "XLM": { name: 'XLM', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/512.png' } },
-  //   { "BNB": { name: 'BNB', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/4687.png' } },
-  //   { "ADA": { name: 'ADA', img: 'https://cdn4.iconfinder.com/data/icons/crypto-currency-and-coin-2/256/cardano_ada-512.png' } },
-  //   { "DOGE": { name: 'DOGE', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/74.png' } },
-  //   { "XRP": { name: 'XRP', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/52.png' } },
-  //   { "LTC": { name: 'LTC', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/2.png' } },
-  //   { "BCH": { name: 'BCH', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1831.png' } },
-  //   { "LINK": { name: 'LINK', img: 'https://s2.coinmarketcap.com/static/img/coins/128x128/1975.png' } },
-  // ]
-
-  // currenciesToCompare = [
-  //   { 'USD': { name: 'USD', img: 'https://cdn-icons-png.flaticon.com/512/197/197484.png' } },
-  //   { 'ARS': { name: 'ARS', img: 'https://cdn-icons-png.flaticon.com/512/197/197573.png' } },
-  //   { 'EUR': { name: 'EUR', img: 'https://cdn-icons-png.flaticon.com/512/197/197615.png' } }
-  // ]
 }

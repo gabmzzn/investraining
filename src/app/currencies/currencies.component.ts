@@ -12,7 +12,15 @@ import { DataService } from '../data.service';
 
 export class CurrenciesComponent {
 
+  unrelatedTest() {
+    const subject2 = this.subject = new WebSocketSubject('wss://ws.bitstamp.net/')
+    subject2.next({ "event": "bts:subscribe", "data": { "channel": "live_trades_btcusd"}	})
+    subject2.next({ "event": "bts:subscribe", "data": { "channel": "live_trades_btceur" } })
+    subject2.subscribe((data: any) => console.log(data))
+  }
+
   ngOnInit() {
+    // this.unrelatedTest()
     this.getCurrencyData()
   }
 
@@ -62,14 +70,14 @@ export class CurrenciesComponent {
       'action': 'SubAdd',
       'subs':
         ['5~CCCAGG~BTC~USD', '5~CCCAGG~ETH~USD', '5~CCCAGG~BNB~USD', '5~CCCAGG~ADA~USD',
-          '5~CCCAGG~SOL~USD', '5~CCCAGG~XRP~USD', '5~CCCAGG~DOT~USD', '5~CCCAGG~DOGE~USD',
-          '5~CCCAGG~LUNA~USD', '5~CCCAGG~UNI~USD', '5~CCCAGG~AVAX~USD', '5~CCCAGG~LINK~USD',
-          '5~CCCAGG~ALGO~USD', '5~CCCAGG~LTC~USD', '5~CCCAGG~BCH~USD', '5~CCCAGG~WBTC~USD',
-          '5~CCCAGG~MATIC~USD', '5~CCCAGG~AXS~USD', '5~CCCAGG~ATOM~USD', '5~CCCAGG~ICP~USD',
-          '5~CCCAGG~FIL~USD', '5~CCCAGG~XTZ~USD', '5~CCCAGG~XLM~USD', '5~CCCAGG~VET~USD',
-          '5~CCCAGG~FTT~USD', '5~CCCAGG~ETC~USD', '5~CCCAGG~TRX~USD', '5~CCCAGG~DAI~USD',
-          '5~CCCAGG~DASH~USD', '5~CCCAGG~FTM~USD', '5~CCCAGG~EGLD~USD', '5~CCCAGG~XMR~USD',
-          '5~CCCAGG~CAKE~USD', '5~CCCAGG~EOS~USD', '5~CCCAGG~XEC~USD', '5~CCCAGG~AAVE~USD',
+          '5~CCCAGG~SOL~USD', '5~CCCAGG~XRP~USD', '5~CCCAGG~DOGE~USD','5~CCCAGG~LUNA~USD', 
+          '5~CCCAGG~UNI~USD', '5~CCCAGG~AVAX~USD', '5~CCCAGG~LINK~USD','5~CCCAGG~ALGO~USD', 
+          '5~CCCAGG~LTC~USD', '5~CCCAGG~BCH~USD', '5~CCCAGG~WBTC~USD','5~CCCAGG~MATIC~USD', 
+          '5~CCCAGG~AXS~USD', '5~CCCAGG~ATOM~USD', '5~CCCAGG~ICP~USD','5~CCCAGG~FIL~USD', 
+          '5~CCCAGG~XTZ~USD', '5~CCCAGG~XLM~USD', '5~CCCAGG~VET~USD', '5~CCCAGG~FTT~USD', 
+          '5~CCCAGG~ETC~USD', '5~CCCAGG~TRX~USD', '5~CCCAGG~DAI~USD','5~CCCAGG~DASH~USD', 
+          '5~CCCAGG~OXT~USD', '5~CCCAGG~FTM~USD', '5~CCCAGG~EGLD~USD', '5~CCCAGG~XMR~USD',
+          '5~CCCAGG~CAKE~USD', '5~CCCAGG~EOS~USD', '5~CCCAGG~STX~USD', '5~CCCAGG~AAVE~USD',
           '5~CCCAGG~SUSHI~USD', '5~CCCAGG~NEAR~USD', '5~CCCAGG~SNX~USD', '5~CCCAGG~QNT~USD',
           '5~CCCAGG~GRT~USD', '5~CCCAGG~NEO~USD', '5~CCCAGG~WAVES~USD', '5~CCCAGG~KSM~USD',
           '5~CCCAGG~LEO~USD', '5~CCCAGG~MKR~USD', '5~CCCAGG~BTT~USD', '5~CCCAGG~ONE~USD',
@@ -93,7 +101,7 @@ export class CurrenciesComponent {
           'en-GB', {
           style: 'decimal',
           minimumFractionDigits: 2,
-          maximumFractionDigits: 6,
+          maximumFractionDigits: 5,
         }))
         that.dataService.currencyList[i1].changepct = (that.dataService.currencyList[i1].changepct > 0 ? '+' : '') +
           (((data.PRICE - that.dataService.currencyList[i1].open24) / data.PRICE) * 100).toFixed(2)

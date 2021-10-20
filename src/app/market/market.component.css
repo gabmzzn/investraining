@@ -221,6 +221,16 @@ mat-card-content th {
   padding: 13px 0;
 }
 
+mat-card-content th span {
+  vertical-align: middle;
+  font-size: 12px;
+  padding: 4px 6px;
+  border-radius: 12%;
+  color: rgb(190, 190, 190);
+  background-color: rgb(50, 50, 65);
+  border-radius: 5px;
+}
+
 mat-card-content td {
   color: rgb(255, 255, 255);
   font-size: 16px;
@@ -235,7 +245,6 @@ mat-card-content td span {
   vertical-align: middle;
   font-size: 16px;
   padding: 5px 8px;
-  border-radius: 12%;
   color: rgb(190, 190, 190);
   background-color: rgb(50, 50, 65);
   border-radius: 5px;
@@ -302,4 +311,19 @@ table {
   background-color: rgba(38, 39, 53, 0);
   border-radius: 8px;
   overflow: hidden !important;
+}
+
+.high {
+  border: 1px solid rgba(0, 128, 0, 0.5);
+  background: transparent !important;
+}
+
+.low {
+  border: 1px solid rgba(255, 0, 0, 0.5);
+  background: transparent !important;
+}
+
+td span {
+  padding: 5px 8px !important;
+  border-radius: 5px !important;
 }

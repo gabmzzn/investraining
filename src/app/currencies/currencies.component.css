@@ -14,7 +14,7 @@ mat-progress-bar {
 
 .symbol {
   vertical-align: middle;
-  font-size: 10px;
+  font-size: 11px;
   font-weight: bold;
   padding: 4px 5px;
   border-radius: 12%;
@@ -73,7 +73,7 @@ mat-card {
   height: 140px;
   background-color: rgb(29, 30, 39);
   border: 1px solid rgba(56, 58, 71, 0.685);
-  padding-top: 10px !important;
+  padding: 12px !important;
   border-radius: 8px;
 }
 
@@ -134,7 +134,7 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .mat-column-name {
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 500;
 }
 

@@ -32,8 +32,9 @@
             </mat-card-title-group>
             <mat-card-content>
               <tr>
-                <th style="font-size: 18px;" class="logo" >
-                  <img src="https://www.cryptocompare.com{{ImageUrl}}" style="width: 25px;"> <span style="vertical-align: super;"> {{selectedCurrency}}</span>
+                <th style="font-size: 18px;" class="logo">
+                  <img src="https://www.cryptocompare.com{{ImageUrl}}" style="width: 25px;"> <a
+                    style="vertical-align: super;"> {{selectedCurrency}}</a>
                 </th>
                 <td style="font-size: 20px;">
                   1
@@ -41,7 +42,8 @@
               </tr>
               <tr>
                 <th style="font-size: 18px;" class="logo">
-                  <img  src="{{ImageUrlTC}}" style="width: 25px;"> <span style="vertical-align: super;"> {{selectedCurrencyToCompare}}</span>
+                  <img src="{{ImageUrlTC}}" style="width: 25px;"> <a style="vertical-align: super;">
+                    {{selectedCurrencyToCompare}}</a>
                 </th>
                 <td style="font-size: 20px;">
                   ${{Price}}
@@ -49,33 +51,33 @@
               </tr>
             </mat-card-content>
           </mat-card>
-          
+
           <mat-card>
             <mat-card-title-group>
               <mat-card-title>{{selectedCurrency}} Statistics and info</mat-card-title>
             </mat-card-title-group>
             <mat-card-content>
               <tr>
-                <th>Price Change:</th>
+                <th>Price Change <span>24h</span></th>
                 <td>${{PriceChange}}</td>
               </tr>
               <tr>
-                <th>High - Low:</th>
+                <th>High - Low <span>24h</span></th>
                 <td>
                   <div style="margin-bottom: 15px;">
-                    <span style="border: 1px solid rgba(0, 128, 0, 0.5);background: transparent;">${{high24}}</span>
+                    <span class="high">${{high24}}</span>
                   </div>
                   <div>
-                    <span style="border: 1px solid rgba(255, 0, 0, 0.5);background: transparent;">${{low24}}</span>
+                    <span class="low">${{low24}}</span>
                   </div>
                 </td>
               </tr>
               <tr>
-                <th>Ranking:</th>
+                <th>Ranking</th>
                 <td><span>#{{SortOrder}}</span></td>
               </tr>
               <tr>
-                <th>General Weiss Rating:</th>
+                <th>General Weiss Rating</th>
                 <td><span [ngClass]="{
                 'weissA' : Rating.substr(0, 1) == 'A',
                 'weissB' : Rating.substr(0, 1) == 'B',
@@ -85,7 +87,7 @@
               }">{{Rating}}</span></td>
               </tr>
               <tr>
-                <th>Technology Adoption:</th>
+                <th>Technology Adoption</th>
                 <td><span [ngClass]="{
                 'weissA' : TechnologyAdoptionRating.substr(0, 1) == 'A',
                 'weissB' : TechnologyAdoptionRating.substr(0, 1) == 'B',
@@ -95,7 +97,7 @@
               }">{{TechnologyAdoptionRating}}</span></td>
               </tr>
               <tr>
-                <th>Market Performance:</th>
+                <th>Market Performance</th>
                 <td><span [ngClass]="{
                 'weissA' : MarketPerformanceRating.substr(0, 1) == 'A',
                 'weissB' : MarketPerformanceRating.substr(0, 1) == 'B',
@@ -105,15 +107,15 @@
               }">{{MarketPerformanceRating}}</span></td>
               </tr>
               <tr>
-                <th>Total coins mined:</th>
+                <th>Total coins mined</th>
                 <td>{{TotalCoinsMined}}</td>
               </tr>
               <tr>
-                <th>Platform Type:</th>
+                <th>Platform Type</th>
                 <td>{{PlatformType}}</td>
               </tr>
               <tr>
-                <th>Algorithm:</th>
+                <th>Algorithm</th>
                 <td>{{Algorithm}}</td>
               </tr>
               <tr>
@@ -142,19 +144,47 @@
       <div class="mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" style="width: 100%;">
           <ng-container matColumnDef="time">
-            <th mat-header-cell *matHeaderCellDef>Date</th>
-            <td mat-cell *matCellDef="let element"> {{element.time * 1000 | date}} </td>
+            <th mat-header-cell *matHeaderCellDef>DATE</th>
+            <td mat-cell *matCellDef="let row"> {{row.time * 1000 | date}} </td>
           </ng-container>
-          <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
-            <th mat-header-cell *matHeaderCellDef>
-              {{column.header}}
-            </th>
-            <td mat-cell *matCellDef="let row">
-              {{column.cell(row)}}
-            </td>
+          <ng-container matColumnDef="high">
+            <th mat-header-cell *matHeaderCellDef>HIGH</th>
+            <td mat-cell *matCellDef="let row"><span class="high">${{row.high}}</span></td>
           </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          <ng-container matColumnDef="low">
+            <th mat-header-cell *matHeaderCellDef>LOW</th>
+            <td mat-cell *matCellDef="let row"><span class="low">${{row.low}}</span></td>
+          </ng-container>
+          <ng-container matColumnDef="open">
+            <th mat-header-cell *matHeaderCellDef>OPEN</th>
+            <td mat-cell *matCellDef="let row">${{row.open}}</td>
+          </ng-container>
+          <ng-container matColumnDef="close">
+            <th mat-header-cell *matHeaderCellDef>CLOSE</th>
+            <td mat-cell *matCellDef="let row">${{row.close}}</td>
+          </ng-container>
+          <ng-container matColumnDef="logo">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row" style="width: 38px;padding-top: 5px;"><img
+                src="https://www.cryptocompare.com{{ImageUrl}}" style="width: 30px;"/></td>
+          </ng-container>
+          <ng-container matColumnDef="volumeto">
+            <th mat-header-cell *matHeaderCellDef>VOLUME TO</th>
+            <td mat-cell *matCellDef="let row">{{selectedCurrency}} {{row.volumeto}} </td>
+          </ng-container>
+          <ng-container matColumnDef="logoTC">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row" style="width: 38px;padding-top: 5px;"><img src="{{ImageUrlTC}}"
+                style="width: 25px;" /></td>
+          </ng-container>
+          <ng-container matColumnDef="volumefrom">
+            <th mat-header-cell *matHeaderCellDef>VOLUME FROM</th>
+            <td mat-cell *matCellDef="let row">{{selectedCurrencyToCompare}} {{row.volumefrom}} </td>
+          </ng-container>
+          <tr mat-header-row *matHeaderRowDef=" ['time', 'high', 'low', 'open' ,'close', 'logo', 'volumeto', 'logoTC', 'volumefrom']">
+          </tr>
+          <tr mat-row *matRowDef="let row; columns: ['time', 'high', 'low', 'open', 'close', 'logo', 'volumeto', 'logoTC', 'volumefrom'];">
+          </tr>
         </table>
         <!-- <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons>
         </mat-paginator> -->
@@ -225,5 +255,4 @@
       </ng-template>
     </mat-tab>
   </mat-tab-group>
-
 </div>
