@@ -7,7 +7,7 @@ import { FormControl } from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar'
 import { ECharts, EChartsOption } from 'echarts'
 import * as echarts from 'echarts'
-import { DataService } from '../data.service'
+import { AppService } from '../app.service'
 
 @Component({
   selector: 'app-market',
@@ -40,26 +40,39 @@ export class MarketComponent {
 
   constructor(
     private snackBar: MatSnackBar,
-    private dataService: DataService
+    private appService: AppService
     ) { }
 
   async ngOnInit() {
-    await this.dataService.getData()
-    this.currency = this.dataService.currencyList
-    if (this.dataService.selectedCurrency == undefined) {
+    this.appService.isLoading = true
+    await this.appService.getData()
+    this.currency = this.appService.currencyList
+    if (this.appService.selectedCurrency == undefined) {
       this.selectedCurrency = 'BTC'
     } else {
-      this.selectedCurrency = this.dataService.selectedCurrency
+      this.selectedCurrency = this.appService.selectedCurrency
     }
     this.getMarketData()
   } 
-  
+
+  // set isLoadingGlobal(value: boolean) {
+  //   this.appService.isLoading = value
+  // }
+
+  // get isLoadingGlobal() {
+  //   return this.appService.isLoading
+  // }
+
+  // ngOnDestroy() {
+  //   this.isLoadingGlobal = false
+  // }
+
+  isLoading = true
   selectedCurrency: string = 'BTC'
   selectedCurrencyToCompare: string = 'USD'
   date: any = new Date()
   data: any
   JSONData: any
-  isLoading: boolean = true
   isFirstLoading: boolean = true
 
   async getJSONData(fsym: string, tsym: string, timestamp: number, limit: number) {
@@ -71,7 +84,7 @@ export class MarketComponent {
   }
 
   async getMarketData() {
-    let that = this
+    // this.isLoadingGlobal = true
     this.isLoading = true
     this.JSONData = await this.getJSONData(
       this.selectedCurrency,
@@ -82,6 +95,7 @@ export class MarketComponent {
     this.HistoricalData()
     this.NewsFeed()
     this.CurrencyInfo().then(() => {
+      // this.isLoadingGlobal = false
       this.isLoading = false
       this.isFirstLoading = false
     })
@@ -209,7 +223,7 @@ export class MarketComponent {
     this.Rating = json.Data[this.selectedCurrency].Rating.Weiss.Rating
     this.TechnologyAdoptionRating = json.Data[this.selectedCurrency].Rating.Weiss.TechnologyAdoptionRating
     this.MarketPerformanceRating = json.Data[this.selectedCurrency].Rating.Weiss.MarketPerformanceRating
-    if (json.Data[this.selectedCurrency].TotalCoinsMined == undefined) { this.TotalCoinsMined = 18822158} // This is because sometimes the API fails
+    if (json.Data[this.selectedCurrency].TotalCoinsMined == undefined) { this.TotalCoinsMined = 18822199} // This is because sometimes the API fails
     else { this.TotalCoinsMined = (json.Data[this.selectedCurrency].TotalCoinsMined).toFixed(0)}
     this.PlatformType = json.Data[this.selectedCurrency].PlatformType
     this.Algorithm = json.Data[this.selectedCurrency].Algorithm

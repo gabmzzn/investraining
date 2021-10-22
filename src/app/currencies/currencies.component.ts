@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core'
 import { MarketComponent } from '../market/market.component'
 import { WebSocketSubject } from 'rxjs/webSocket'
-import { DataService } from '../data.service';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-currencies',
@@ -21,6 +21,8 @@ export class CurrenciesComponent {
 
   ngOnInit() {
     // this.unrelatedTest()
+    // this.isLoadingGlobal = true
+    // this.isLoading = this.isLoadingGlobal
     this.getCurrencyData()
   }
 
@@ -28,25 +30,34 @@ export class CurrenciesComponent {
   //   this.getCurrencyData()
   // }
 
-  constructor(private dataService: DataService) { }
+  constructor(private appService: AppService) { }
 
   set selectedCurrencyData(value:string) {
-    this.dataService.selectedCurrency = value
+    this.appService.selectedCurrency = value
   }
 
   set currencyListData(value: any) {
-    this.dataService.currencyList = value
+    this.appService.currencyList = value
   }
+
+  // set isLoadingGlobal(value: boolean) {
+  //   this.appService.isLoading = value
+  // }
+  
+  // get isLoadingGlobal() {
+  //   return this.appService.isLoading
+  // }
 
   setRowInfo(row:any){
     this.selectedCurrencyData = row.symbol
   }
 
   ngOnDestroy() {
+    // this.isLoadingGlobal = false
     this.subject.complete()
   }
 
-  isLoading: boolean = true
+  isLoading = true
   isWebSocketLoading: boolean = true
   subject!: any
   dataSource!: any
@@ -55,12 +66,13 @@ export class CurrenciesComponent {
     'marketcap', 'sparkchart', 'buy', 'info'];
 
   async getCurrencyData() {
-
-    await this.dataService.getData()
-    this.dataSource = this.dataService.currencyList
-    let performers = [...this.dataService.currencyList].sort((a: any, b: any) => b.changepct - a.changepct)
+    await this.appService.getData()
+    this.dataSource = this.appService.currencyList
+    let performers = [...this.appService.currencyList].sort((a: any, b: any) => b.changepct - a.changepct)
     performers.splice(3, 44)
     this.performersSource = performers
+
+    // this.isLoadingGlobal = false
     this.isLoading = false
 
     // WebSocket Connection 
@@ -88,7 +100,7 @@ export class CurrenciesComponent {
     let subibaja: any = [], that = this
     for (let i = 0; i < 50; i++) {
       subibaja.push({
-        price: that.dataService.currencyList[i].price
+        price: that.appService.currencyList[i].price
       })
     }
     this.subject.subscribe((data: any) => pushWebSocketData(data))
@@ -96,24 +108,24 @@ export class CurrenciesComponent {
     function pushWebSocketData(data: any) {
       that.isWebSocketLoading = false
       if (data.PRICE !== undefined) {
-        let i1 = that.dataService.currencyList.findIndex(((obj: any) => obj.symbol == data.FROMSYMBOL))
-        that.dataService.currencyList[i1].price = '$ ' + (data.PRICE.toLocaleString(
+        let i1 = that.appService.currencyList.findIndex(((obj: any) => obj.symbol == data.FROMSYMBOL))
+        that.appService.currencyList[i1].price = '$ ' + (data.PRICE.toLocaleString(
           'en-GB', {
           style: 'decimal',
           minimumFractionDigits: 2,
           maximumFractionDigits: 5,
         }))
-        that.dataService.currencyList[i1].changepct = (that.dataService.currencyList[i1].changepct > 0 ? '+' : '') +
-          (((data.PRICE - that.dataService.currencyList[i1].open24) / data.PRICE) * 100).toFixed(2)
+        that.appService.currencyList[i1].changepct = (that.appService.currencyList[i1].changepct > 0 ? '+' : '') +
+          (((data.PRICE - that.appService.currencyList[i1].open24) / data.PRICE) * 100).toFixed(2)
 
-        if (that.dataService.currencyList[i1].price > subibaja[i1].price) {
-          subibaja[i1].price = that.dataService.currencyList[i1].price
-          that.dataService.currencyList[i1].updown = '▲'
-        } else if (that.dataService.currencyList[i1].price < subibaja) {
-          subibaja[i1].price = that.dataService.currencyList[i1].price
-          that.dataService.currencyList[i1].updown = '▼'
+        if (that.appService.currencyList[i1].price > subibaja[i1].price) {
+          subibaja[i1].price = that.appService.currencyList[i1].price
+          that.appService.currencyList[i1].updown = '▲'
+        } else if (that.appService.currencyList[i1].price < subibaja) {
+          subibaja[i1].price = that.appService.currencyList[i1].price
+          that.appService.currencyList[i1].updown = '▼'
         }
-        let performers = [...that.dataService.currencyList].sort((a: any, b: any) => b.changepct - a.changepct)
+        let performers = [...that.appService.currencyList].sort((a: any, b: any) => b.changepct - a.changepct)
         performers.splice(3, 44)
         that.performersSource = performers
       }

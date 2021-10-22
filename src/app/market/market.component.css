@@ -19,7 +19,6 @@ p {
   font-size: 16px;
   font-weight: bold;
   padding: 5px 7px;
-  border-radius: 12%;
   color: rgb(190, 190, 190);
   background-color: rgb(50, 50, 65);
   border-radius: 10%;
@@ -245,7 +244,6 @@ mat-card-content td span {
   vertical-align: middle;
   font-size: 16px;
   padding: 5px 8px;
-  color: rgb(190, 190, 190);
   background-color: rgb(50, 50, 65);
   border-radius: 5px;
 }

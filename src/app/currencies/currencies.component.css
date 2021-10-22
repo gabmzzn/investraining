@@ -26,8 +26,7 @@ mat-progress-bar {
 table {
   width: 100%;
   background-color: rgba(53, 38, 38, 0);
-  border-radius: 8px;
-  overflow: hidden !important;
+  /* overflow: hidden !important; */
 }
 
 h1 {
@@ -129,8 +128,13 @@ tr.element-row:not(.expanded-row):active {
 }
 
 .element-row td {
-  border-color: rgba(255, 255, 255, 0.070);
+  border-color: rgba(255, 255, 255, 0.060);
   border-bottom-width: 1;
+}
+
+th.mat-header-cell {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .mat-column-name {
@@ -158,10 +162,7 @@ tr.element-row:not(.expanded-row):active {
   font-size: 16px;
 }
 
-.positive-pct, .positive-pct-per, 
-.negative-pct, .negative-pct-per, 
-.positive-price, .positive-price-per, 
-.negative-price, .negative-price-per {
+.positive-pct, .positive-pct-per, .negative-pct, .negative-pct-per, .positive-price, .positive-price-per, .negative-price, .negative-price-per {
   border-radius: 5px;
   padding: 4px 5px;
   transition: background-color 350ms linear;
@@ -185,8 +186,7 @@ tr.element-row:not(.expanded-row):active {
   background-color: rgba(255, 0, 0, 0.3);
 }
 
-.positive-pct-per, .negative-pct-per, 
-.positive-price-per, .negative-price-per {
+.positive-pct-per, .negative-pct-per, .positive-price-per, .negative-price-per {
   padding: 0 5px !important;
 }
 

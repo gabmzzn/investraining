@@ -39,7 +39,7 @@ import { WithdrawDialog } from './invest/invest.component'
 import { NgxEchartsModule } from 'ngx-echarts'
 
 import { MatSortModule } from '@angular/material/sort';
-import { AppRoutingModule } from './app-routing.module'
+import { AppRoutingModule } from './app.routing.module'
 
 @NgModule({
   declarations: [
@@ -52,7 +52,7 @@ import { AppRoutingModule } from './app-routing.module'
     BuyCryptoDialog,
     ConvertCryptoDialog,
     TransactionDetailsDialog,
-    WithdrawDialog
+    WithdrawDialog,
   ],
   imports: [
     AppRoutingModule,
@@ -87,4 +87,5 @@ import { AppRoutingModule } from './app-routing.module'
   providers: [],
   bootstrap: [AppComponent]
 })
+
 export class AppModule { }

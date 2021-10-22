@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
-
+export class AppService {
+  
+  isLoading: boolean = true
   selectedCurrency!: string;
   currencyList: any = []
 
@@ -36,7 +37,7 @@ export class DataService {
 
     // Last hour timestamp
     let d = (new Date()).toString(), timestampLastHour = Date.parse((d.substr(0, 18) + ':00:00' + d.substr(24))) / 1000
-
+    
     for (let currency of currencieslist) {
       // 0 = RAW Value, 1 = DISPLAY Value  
       let plussign, updown
