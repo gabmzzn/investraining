@@ -44,6 +44,7 @@ export class MarketComponent {
     ) { }
 
   async ngOnInit() {
+    window.scrollTo(0, 0);
     this.appService.isLoading = true
     await this.appService.getData()
     this.currency = this.appService.currencyList

@@ -20,6 +20,7 @@ export class CurrenciesComponent {
   }
 
   ngOnInit() {
+    window.scrollTo(0, 0);
     // this.unrelatedTest()
     // this.isLoadingGlobal = true
     // this.isLoading = this.isLoadingGlobal
