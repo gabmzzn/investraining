@@ -97,30 +97,43 @@ footer {
 .about, .description, .technologies {
   /* border: 1px solid rgba(128, 128, 128, 0.233); */
   height: 310px;
-  width: 100%;
-  padding: 30px;
+  padding: 20px 0;
   margin: 10px;
 }
 
-.about img {
+/* .about img {
   width: 200px;
   border-radius: 50%;
   border-color: 1px solid gray;
-}
+} */
 
 .firm {
   border: 3px solid;
-  border-image: linear-gradient(45deg, rgb(0, 0, 255) 0%, rgba(255, 0, 0, 1) 100%) 1;
+  --angle: 0deg;
+  border-image: linear-gradient(var(--angle), rgb(0, 0, 255, 1) 0%, rgb(255, 0, 255, 0.6) 50%, rgb(255, 0, 0, 1) 100%) 1;
   font-family: 'Roboto', sans-serif;
   padding: 30px 25px;
-  /* border-radius: 10px; */
   margin-top: 42px;
   width: 184px;
   height: 174px;
+  animation: 5s rotate linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
 }
 
 .about {
-  padding: 30px 0px;
+  padding: 15px 0px;
+  width: 240px
 }
 
 .about p {
@@ -149,4 +162,36 @@ footer {
   font-size: 21.4px;
   font-weight: 300;
   margin-left: 0.5px;
+}
+
+.description {
+  margin-top: 42px;
+  width: 500px;
+  margin-left: 30px;
+  color: rgb(160, 160, 180);
+  line-height: 24px;
+}
+
+.contact {
+  padding: 5px;
+}
+
+.contact-link {
+  margin-top: 20px;
+  margin-right: 46px;
+  margin-left: 1px;
+}
+
+.contact-link img {
+  width: 25px;
+  filter: invert(1) brightness(80%)
+}
+
+#cv {
+  font-size: 12px;
+  font-weight: 900;
+  border-radius: 5px;
+  padding: 5px 7px;
+  background-color: rgb(180, 180, 180);
+  color: black;
 }

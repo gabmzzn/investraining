@@ -27,6 +27,12 @@ export class CurrenciesComponent {
     this.getCurrencyData()
   }
 
+  ngOnDestroy() {
+    window.scrollTo(0, 0);
+    // this.isLoadingGlobal = false
+    this.subject.complete()
+  }
+
   // ngAfterViewInit() {
   //   this.getCurrencyData()
   // }
@@ -51,11 +57,6 @@ export class CurrenciesComponent {
 
   setRowInfo(row:any){
     this.selectedCurrencyData = row.symbol
-  }
-
-  ngOnDestroy() {
-    // this.isLoadingGlobal = false
-    this.subject.complete()
   }
 
   isLoading = true

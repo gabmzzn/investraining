@@ -1,10 +1,10 @@
 a {
-  color: white;
+  color: rgb(235, 235, 255);
   text-decoration: none;
 }
 
 p {
-  color: rgb(184, 184, 184);
+  color: rgb(170, 170, 190);
   line-height: 1.4;
 }
 
@@ -19,7 +19,7 @@ p {
   font-size: 16px;
   font-weight: bold;
   padding: 5px 7px;
-  color: rgb(190, 190, 190);
+  color: rgb(180, 180, 200);
   background-color: rgb(50, 50, 65);
   border-radius: 10%;
   vertical-align: text-top;
@@ -115,23 +115,23 @@ mat-option {
 
 .mat-focused .mat-form-field-label {
   /*change color of label*/
-  color: white !important;
+  color: rgb(235, 235, 255) !important;
 }
 
 .mat-form-field-underline {
   /*change color of underline*/
-  background-color: white !important;
+  background-color: rgb(235, 235, 255) !important;
 }
 
 .mat-form-field-ripple {
   /*change color of underline when focused*/
-  background-color: white !important;
+  background-color: rgb(235, 235, 255) !important;
   ;
 }
 
 .mat-form-field-label {
   /*change color of label*/
-  color: white !important;
+  color: rgb(235, 235, 255) !important;
 }
 
 ::ng-deep .mat-calendar-body-selected {
@@ -213,7 +213,7 @@ th img {
 }
 
 mat-card-content th {
-  color: rgb(201, 201, 201);
+  color: rgb(180, 180, 200);
   width: 100%;
   text-align: left;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -225,13 +225,13 @@ mat-card-content th span {
   font-size: 12px;
   padding: 4px 6px;
   border-radius: 12%;
-  color: rgb(190, 190, 190);
+  color: rgb(180, 180, 200);
   background-color: rgb(50, 50, 65);
   border-radius: 5px;
 }
 
 mat-card-content td {
-  color: rgb(255, 255, 255);
+  color: rgb(235, 235, 255);
   font-size: 16px;
   font-weight: bold;
   text-align: right;
@@ -249,7 +249,7 @@ mat-card-content td span {
 }
 
 .weissA, .weissB, .weissC, .weissD, .weissE {
-  color: white !important;
+  color: rgb(235, 235, 255) !important;
 }
 
 .weissA, .weissB {
@@ -299,7 +299,7 @@ mat-card img {
 
 .news-feed mat-card-content {
   line-height: 1.5;
-  color: rgb(211, 211, 211);
+  color: rgb(190, 190, 210);
 }
 
 /* History Data */

@@ -56,16 +56,17 @@ export class MarketComponent {
     this.getMarketData()
   } 
 
+  ngOnDestroy() {
+    window.scrollTo(0, 0)
+    // this.isLoadingGlobal = false
+  }
+
   // set isLoadingGlobal(value: boolean) {
   //   this.appService.isLoading = value
   // }
 
   // get isLoadingGlobal() {
   //   return this.appService.isLoading
-  // }
-
-  // ngOnDestroy() {
-  //   this.isLoadingGlobal = false
   // }
 
   isLoading = true
@@ -142,7 +143,8 @@ export class MarketComponent {
     },
     yAxis: {
       type: 'value',
-      boundaryGap: false,
+      // min: 'dataMin',
+      scale: true,
       splitLine: {
         show: true,
         lineStyle: {
@@ -153,11 +155,11 @@ export class MarketComponent {
     dataZoom: [
       {
         type: 'inside',
-        start: 70,
+        start: 80,
         end: 100
       },
       {
-        start: 70,
+        start: 80,
         end: 100
       }
     ],
@@ -165,6 +167,7 @@ export class MarketComponent {
       {
         name: this.selectedCurrencyToCompare,
         type: 'line',
+        smooth: false,
         animationThreshold: 5000,
         showSymbol: false,
         symbolSize: 9,
