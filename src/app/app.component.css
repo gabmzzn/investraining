@@ -51,6 +51,7 @@ body {
 
 .buttons {
   float: right;
+  color: rgb(210, 210, 220);
 }
 
 .buttons span {
@@ -62,13 +63,13 @@ body {
 
 button:hover, .active {
   /* text-decoration: overline solid rgb(143, 223, 255) 2px; */
-  color: rgb(143, 223, 255);
+  color: rgb(121, 141, 255);
   cursor: pointer;
 }
 
 .active {
   text-decoration: overline solid rgb(143, 223, 255) 2px;
-  color: rgb(143, 223, 255);
+  color: rgb(121, 141, 255);
   cursor: pointer;
 }
 
