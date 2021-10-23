@@ -197,26 +197,69 @@ th.mat-header-cell {
 
 .positive-pct, .positive-pct-per, .negative-pct, .negative-pct-per, .positive-price, .positive-price-per, .negative-price, .negative-price-per {
   border-radius: 5px;
-  padding: 4px 5px;
+  padding: 5px 6px;
   transition: background-color 350ms linear;
+  /* transition: border-color 350ms linear; */
 }
 
 .positive-pct, .positive-pct-per {
   color: green !important;
-  border: 1px solid rgba(0, 128, 0, 0.3) !important;
+  border: 1px solid rgba(0, 128, 0, 0.3);
 }
 
 .negative-pct, .negative-pct-per {
   color: red !important;
-  border: 1px solid rgba(255, 0, 0, 0.3) !important;
+  border: 1px solid rgba(255, 0, 0, 0.3);
 }
 
 .positive-price, .positive-price-per {
-  background-color: rgba(0, 128, 0, 0.3) !important;
+  /* background-color: rgba(0, 128, 0, 0.25) !important; */
+  border: 1px solid rgba(0, 128, 0, 0.55);
+  animation: fadeinP 2s linear forwards;
+}
+
+@keyframes fadeinP {
+  0% {
+    border: 1px solid rgba(0, 128, 0, 0.55);
+    background-color: transparent;
+  }
+  20% {
+    border: 1px solid rgba(0, 128, 0, 0.3);
+    background-color: rgba(0, 128, 0, 0.3);
+  }
+  80% {
+    border: 1px solid rgba(0, 128, 0, 0.3);
+    background-color: rgba(0, 128, 0, 0.3);
+  }
+  100% {
+    border: 1px solid rgba(0, 128, 0, 0.55);
+    background-color: transparent;
+  }
 }
 
 .negative-price, .negative-price-per {
-  background-color: rgba(255, 0, 0, 0.3) !important;
+  /* background-color: rgba(255, 0, 0, 0.25) !important; */
+  border: 1px solid rgba(255, 0, 0, 0.35);
+  animation: fadeinN 2s linear forwards;
+}
+
+@keyframes fadeinN {
+  0% {
+    border: 1px solid rgba(255, 0, 0, 0.35);
+    background-color: transparent;
+  }
+  20% {
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    background-color: rgba(255, 0, 0, 0.25);
+  }
+  80% {
+    border: 1px solid rgba(255, 0, 0, 0.3);
+    background-color: rgba(255, 0, 0, 0.25);
+  }
+  100% {
+    border: 1px solid rgba(255, 0, 0, 0.35);
+    background-color: transparent;
+  }
 }
 
 .positive-pct-per, .negative-pct-per, .positive-price-per, .negative-price-per {
@@ -224,9 +267,11 @@ th.mat-header-cell {
 }
 
 .positive-price .updown {
-  color: green !important;
+  color: green;
+  transition: color 150ms linear;
 }
 
 .negative-price .updown {
-  color: red !important;
+  color: red;
+  transition: color 150ms linear;
 }

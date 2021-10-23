@@ -117,7 +117,7 @@ export class MarketComponent {
           minimumFractionDigits: 2,
           maximumFractionDigits: 5,
         }))
-        that.appService.currencyList[i1].changepct = (that.appService.currencyList[i1].changepct > 0 ? '+' : '') +
+        that.appService.currencyList[i1].changepct = (that.appService.currencyList[i1].changepct >= 0 ? '+' : '') +
           (((data.PRICE - that.appService.currencyList[i1].open24) / data.PRICE) * 100).toFixed(2)
 
         if (that.appService.currencyList[i1].price > subibaja[i1].price) {

@@ -42,7 +42,7 @@ export class AppService {
       // 0 = RAW Value, 1 = DISPLAY Value  
       let plussign, updown
       Math.random() > 0.5 ? updown = '▲' : updown = '▼'
-      json[0][currency].USD.CHANGEPCT24HOUR > 0 ? plussign = '+' : plussign = ''
+      json[0][currency].USD.CHANGEPCT24HOUR >= 0.00 ? plussign = '+' : plussign = ''
       composedData.push(
         {
           rank: i + 1,

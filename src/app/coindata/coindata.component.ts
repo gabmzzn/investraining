@@ -218,12 +218,27 @@ export class CoindataComponent {
       + this.selectedCurrency + '&tsyms=' + this.selectedCurrencyToCompare
     const json2 = await fetch(singleprice).then(res => res.json())
     let coin = json.Data[this.selectedCurrency] 
-    this.Price = json2[this.selectedCurrencyToCompare]
+    this.Price = json2[this.selectedCurrencyToCompare].toLocaleString(
+      'en-GB', {
+      style: 'decimal',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 5,
+    }),
     this.Symbol = coin.Symbol
     this.CoinName = coin.CoinName
     this.Description = coin.Description.replaceAll(/\. /g, '.<br><br>')
-    this.high24 = this.JSONData[999].high
-    this.low24 = this.JSONData[999].low
+    this.high24 = this.JSONData[999].high.toLocaleString(
+      'en-GB', {
+      style: 'decimal',
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 5,
+    }),
+      this.low24 = this.JSONData[999].low.toLocaleString(
+        'en-GB', {
+        style: 'decimal',
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 5,
+      }),
     this.PriceChange = (this.Price - this.low24).toFixed(2)
     this.SortOrder = coin.SortOrder
     this.Rating = coin.Rating.Weiss.Rating
