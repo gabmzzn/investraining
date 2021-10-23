@@ -156,7 +156,8 @@ export class MarketComponent {
       {
         type: 'inside',
         start: 80,
-        end: 100
+        end: 100,
+        zoomOnMouseWheel: false, 
       },
       {
         start: 80,
@@ -215,24 +216,24 @@ export class MarketComponent {
     const singleprice = 'https://min-api.cryptocompare.com/data/price?fsym='
       + this.selectedCurrency + '&tsyms=' + this.selectedCurrencyToCompare
     const json2 = await fetch(singleprice).then(res => res.json())
-
+    let coin = json.Data[this.selectedCurrency] 
     this.Price = json2[this.selectedCurrencyToCompare]
-    this.Symbol = json.Data[this.selectedCurrency].Symbol
-    this.CoinName = json.Data[this.selectedCurrency].CoinName
-    this.Description = json.Data[this.selectedCurrency].Description.replaceAll(/\. /g, '.<br><br>')
+    this.Symbol = coin.Symbol
+    this.CoinName = coin.CoinName
+    this.Description = coin.Description.replaceAll(/\. /g, '.<br><br>')
     this.high24 = this.JSONData[999].high
     this.low24 = this.JSONData[999].low
     this.PriceChange = (this.Price - this.low24).toFixed(2)
-    this.SortOrder = json.Data[this.selectedCurrency].SortOrder
-    this.Rating = json.Data[this.selectedCurrency].Rating.Weiss.Rating
-    this.TechnologyAdoptionRating = json.Data[this.selectedCurrency].Rating.Weiss.TechnologyAdoptionRating
-    this.MarketPerformanceRating = json.Data[this.selectedCurrency].Rating.Weiss.MarketPerformanceRating
-    if (json.Data[this.selectedCurrency].TotalCoinsMined == undefined) { this.TotalCoinsMined = 18822199} // This is because sometimes the API fails
-    else { this.TotalCoinsMined = (json.Data[this.selectedCurrency].TotalCoinsMined).toFixed(0)}
-    this.PlatformType = json.Data[this.selectedCurrency].PlatformType
-    this.Algorithm = json.Data[this.selectedCurrency].Algorithm
-    this.AssetWebsiteUrl = json.Data[this.selectedCurrency].AssetWebsiteUrl
-    this.ImageUrl = json.Data[this.selectedCurrency].ImageUrl
+    this.SortOrder = coin.SortOrder
+    this.Rating = coin.Rating.Weiss.Rating
+    this.TechnologyAdoptionRating = coin.Rating.Weiss.TechnologyAdoptionRating
+    this.MarketPerformanceRating = coin.Rating.Weiss.MarketPerformanceRating
+    if (coin.TotalCoinsMined == undefined) { this.TotalCoinsMined = 18822199} // This is because sometimes the API fails
+    else { this.TotalCoinsMined = (coin.TotalCoinsMined).toFixed(0)}
+    this.PlatformType = coin.PlatformType
+    this.Algorithm = coin.Algorithm
+    this.AssetWebsiteUrl = coin.AssetWebsiteUrl
+    this.ImageUrl = coin.ImageUrl
     let i = this.currenciesToCompare.findIndex(((obj: any) => obj.name == this.selectedCurrencyToCompare))
     this.ImageUrlTC = this.currenciesToCompare[i].img
     if (this.Rating=='') {

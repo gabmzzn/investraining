@@ -65,7 +65,7 @@ export class CurrenciesComponent {
   dataSource!: any
   performersSource!: any
   columnsToDisplay = ['rank', 'logo', 'name', 'updown', 'price', 'changepct', 'totalvolume',
-    'marketcap', 'sparkchart', 'buy', 'info'];
+    'marketcap', 'sparkchart', 'info'];
 
   async getCurrencyData() {
     await this.appService.getData()

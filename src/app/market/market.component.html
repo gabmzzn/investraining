@@ -157,29 +157,29 @@
             <th mat-header-cell *matHeaderCellDef>CLOSE</th>
             <td mat-cell *matCellDef="let row">${{row.close}}</td>
           </ng-container>
-          <ng-container matColumnDef="logo">
+          <!-- <ng-container matColumnDef="logo">
             <th mat-header-cell *matHeaderCellDef></th>
             <td mat-cell *matCellDef="let row" style="width: 32px;padding-top: 5px;"><img
                 src="https://www.cryptocompare.com{{ImageUrl}}" style="width: 26px;" /></td>
-          </ng-container>
+          </ng-container> -->
           <ng-container matColumnDef="volumeto">
-            <th mat-header-cell *matHeaderCellDef>VOLUME TO</th>
-            <td mat-cell *matCellDef="let row">{{selectedCurrency}} {{row.volumeto}} </td>
+            <th mat-header-cell *matHeaderCellDef style="padding-left: 4%;">VOLUME TO</th>
+            <td mat-cell *matCellDef="let row" style="padding-left: 4%;">{{row.volumeto}} {{selectedCurrency}}</td>
           </ng-container>
-          <ng-container matColumnDef="logoTC">
+          <!-- <ng-container matColumnDef="logoTC">
             <th mat-header-cell *matHeaderCellDef></th>
-            <td mat-cell *matCellDef="let row" style="width: 32px;padding-top: 5px;"><img src="{{ImageUrlTC}}"
-                style="width: 21px;" /></td>
-          </ng-container>
+            <td mat-cell *matCellDef="let row" style="width: 32px;padding-top: 5px;">
+              <img src="{{ImageUrlTC}}" style="width: 21px;" /></td>
+          </ng-container> -->
           <ng-container matColumnDef="volumefrom">
             <th mat-header-cell *matHeaderCellDef>VOLUME FROM</th>
-            <td mat-cell *matCellDef="let row">{{selectedCurrencyToCompare}} {{row.volumefrom}} </td>
+            <td mat-cell *matCellDef="let row">${{row.volumefrom}} {{selectedCurrencyToCompare}}</td>
           </ng-container>
           <tr mat-header-row
-            *matHeaderRowDef=" ['time', 'high', 'low', 'open' ,'close', 'logo', 'volumeto', 'logoTC', 'volumefrom']">
+            *matHeaderRowDef=" ['time', 'high', 'low', 'open' ,'close', 'volumeto', 'volumefrom']">
           </tr>
           <tr mat-row
-            *matRowDef="let row; columns: ['time', 'high', 'low', 'open', 'close', 'logo', 'volumeto', 'logoTC', 'volumefrom'];">
+            *matRowDef="let row; columns: ['time', 'high', 'low', 'open', 'close', 'volumeto', 'volumefrom'];">
           </tr>
         </table>
         <!-- <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons>

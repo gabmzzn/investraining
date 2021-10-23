@@ -238,6 +238,10 @@ th img {
   border-radius: 50% !important;
 }
 
+.mat-cell {
+  color: rgb(230, 230, 240);
+}
+
 mat-card-content th {
   color: rgb(180, 180, 200);
   width: 100%;
