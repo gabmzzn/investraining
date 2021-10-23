@@ -60,8 +60,8 @@ mat-option {
 }
 
 ::ng-deep .mat-select-panel {
-  backdrop-filter: blur(60px);
-  background: rgba(37, 37, 44, 0.0) !important;
+  backdrop-filter: blur(70px);
+  background: rgba(37, 37, 44, 0.5) !important;
 }
 
 .icon {
@@ -230,11 +230,6 @@ mat-tab-group {
     white-space: pre-line;
 } */
 
-.mat-header-row {
-  background-color: #282a38 !important;
-  font-size: medium !important;
-}
-
 th img {
   border-radius: 50% !important;
 }
@@ -245,6 +240,20 @@ th img {
 
 tr.mat-row, tr.mat-footer-row {
   height: 60px !important;
+}
+
+::ng-deep .tooltip {
+  font-size: 13px;
+  line-height: 22px;
+  color: rgb(220, 220, 240) !important;
+  backdrop-filter: blur(70px);
+  border: 1px solid rgba(56, 58, 71, 0.685);
+  background: rgba(39, 39, 46, 0);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+#tooltip-icon {
+  font-size: 12px !important;
 }
 
 mat-card-content th {

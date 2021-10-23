@@ -79,11 +79,12 @@
          }"> {{row.changepct}}%</span></td>
     </ng-container>
     <ng-container matColumnDef="totalvolume">
-      <th mat-header-cell *matHeaderCellDef>TOTAL VOL.</th>
+      <th mat-header-cell *matHeaderCellDef>TOTAL VOL <span class="material-icons-outlined" id="tooltip-icon" matTooltipClass="tooltip" matTooltip="The volume of a particular cryptocurrency is simply the total amount of coins traded in the last 24 hours."
+        style="font-size: 20px;">info</span></th>
       <td mat-cell *matCellDef="let row">{{row.totalvolume}}</td>
     </ng-container>
     <ng-container matColumnDef="marketcap">
-      <th mat-header-cell *matHeaderCellDef>MARKET CAP</th>
+      <th mat-header-cell *matHeaderCellDef>MARKET CAP <span class="material-icons-outlined" id="tooltip-icon" matTooltipClass="tooltip" matTooltip="Market Cap is Total Supply × Price. Where Total Supply includes coins held by the project team, locked in smart contracts or escrow. Supply that is verifiably burned is not included. A penalty is applied to coins with low liquidity." style="font-size: 20px;">info</span></th>
       <td mat-cell *matCellDef="let row"><span>{{row.marketcap}}</span></td>
     </ng-container>
     <ng-container matColumnDef="sparkchart">

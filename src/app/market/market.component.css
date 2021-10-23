@@ -29,6 +29,20 @@ table {
   /* overflow: hidden !important; */
 }
 
+::ng-deep .tooltip {
+  font-size: 13px;
+  line-height: 22px;
+  color: rgb(220, 220, 240) !important;
+  backdrop-filter: blur(70px);
+  border: 1px solid rgba(56, 58, 71, 0.685);
+  background: rgba(39, 39, 46, 0);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
+}
+
+#tooltip-icon {
+  font-size: 12px !important;
+}
+
 h1 {
   font-size: 35px;
   font-weight: 500;

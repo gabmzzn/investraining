@@ -24,6 +24,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner'
 import { MatProgressBarModule } from '@angular/material/progress-bar'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatStepperModule } from '@angular/material/stepper'
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { AppComponent } from './app.component'
 import { MarketComponent } from './market/market.component'
@@ -59,6 +60,7 @@ import { AppRoutingModule } from './app.routing.module'
     BrowserModule,
     BrowserAnimationsModule,
     MatListModule,
+    MatTooltipModule,
     MatDialogModule,
     MatDatepickerModule,
     MatFormFieldModule,
