@@ -15,8 +15,8 @@
   <div class="currencies">
     <div class="content">
       <ng-container *ngFor="let performer of performersSource">
-        <div class="card">
-          <mat-card  class="mat-elevation-z2">
+        <div class="card" id="mat-card2">
+          <mat-card (click)="setRowInfo(performer)" routerLink="/market" class="mat-elevation-z3">
             <mat-card-title-group>
               <mat-card-title>
                 {{performer.symbol}}

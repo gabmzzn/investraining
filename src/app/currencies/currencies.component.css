@@ -76,6 +76,20 @@ mat-card {
   border-radius: 8px;
 }
 
+#mat-card2 :hover {
+  background-color: rgb(32, 32, 46);
+  transition: background-color 250ms;
+}
+
+#mat-card2 :not(:hover) {
+  transition: background-color 300ms;
+}
+
+#mat-card2 :active {
+  background-color: rgb(45, 45, 55);
+  transition: background-color 250ms;
+}
+
 .card mat-card-content {
   font-size: 16px;
   font-weight: 600;
@@ -169,21 +183,21 @@ th.mat-header-cell {
 }
 
 .positive-pct, .positive-pct-per {
-  color: green;
-  border: 1px solid rgba(0, 128, 0, 0.3);
+  color: green !important;
+  border: 1px solid rgba(0, 128, 0, 0.3) !important;
 }
 
 .negative-pct, .negative-pct-per {
-  color: red;
-  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: red !important;
+  border: 1px solid rgba(255, 0, 0, 0.3) !important;
 }
 
 .positive-price, .positive-price-per {
-  background-color: rgba(0, 128, 0, 0.3);
+  background-color: rgba(0, 128, 0, 0.3) !important;
 }
 
 .negative-price, .negative-price-per {
-  background-color: rgba(255, 0, 0, 0.3);
+  background-color: rgba(255, 0, 0, 0.3) !important;
 }
 
 .positive-pct-per, .negative-pct-per, .positive-price-per, .negative-price-per {
@@ -191,9 +205,9 @@ th.mat-header-cell {
 }
 
 .positive-price .updown {
-  color: green;
+  color: green !important;
 }
 
 .negative-price .updown {
-  color: red;
+  color: red !important;
 }
