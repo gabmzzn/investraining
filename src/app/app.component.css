@@ -110,13 +110,13 @@ footer {
 .firm {
   border: 3px solid;
   --angle: 0deg;
-  border-image: linear-gradient(var(--angle), rgb(0, 0, 255, 1) 0%, rgb(255, 0, 255, 0.6) 50%, rgb(255, 0, 0, 1) 100%) 1;
+  border-image: linear-gradient(var(--angle), rgba(0, 0, 255, 1) 0%, rgba(255, 0, 255, 0.6) 50%, rgba(255, 0, 0, 1) 100%) 1;
   font-family: 'Roboto', sans-serif;
   padding: 30px 25px;
   margin-top: 42px;
   width: 184px;
   height: 174px;
-  animation: 5s rotate linear infinite;
+  animation: 4s rotate linear infinite;
 }
 
 @keyframes rotate {
