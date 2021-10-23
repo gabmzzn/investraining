@@ -28,7 +28,7 @@ import { MatStepperModule } from '@angular/material/stepper'
 import { AppComponent } from './app.component'
 import { MarketComponent } from './market/market.component'
 import { AboutComponent } from './about/about.component'
-import { CurrenciesComponent } from './currencies/currencies.component'
+import { CoindataComponent } from './coindata/coindata.component'
 import { InvestComponent } from './invest/invest.component'
 import { AddFundsDialog } from './invest/invest.component'
 import { BuyCryptoDialog } from './invest/invest.component'
@@ -46,7 +46,7 @@ import { AppRoutingModule } from './app.routing.module'
     AppComponent,
     AboutComponent,
     MarketComponent,
-    CurrenciesComponent,
+    CoindataComponent,
     InvestComponent,
     AddFundsDialog,
     BuyCryptoDialog,

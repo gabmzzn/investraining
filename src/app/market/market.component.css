@@ -1,48 +1,4 @@
-a {
-  color: rgb(235, 235, 255);
-  text-decoration: none;
-}
-
-p {
-  color: rgb(170, 170, 190);
-  line-height: 1.4;
-}
-
-/*  Currency Info */
-
-.currencyHeader {
-  height: 60px;
-  margin-bottom: 20px;
-}
-
-.symbol {
-  font-size: 16px;
-  font-weight: bold;
-  padding: 5px 7px;
-  color: rgb(180, 180, 200);
-  background-color: rgb(50, 50, 65);
-  border-radius: 10%;
-  vertical-align: text-top;
-}
-
-.selectedCurrencyActions {
-  font-size: 36px;
-  float: left;
-}
-
-.selectedCurrencyActions img {
-  border-radius: 50%;
-  width: 50px;
-  background-color: rgb(50, 50, 65);
-}
-
-.selectedCurrencyPrice {
-  font-size: 24px;
-  float: right;
-}
-
-/* Input data */
-
+@import url('https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp');
 mat-progress-bar {
   z-index: 100;
   position: fixed;
@@ -50,308 +6,213 @@ mat-progress-bar {
   left: 0;
 }
 
-mat-option img {
+.actionbuttons {
+  width: 40px !important;
+  min-width: unset !important;
+  padding: 0 !important;
+}
+
+.symbol {
+  vertical-align: middle;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 4px 5px;
+  border-radius: 12%;
+  color: rgb(190, 190, 200);
+  background-color: rgb(50, 50, 65);
+  border-radius: 10%;
+}
+
+table {
+  width: 100%;
+  background-color: rgba(53, 38, 38, 0);
+  /* overflow: hidden !important; */
+}
+
+h1 {
+  font-size: 35px;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
+
+.titles {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.title {
+  width: 50%;
+  margin-bottom: 5px;
+}
+
+.currencies {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+mat-card-content {
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.card {
+  width: 100%;
+  margin-right: 10px;
+}
+
+mat-card {
+  height: 140px;
+  background-color: rgb(29, 30, 39);
+  border: 1px solid rgba(56, 58, 71, 0.685);
+  padding: 12px !important;
+  border-radius: 8px;
+}
+
+#mat-card2 :hover {
+  background-color: rgb(32, 32, 46);
+  transition: background-color 250ms;
+}
+
+#mat-card2 :not(:hover) {
+  transition: background-color 300ms;
+}
+
+#mat-card2 :active {
+  background-color: rgb(45, 45, 55);
+  transition: background-color 250ms;
+}
+
+.card mat-card-content {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.card mat-card-subtitle {
+  font-size: 13px;
+  color: rgb(96, 104, 116);
+}
+
+.title h2 {
+  margin-bottom: 7px;
+  font-weight: 400;
+}
+
+mat-card-title-group img {
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   background-color: rgb(50, 50, 65);
 }
 
-mat-option {
-  border-radius: 7px;
-}
-
-::ng-deep .mat-select-panel {
-  backdrop-filter: blur(60px);
-  background: rgba(37, 37, 44, 0.0) !important;
-}
-
-.icon {
-  vertical-align: middle;
-  margin-right: 8px;
-  height: 25px;
-}
-
-::ng-deep mat-form-field {
-  width: 79px !important;
-  height: 40px !important;
-  margin-right: 10px !important;
-}
-
-::ng-deep .mat-form-field-flex {
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-  padding-right: 0px !important;
-  border: 1px solid rgba(255, 255, 255, 0.158) !important;
-  border-radius: 7px !important;
-}
-
-::ng-deep .mat-form-field-infix {
-  padding: 0 0 0.75em 0 !important;
-}
-
-::ng-deep .mat-form-field-underline {
-  display: none;
-}
-
-#crypto-select {
-  display: inline-block;
-  width: 33.33%;
-  /* text-align:right; */
-}
-
-.mat-option.mat-selected:not(.mat-option-disabled) {
-  color: #ffffff;
-  font-weight: 700;
-}
-
-::ng-deep .datepicker {
-  width: 120px !important;
-  height: 40px !important;
-}
-
-::ng-deep .mat-tab-label.mat-tab-disabled {
-  padding: 0 0 0 250px !important;
-}
-
-::ng-deep .mat-form-field-flex {
-  padding-top: 0px !important;
-  padding-bottom: 0px !important;
-  padding-right: 0px !important;
-  height: 40px !important;
-}
-
-/* ::ng-deep mat-tab-header {
-  width: 80%;
-} */
-
-.mat-focused .mat-form-field-label {
-  /*change color of label*/
-  color: rgb(235, 235, 255) !important;
-}
-
-.mat-form-field-underline {
-  /*change color of underline*/
-  background-color: rgb(235, 235, 255) !important;
-}
-
-.mat-form-field-ripple {
-  /*change color of underline when focused*/
-  background-color: rgb(235, 235, 255) !important;
-  ;
-}
-
-.mat-form-field-label {
-  /*change color of label*/
-  color: rgb(235, 235, 255) !important;
-}
-
-.mat-input-element {
-  margin-bottom: 6px;
-}
-
-::ng-deep .mat-select-arrow {
-  margin: 13px 10px 0px 0px !important;
-}
-
-::ng-deep .mat-button-wrapper {
-  margin-top: 4px !important;
-}
-
-::ng-deep .mat-calendar-body-selected {
-  /* background-color: green; */
-}
-
-::ng-deep .mat-tab-label {
-  opacity: 0.85 !important;
-}
-
-::ng-deep mat-datepicker-content {
-  backdrop-filter: blur(50px);
-  background: rgba(37, 37, 44, 0.75) !important;
-}
-
-mat-spinner {
-  margin-right: 10px;
-}
-
-mat-form-field {
-  float: left;
-  margin-right: 1%;
-}
-
-.mat-select-panel {
-  background: rgba(37, 37, 44) !important;
-}
-
-/* Tabs */
-
-mat-tab-group {
-  margin: auto;
-  height: 100%;
-  width: 100%;
-  display: inline-block;
-}
-
-::ng-deep .mat-tab-body-wrapper {
-  margin-top: 15px;
-}
-
-.tab-icon {
-  margin-right: 8px;
-}
-
-/* Market info */
-
-.market-container {
-  display: flex;
-}
-
-.info-container {
-  flex: 1;
-}
-
-.info-container mat-card {
-  width: 300px;
-}
-
-.info-container mat-card-content, .info-container mat-card-title {
-  padding: 5px;
-}
-
-.left-container:first-child {
+mat-card-content img {
   width: 100%;
 }
 
-.right-container:first-child {
-  margin-right: 20px;
+.card mat-card-title {
+  margin-top: 5px;
 }
-
-/* .angular-with-newlines {
-    white-space: pre-line;
-} */
 
 .mat-header-row {
-  background-color: #282a38 !important;
+  background-color: rgb(27, 27, 32, 0.85) !important;
   font-size: medium !important;
 }
 
-th img {
-  border-radius: 50% !important;
+th {
+  font-size: 15px !important;
 }
 
-.mat-cell {
-  color: rgb(230, 230, 240);
+tr.detail-row {
+  height: 0;
 }
 
-mat-card-content th {
-  color: rgb(180, 180, 200);
-  width: 100%;
-  text-align: left;
+tr.mat-row, tr.mat-footer-row {
+  height: 53px !important;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: rgba(194, 207, 243, 0.082);
+}
+
+tr.element-row:not(.expanded-row):active {
+  background: rgba(194, 207, 243, 0.205);
+}
+
+.element-row td {
+  border-color: rgba(255, 255, 255, 0.060);
+  border-bottom-width: 1;
+}
+
+th.mat-header-cell {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 13px 0;
 }
 
-mat-card-content th span {
-  vertical-align: middle;
-  font-size: 12px;
-  padding: 4px 6px;
-  border-radius: 12%;
-  color: rgb(180, 180, 200);
+.mat-column-name {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+.mat-column-logo img {
+  border-radius: 50%;
   background-color: rgb(50, 50, 65);
-  border-radius: 5px;
 }
 
-mat-card-content td {
-  color: rgb(235, 235, 255);
+.mat-column-price {
   font-size: 16px;
-  font-weight: bold;
-  text-align: right;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 13px 0;
-  width: 50px;
+  font-weight: 500;
+  width: 135px;
 }
 
-mat-card-content td span {
-  vertical-align: middle;
+.mat-column-changepct {
   font-size: 16px;
-  padding: 5px 8px;
-  background-color: rgb(50, 50, 65);
+  font-weight: 500;
+}
+
+.mat-column-totalvolume, .mat-column-circulatingsupply, .mat-column-marketcap {
+  font-size: 16px;
+}
+
+.positive-pct, .positive-pct-per, .negative-pct, .negative-pct-per, .positive-price, .positive-price-per, .negative-price, .negative-price-per {
   border-radius: 5px;
+  padding: 4px 5px;
+  transition: background-color 350ms linear;
 }
 
-.weissA, .weissB, .weissC, .weissD, .weissE {
-  color: rgb(235, 235, 255) !important;
+.positive-pct, .positive-pct-per {
+  color: green !important;
+  border: 1px solid rgba(0, 128, 0, 0.3) !important;
 }
 
-.weissA, .weissB {
-  background-color: green !important;
+.negative-pct, .negative-pct-per {
+  color: red !important;
+  border: 1px solid rgba(255, 0, 0, 0.3) !important;
 }
 
-.weissC {
-  background-color: rgba(255, 145, 0, 0.788) !important;
+.positive-price, .positive-price-per {
+  background-color: rgba(0, 128, 0, 0.3) !important;
 }
 
-.weissD, .weissE {
-  background-color: rgba(255, 0, 0, 0.555) !important;
+.negative-price, .negative-price-per {
+  background-color: rgba(255, 0, 0, 0.3) !important;
 }
 
-/* News Feed */
-
-.news-feed {
-  /* display: flex; */
-  column-count: 2;
-  padding: 5px 8px 0 0;
-  /* column-gap: 10px; */
-  column-gap: 1.5em;
+.positive-pct-per, .negative-pct-per, .positive-price-per, .negative-price-per {
+  padding: 0 5px !important;
 }
 
-mat-card {
-  display: inline-block;
-  width: 95%;
-  margin-bottom: 16px;
-  line-height: 1.4;
-  background-color: rgb(29, 30, 39);
-  border: 1px solid rgba(56, 58, 71, 0.685);
-  border-radius: 12px;
+.positive-price .updown {
+  color: green !important;
 }
 
-mat-card-title {
-  line-height: 1.25;
-}
-
-mat-card img {
-  border-radius: 12%;
-  margin-left: 10px;
-}
-
-#card-body {
-  line-height: 1.35;
-}
-
-.news-feed mat-card-content {
-  line-height: 1.5;
-  color: rgb(190, 190, 210);
-}
-
-/* History Data */
-
-table {
-  width: 95%;
-  background-color: rgba(38, 39, 53, 0);
-  border-radius: 8px;
-  overflow: hidden !important;
-}
-
-.high {
-  border: 1px solid rgba(0, 128, 0, 0.5);
-  background: rgba(0, 128, 0, 0.15) !important;
-}
-
-.low {
-  border: 1px solid rgba(255, 0, 0, 0.5);
-  background: rgba(255, 0, 0, 0.15) !important;
-}
-
-td span {
-  padding: 5px 8px !important;
-  border-radius: 5px !important;
+.negative-price .updown {
+  color: red !important;
 }

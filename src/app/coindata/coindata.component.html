@@ -1,0 +1,253 @@
+<!-- Data input -->
+<mat-progress-bar mode="indeterminate" *ngIf="isLoading"></mat-progress-bar>
+<div *ngIf="!isFirstLoading">
+  <div class="currencyHeader">
+    <div class="selectedCurrencyActions">
+      <img src="https://www.cryptocompare.com{{ImageUrl}}">
+      <span style="padding: 4px 5px;  vertical-align: super; font-weight: 500;">{{CoinName}}</span> <span class="symbol">{{Symbol}}</span>
+    </div>
+  </div>
+
+  <!-- Tabs with their content  -->
+  <mat-tab-group mat-align-tabs="start">
+    <!-- STATS CHART -->
+    <mat-tab class="stats">
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">trending_up</mat-icon>
+        Stats Chart
+      </ng-template>
+      <div class="market-container">
+        <div class="left-container" style="padding-right: 20px">
+          <div echarts [options]="chartOption" [merge]="mergeOptions" class="demo-chart"
+            style="width: 100%;height: 450px; margin-bottom: 50px;">
+          </div>
+
+          <h2>What is {{CoinName}} ({{Symbol}})?</h2>
+          <p class="descriptionInfo" [innerHTML]="Description"></p>
+        </div>
+        <div class="info-container">
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>{{selectedCurrency}} price to {{selectedCurrencyToCompare}}</mat-card-title>
+            </mat-card-title-group>
+            <mat-card-content>
+              <tr>
+                <td style="text-align: left;"><img src="https://www.cryptocompare.com{{ImageUrl}}" 
+                  style="width: 28px;vertical-align: bottom;margin-right: 7px;margin-left: 0px;  border-radius: 50%;background-color: rgb(50, 50, 65);"></td>
+                <td style="font-size: 20px;text-align: left;width: 100%;">{{selectedCurrency}}</td>
+                <td style="font-size: 20px;">1</td>
+              </tr>
+              <tr>
+                <td style="text-align: left;"><img src="{{ImageUrlTC}}" 
+                  style="width: 24px;vertical-align: middle;padding-left: 3px;margin-left: 0px;  border-radius: 50%;"></td>
+                <td style="font-size: 18px;text-align: left;width: 100%;">{{selectedCurrencyToCompare}}</td>
+                <td style="font-size: 20px;">${{Price}}</td>
+              </tr>
+            </mat-card-content>
+          </mat-card>
+
+          <mat-card>
+            <mat-card-title-group>
+              <mat-card-title>{{selectedCurrency}} Statistics and info</mat-card-title>
+            </mat-card-title-group>
+            <mat-card-content>
+              <tr>
+                <th>Price Change <span>24h</span></th>
+                <td>${{PriceChange}}</td>
+              </tr>
+              <tr>
+                <th>High - Low <span>24h</span></th>
+                <td>
+                  <div style="margin-bottom: 15px;">
+                    <span class="high">${{high24}}</span>
+                  </div>
+                  <div>
+                    <span class="low">${{low24}}</span>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <th>Ranking</th>
+                <td><span>#{{SortOrder}}</span></td>
+              </tr>
+              <tr>
+                <th>General Weiss Rating</th>
+                <td><span [ngClass]="{
+                'weissA' : Rating.substr(0, 1) == 'A',
+                'weissB' : Rating.substr(0, 1) == 'B',
+                'weissC' : Rating.substr(0, 1) == 'C',
+                'weissD' : Rating.substr(0, 1) == 'D',
+                'weissE' : Rating.substr(0, 1) == 'E'
+              }">{{Rating}}</span></td>
+              </tr>
+              <tr>
+                <th>Technology Adoption</th>
+                <td><span [ngClass]="{
+                'weissA' : TechnologyAdoptionRating.substr(0, 1) == 'A',
+                'weissB' : TechnologyAdoptionRating.substr(0, 1) == 'B',
+                'weissC' : TechnologyAdoptionRating.substr(0, 1) == 'C',
+                'weissD' : TechnologyAdoptionRating.substr(0, 1) == 'D',
+                'weissE' : TechnologyAdoptionRating.substr(0, 1) == 'E'
+              }">{{TechnologyAdoptionRating}}</span></td>
+              </tr>
+              <tr>
+                <th>Market Performance</th>
+                <td><span [ngClass]="{
+                'weissA' : MarketPerformanceRating.substr(0, 1) == 'A',
+                'weissB' : MarketPerformanceRating.substr(0, 1) == 'B',
+                'weissC' : MarketPerformanceRating.substr(0, 1) == 'C',
+                'weissD' : MarketPerformanceRating.substr(0, 1) == 'D',
+                'weissE' : MarketPerformanceRating.substr(0, 1) == 'E'
+              }">{{MarketPerformanceRating}}</span></td>
+              </tr>
+              <tr>
+                <th>Total coins mined</th>
+                <td>{{TotalCoinsMined}}</td>
+              </tr>
+              <tr>
+                <th>Platform Type</th>
+                <td>{{PlatformType}}</td>
+              </tr>
+              <tr>
+                <th>Algorithm</th>
+                <td>{{Algorithm}}</td>
+              </tr>
+              <tr>
+                <th style="border-bottom: none;">Website:</th>
+                <td style="border-bottom: none;">
+                  <a mat-stroked-button href={{AssetWebsiteUrl}} target="_blank">
+                    External Link
+                    <mat-icon style="font-size: 20px;color: grey">
+                      open_in_new
+                    </mat-icon>
+                  </a>
+                </td>
+              </tr>
+            </mat-card-content>
+          </mat-card>
+        </div>
+      </div>
+    </mat-tab>
+    <!-- HISTORICAL DATA -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">view_list</mat-icon>
+        Historical Data
+      </ng-template>
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table" style="width: 100%;">
+          <ng-container matColumnDef="time">
+            <th mat-header-cell *matHeaderCellDef>DATE</th>
+            <td mat-cell *matCellDef="let row"> {{row.time * 1000 | date}} </td>
+          </ng-container>
+          <ng-container matColumnDef="high">
+            <th mat-header-cell *matHeaderCellDef>HIGH</th>
+            <td mat-cell *matCellDef="let row"><span class="high">${{row.high}}</span></td>
+          </ng-container>
+          <ng-container matColumnDef="low">
+            <th mat-header-cell *matHeaderCellDef>LOW</th>
+            <td mat-cell *matCellDef="let row"><span class="low">${{row.low}}</span></td>
+          </ng-container>
+          <ng-container matColumnDef="open">
+            <th mat-header-cell *matHeaderCellDef>OPEN</th>
+            <td mat-cell *matCellDef="let row">${{row.open}}</td>
+          </ng-container>
+          <ng-container matColumnDef="close">
+            <th mat-header-cell *matHeaderCellDef>CLOSE</th>
+            <td mat-cell *matCellDef="let row">${{row.close}}</td>
+          </ng-container>
+          <!-- <ng-container matColumnDef="logo">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row" style="width: 32px;padding-top: 5px;"><img
+                src="https://www.cryptocompare.com{{ImageUrl}}" style="width: 26px;" /></td>
+          </ng-container> -->
+          <ng-container matColumnDef="volumeto">
+            <th mat-header-cell *matHeaderCellDef style="padding-left: 4%;">VOLUME TO</th>
+            <td mat-cell *matCellDef="let row" style="padding-left: 4%;">{{row.volumeto}} {{selectedCurrency}}</td>
+          </ng-container>
+          <!-- <ng-container matColumnDef="logoTC">
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let row" style="width: 32px;padding-top: 5px;">
+              <img src="{{ImageUrlTC}}" style="width: 21px;" /></td>
+          </ng-container> -->
+          <ng-container matColumnDef="volumefrom">
+            <th mat-header-cell *matHeaderCellDef>VOLUME FROM</th>
+            <td mat-cell *matCellDef="let row">${{row.volumefrom}} {{selectedCurrencyToCompare}}</td>
+          </ng-container>
+          <tr mat-header-row
+            *matHeaderRowDef=" ['time', 'high', 'low', 'open' ,'close', 'volumeto', 'volumefrom']">
+          </tr>
+          <tr mat-row
+            *matRowDef="let row; columns: ['time', 'high', 'low', 'open', 'close', 'volumeto', 'volumefrom'];">
+          </tr>
+        </table>
+        <!-- <mat-paginator [pageSizeOptions]="[10, 25, 50]" showFirstLastButtons>
+        </mat-paginator> -->
+      </div>
+    </mat-tab>
+    <!-- NEWS FEED -->
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <mat-icon class="tab-icon">star_half</mat-icon>
+        News Feed
+      </ng-template>
+
+      <div class="news-feed">
+        <div fxLayout="row nowrap" fxLayoutGap="16px grid">
+          <ng-container *ngFor="let card of cards">
+            <mat-card style="border: 1px solid rgba(255, 255, 255, 0.096);">
+              <mat-card-title-group>
+                <mat-card-title>{{card.title}}</mat-card-title>
+                <mat-card-subtitle>{{card.published_on * 1000 | date}}</mat-card-subtitle>
+                <img mat-card-sm-image src={{card.imageurl}}>
+              </mat-card-title-group>
+              <mat-card-content>
+                <div id="card-body" [innerHTML]="card.body"></div>
+              </mat-card-content>
+              <mat-card-actions>
+                <a mat-stroked-button href={{card.url}} target="_blank">
+                  Source: {{card.source_info['name']}}
+                  <mat-icon style="font-size: 20px;color: grey">
+                    open_in_new
+                  </mat-icon>
+                </a>
+              </mat-card-actions>
+            </mat-card>
+          </ng-container>
+        </div>
+      </div>
+    </mat-tab>
+
+    <!-- INPUT VALUES -->
+    <mat-tab disabled style="width: 600px !important; padding: 0 0 0 300px;">
+      <ng-template mat-tab-label>
+        <div style="width: 30px; margin-right: 10px">
+          <mat-spinner *ngIf="isLoading" [diameter]="30"></mat-spinner>
+        </div>
+        <mat-form-field appearance="fill">
+          <mat-select [(ngModel)]="selectedCurrency" name="currency" disableOptionCentering (selectionChange)="updateData()"
+            style="padding: 0;">
+            <mat-option id="crypto-select" *ngFor="let currency of currency" [value]="currency.symbol">
+              <img class="icon" aria-hidden src="https://www.cryptocompare.com{{currency.logo}}">
+              <span>{{currency.symbol}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-select [(ngModel)]="selectedCurrencyToCompare" name="currency" disableOptionCentering (selectionChange)="updateData()">
+            <mat-option *ngFor="let currency of currenciesToCompare" [value]="currency.name">
+              <img class="icon" aria-hidden src="{{currency.img}}">
+              <span>{{currency.name}}</span>
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="datepicker">
+          <input matInput [matDatepicker]="picker" [(ngModel)]="date" (dateChange)="updateData()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>
