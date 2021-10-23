@@ -113,7 +113,7 @@ export class MarketComponent {
   async StatsChart() {
     this.data = await this.JSONData.map((r: { time: any; close: any }) =>
       Object.values({ time: r.time * 1000, close: r.close }))
-    this.mergeOptions = { series: [{ data: this.data }] }
+    this.mergeOptions = { series: [{ data: this.data, name: this.selectedCurrencyToCompare }] }
   }
 
   mergeOptions = {};
