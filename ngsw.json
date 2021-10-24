@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1635042169202,
+  "timestamp": 1635055668982,
   "index": "https://gabmzzn.github.io/investraining/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://gabmzzn.github.io/investraining/favicon.ico",
         "https://gabmzzn.github.io/investraining/index.html",
-        "https://gabmzzn.github.io/investraining/main.01da11a264aa6a59a90a.js",
+        "https://gabmzzn.github.io/investraining/main.09ec94d29b54a922ada7.js",
         "https://gabmzzn.github.io/investraining/manifest.webmanifest",
         "https://gabmzzn.github.io/investraining/polyfills.fe87c3dae76fa5323645.js",
         "https://gabmzzn.github.io/investraining/runtime.84667cc701e8f4b4da78.js",
@@ -37,7 +37,6 @@
         "https://gabmzzn.github.io/investraining/assets/icons/icon-512x512.png",
         "https://gabmzzn.github.io/investraining/assets/icons/icon-72x72.png",
         "https://gabmzzn.github.io/investraining/assets/icons/icon-96x96.png",
-        "https://gabmzzn.github.io/investraining/assets/imgs/Untitled-1.png",
         "https://gabmzzn.github.io/investraining/assets/imgs/cv.png",
         "https://gabmzzn.github.io/investraining/assets/imgs/github.png",
         "https://gabmzzn.github.io/investraining/assets/imgs/linkedin.png",
@@ -56,14 +55,13 @@
     "https://gabmzzn.github.io/investraining/assets/icons/icon-512x512.png": "559d9c4318b45a1f2b10596bbb4c960fe521dbcc",
     "https://gabmzzn.github.io/investraining/assets/icons/icon-72x72.png": "c457e56089a36952cd67156f9996bc4ce54a5ed9",
     "https://gabmzzn.github.io/investraining/assets/icons/icon-96x96.png": "3914125a4b445bf111c5627875fc190f560daa41",
-    "https://gabmzzn.github.io/investraining/assets/imgs/Untitled-1.png": "33d3dab8f3745ebf77d39c180949313ab4dd7be7",
     "https://gabmzzn.github.io/investraining/assets/imgs/cv.png": "8394bd821506c81c3d4497515a8d83f9ae79ba5f",
     "https://gabmzzn.github.io/investraining/assets/imgs/github.png": "6ef5bf70375cc302922f0cc0271103cdd70e4450",
     "https://gabmzzn.github.io/investraining/assets/imgs/linkedin.png": "0f8d0ba6293237fb09f16ad1d8583517ebabf3e2",
     "https://gabmzzn.github.io/investraining/assets/imgs/mail.png": "0665650f02b617109935ed63eccbbc64238d45ad",
     "https://gabmzzn.github.io/investraining/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://gabmzzn.github.io/investraining/index.html": "e9b5eb1e73586aac33b07d0dc3a1e67d4baf164a",
-    "https://gabmzzn.github.io/investraining/main.01da11a264aa6a59a90a.js": "c193c5433ad9308c2a024e3076575eaf858a0fb1",
+    "https://gabmzzn.github.io/investraining/index.html": "110adc873042772f41eba3fd9082b070e9c1e460",
+    "https://gabmzzn.github.io/investraining/main.09ec94d29b54a922ada7.js": "3d6dc203af9d43cc5bbf13e97c437a15410ead3c",
     "https://gabmzzn.github.io/investraining/manifest.webmanifest": "268a4e337bd9a4c7909ba3483905338f6dda0d37",
     "https://gabmzzn.github.io/investraining/polyfills.fe87c3dae76fa5323645.js": "10eab0405402fb92bba27637ff43b4d589d5223c",
     "https://gabmzzn.github.io/investraining/runtime.84667cc701e8f4b4da78.js": "6167a9427635d715761c5702451c6c469a82f49b",
