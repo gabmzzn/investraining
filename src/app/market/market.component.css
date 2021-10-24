@@ -225,11 +225,11 @@ th.mat-header-cell {
   }
   20% {
     border: 1px solid rgba(0, 128, 0, 0.3);
-    background-color: rgba(0, 128, 0, 0.3);
+    background-color: rgba(0, 128, 0, 0.4);
   }
   80% {
     border: 1px solid rgba(0, 128, 0, 0.3);
-    background-color: rgba(0, 128, 0, 0.3);
+    background-color: rgba(0, 128, 0, 0.4);
   }
   100% {
     border: 1px solid rgba(0, 128, 0, 0.55);
