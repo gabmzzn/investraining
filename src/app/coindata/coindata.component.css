@@ -109,7 +109,7 @@ mat-option {
 }
 
 ::ng-deep .mat-tab-label.mat-tab-disabled {
-  padding: 0 0 0 250px !important;
+  padding-left: 25%;
 }
 
 ::ng-deep .mat-form-field-flex {
