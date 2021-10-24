@@ -203,24 +203,30 @@ footer {
   color: black;
 }
 
+.resources h2 {
+  font-size: 20px;
+  font-weight: 700;
+  font-style: italic;
+  color: rgb(165, 165, 190);
+  padding-left: 3px;
+  margin-bottom: 15px;
+  margin-top: 5px;
+}
+
 .resources {
   margin-top: 50px;
   margin-left: 30px;
   /* border: 1px solid gray; */
-  width: 400px;
+  width: 300px;
   height: 190px;
 }
 
-.resources img {
-  width: 330px;
-  filter: brightness(80%)
+mat-chip {
+  color: rgb(220, 220, 230) !important;
+  background-color: rgba(255, 255, 255, 0.075) !important;
 }
 
-.resources h2 {
-  font-size: 24px;
-  font-weight: 700;
-  font-style: italic;
-  color: rgb(165, 165, 190);
-  margin-bottom: 15px;
-  margin-top: 7px;
+.mat-standard-chip:focus::after {
+  opacity: 0 !important;
+  transition: opacity 500ms;
 }

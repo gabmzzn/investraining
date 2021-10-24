@@ -262,7 +262,7 @@ export class CoindataComponent {
   dataSource = new MatTableDataSource()
 
   async HistoricalData() {
-    this.dataSource = this.JSONData.slice(this.JSONData.length - 50).reverse()
+    this.dataSource = this.JSONData.slice(this.JSONData.length - 20).reverse()
   }
 
   // News Feed
@@ -272,8 +272,8 @@ export class CoindataComponent {
     const url = 'https://min-api.cryptocompare.com/data/v2/news/?lang=EN&categories=' + this.selectedCurrency
       + '&excludeCategories=Sponsored&lTs=' + Date.parse(this.date) / 1000
     const json = await fetch(url).then(res => res.json())
-    this.cards = json.Data
-    for (let i=0;i < json.Data.length; i++) {
+    this.cards = json.Data.slice(json.Data.length - 15)
+    for (let i=0;i < this.cards.length; i++) {
       this.cards[i].body = json.Data[i].body.replaceAll(/\. /g, '.<br><br>')
     }
   }
