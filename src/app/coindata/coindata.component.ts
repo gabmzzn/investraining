@@ -205,7 +205,7 @@ export class CoindataComponent {
   MarketPerformanceRating!: string
   high24!: number
   low24!: number
-  PriceChange!: any
+  PriceChange!: string
   ImageUrl!: string
   ImageUrlTC!: string
   CoinName!: string
