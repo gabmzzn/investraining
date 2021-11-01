@@ -116,6 +116,7 @@ footer {
   margin-top: 42px;
   width: 184px;
   height: 174px;
+  animation: 3.5s rotate linear infinite;
 }
 
 .firm-container :hover {
