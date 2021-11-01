@@ -119,10 +119,10 @@ footer {
   animation: 3.5s rotate linear infinite;
 }
 
-.firm-container :hover {
+/* .firm-container :hover {
   border-image: linear-gradient(var(--angle), rgba(0, 0, 255, 1) 0%, rgba(255, 0, 0, 1) 100%) 1;
   animation: 2s rotate linear infinite;
-}
+} */
 
 @keyframes rotate {
   0% {
