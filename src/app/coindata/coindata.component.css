@@ -200,6 +200,16 @@ mat-tab-group {
   margin-right: 8px;
 }
 
+::ng-deep .mat-ink-bar {
+  background-color: rgba(88, 113, 255, 0.1) !important;
+  border-bottom: 3px solid rgb(88, 113, 255) !important;
+  height: 44px !important;
+}
+
+.tab-button {
+  background-color: transparent !important;
+}
+
 /* Market info */
 
 .market-container {
@@ -247,6 +257,7 @@ tr.mat-row, tr.mat-footer-row {
   line-height: 22px;
   color: rgb(220, 220, 240) !important;
   backdrop-filter: blur(70px);
+  -webkit-backdrop-filter: blur(70px);
   border: 1px solid rgba(56, 58, 71, 0.685);
   background: rgba(39, 39, 46, 0);
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.3);
