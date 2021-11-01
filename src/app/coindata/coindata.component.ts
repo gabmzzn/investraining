@@ -262,7 +262,7 @@ export class CoindataComponent {
   dataSource = new MatTableDataSource()
 
   async HistoricalData() {
-    this.dataSource = this.JSONData.slice(this.JSONData.length - 20).reverse()
+    this.dataSource = this.JSONData.slice(this.JSONData.length - 30).reverse()
   }
 
   // News Feed
