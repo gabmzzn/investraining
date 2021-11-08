@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1636340206606,
+  "timestamp": 1636356372057,
   "index": "https://gabmzzn.github.io/investraining/index.html",
   "assetGroups": [
     {
@@ -13,7 +13,7 @@
       "urls": [
         "https://gabmzzn.github.io/investraining/favicon.ico",
         "https://gabmzzn.github.io/investraining/index.html",
-        "https://gabmzzn.github.io/investraining/main.27b1b19159c30b892c5d.js",
+        "https://gabmzzn.github.io/investraining/main.1f02c93edf53ede7b6b3.js",
         "https://gabmzzn.github.io/investraining/manifest.webmanifest",
         "https://gabmzzn.github.io/investraining/polyfills.fe87c3dae76fa5323645.js",
         "https://gabmzzn.github.io/investraining/runtime.84667cc701e8f4b4da78.js",
@@ -29,6 +29,7 @@
         "ignoreVary": true
       },
       "urls": [
+        "https://gabmzzn.github.io/investraining/assets/CV - Juan Gabriel Mazzoleni.pdf",
         "https://gabmzzn.github.io/investraining/assets/icons/icon-128x128.png",
         "https://gabmzzn.github.io/investraining/assets/icons/icon-144x144.png",
         "https://gabmzzn.github.io/investraining/assets/icons/icon-152x152.png",
@@ -47,6 +48,7 @@
   ],
   "dataGroups": [],
   "hashTable": {
+    "https://gabmzzn.github.io/investraining/assets/CV - Juan Gabriel Mazzoleni.pdf": "2859860d04bcd9ddc4e23ee89d4780f3fb005c61",
     "https://gabmzzn.github.io/investraining/assets/icons/icon-128x128.png": "dae3b6ed49bdaf4327b92531d4b5b4a5d30c7532",
     "https://gabmzzn.github.io/investraining/assets/icons/icon-144x144.png": "b0bd89982e08f9bd2b642928f5391915b74799a7",
     "https://gabmzzn.github.io/investraining/assets/icons/icon-152x152.png": "7479a9477815dfd9668d60f8b3b2fba709b91310",
@@ -60,8 +62,8 @@
     "https://gabmzzn.github.io/investraining/assets/imgs/linkedin.png": "0f8d0ba6293237fb09f16ad1d8583517ebabf3e2",
     "https://gabmzzn.github.io/investraining/assets/imgs/mail.png": "0665650f02b617109935ed63eccbbc64238d45ad",
     "https://gabmzzn.github.io/investraining/favicon.ico": "22f6a4a3bcaafafb0254e0f2fa4ceb89e505e8b2",
-    "https://gabmzzn.github.io/investraining/index.html": "b96354d4a95b2cc63e2a804c57ab6f3dc9345cb2",
-    "https://gabmzzn.github.io/investraining/main.27b1b19159c30b892c5d.js": "07ba621e3fdef5bba3419cde8ee03ba5124b1644",
+    "https://gabmzzn.github.io/investraining/index.html": "962e9e529a163fad44a0ad18a2df3bb885afb12b",
+    "https://gabmzzn.github.io/investraining/main.1f02c93edf53ede7b6b3.js": "beea9fc51fbedd863f23aa8ebb425b393513b52c",
     "https://gabmzzn.github.io/investraining/manifest.webmanifest": "268a4e337bd9a4c7909ba3483905338f6dda0d37",
     "https://gabmzzn.github.io/investraining/polyfills.fe87c3dae76fa5323645.js": "10eab0405402fb92bba27637ff43b4d589d5223c",
     "https://gabmzzn.github.io/investraining/runtime.84667cc701e8f4b4da78.js": "6167a9427635d715761c5702451c6c469a82f49b",
