@@ -3,6 +3,7 @@
   <div style="display: flex; flex-direction: row;">
     <h1 style="margin-right: 15px;">Markets Live</h1>
     <mat-spinner *ngIf="isWebSocketLoading" [diameter]="28"></mat-spinner>
+    <h4 style="margin-right: 15px;" *ngIf="isWebSocketLoading">Waiting for live data...</h4>
   </div>
   <div class="titles">
     <div class="title">
