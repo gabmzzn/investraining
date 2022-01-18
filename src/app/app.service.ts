@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-  
+
   isLoading: boolean = true
-  selectedCurrency!: string;
+  selectedCurrency!: string
   currencyList: any = []
 
   constructor() { }
@@ -19,7 +19,7 @@ export class AppService {
       'WBTC', 'MATIC', 'AXS', 'ATOM', 'ICP', 'FIL', 'XTZ', 'XLM', 'VET',
       'FTT', 'ETC', 'TRX', 'DAI', 'DASH', 'OXT', 'FTM', 'EGLD', 'XMR', 'CAKE',
       'EOS', 'STX', 'AAVE', 'SUSHI', 'NEAR', 'SNX', 'QNT', 'GRT', 'NEO',
-      'WAVES', 'KSM', 'LEO', 'MKR', 'BTT', 'ONE', 'HNT', 'AMP']
+      'WAVES', 'KSM', 'LEO', 'MKR', 'CHR', 'ONE', 'HNT', 'AMP']
     const currenciesnames = ['Bitcoin', 'Ethereum', 'Binance', 'Cardano',
       'Solana', 'XRP', 'Dogecoin', 'Terra', 'Uniswap', 'Avalanche',
       'Chainlink', 'Algorand', 'Litecoin', 'Bitcoin Cash', 'Wrapped Bitcoin',
@@ -28,7 +28,7 @@ export class AppService {
       'Dai', 'Dash', 'Orchid Protocol', 'Fantom', 'Elrond', 'Monero', 'PancakeSwap', 'EOS',
       'Stacks', 'Aave', 'SushiSwap', 'NEAR Protocol', 'Synthetix', 'Quant',
       'The Graph', 'Neo', 'Waves', 'Kusama', 'LEO Token', 'Maker',
-      'BitTorrent Token', 'Harmony', 'Helium', 'Amp']
+      'Chroma', 'Harmony', 'Helium', 'Amp']
     currencieslist.forEach(element => {
       clist += element + ','
     })
@@ -37,7 +37,7 @@ export class AppService {
 
     // Last hour timestamp
     let d = (new Date()).toString(), timestampLastHour = Date.parse((d.substr(0, 18) + ':00:00' + d.substr(24))) / 1000
-    
+
     for (let currency of currencieslist) {
       // 0 = RAW Value, 1 = DISPLAY Value  
       let plussign, updown
