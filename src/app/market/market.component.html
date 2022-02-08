@@ -26,17 +26,17 @@
               <img src="https://www.cryptocompare.com{{performer.logo}}" />
             </mat-card-title-group>
             <div style="display: flex;flex-direction: row;">
-            <mat-card-content style="font-size: 12px;">
-              <span [ngClass]="{
+              <mat-card-content style="font-size: 12px;">
+                <span [ngClass]="{
                 'positive-price-per' : performer.updown == '▲',
                 'negative-price-per' : performer.updown == '▼'
               }"><span class="updown">{{performer.updown}}</span> {{performer.price}}</span>
-            </mat-card-content>
-            <mat-card-content style="font-size: 12px;margin-left: 6px;" [ngClass]="{
+              </mat-card-content>
+              <mat-card-content style="font-size: 12px;margin-left: 6px;" [ngClass]="{
                 'positive-pct-per' : performer.changepct >= 0,
                 'negative-pct-per' : performer.changepct < 0}"><span>
-              {{performer.changepct}}%</span>
-            </mat-card-content>
+                  {{performer.changepct}}%</span>
+              </mat-card-content>
             </div>
             <mat-card-content>
               <img src="{{performer.sparkchart}}" />
@@ -53,12 +53,14 @@
     </ng-container>
     <ng-container matColumnDef="logo" class="logo">
       <th mat-header-cell *matHeaderCellDef></th>
-      <td mat-cell *matCellDef="let row"> <img src="https://www.cryptocompare.com{{row.logo}}" style="width: 30px;margin-top: 5px;" />
+      <td mat-cell *matCellDef="let row"> <img src="https://www.cryptocompare.com{{row.logo}}"
+          style="width: 30px;margin-top: 5px;" />
       </td>
     </ng-container>
     <ng-container matColumnDef="name" class="name">
       <th mat-header-cell *matHeaderCellDef>CURRENCY</th>
-      <td mat-cell *matCellDef="let row" style="padding-top: 2px;">{{row.name}}&nbsp;&nbsp;<span class="symbol">{{row.symbol}}</span></td>
+      <td mat-cell *matCellDef="let row" style="padding-top: 2px;">{{row.name}}&nbsp;&nbsp;<span
+          class="symbol">{{row.symbol}}</span></td>
     </ng-container>
     <ng-container matColumnDef="updown">
       <th mat-header-cell *matHeaderCellDef="let row" class="updown"></th>
@@ -74,23 +76,29 @@
     <ng-container matColumnDef="changepct">
       <th mat-header-cell *matHeaderCellDef="let row" class="changepct">LAST 24h</th>
       <td mat-cell *matCellDef="let row" style="width: 100px;">
-      <span [ngClass]="{
+        <span [ngClass]="{
             'positive-pct' : row.changepct >= 0,
             'negative-pct' : row.changepct < 0
-         }"> {{row.changepct}}%</span></td>
+         }"> {{row.changepct}}%</span>
+      </td>
     </ng-container>
     <ng-container matColumnDef="totalvolume">
-      <th mat-header-cell *matHeaderCellDef>TOTAL VOL <span class="material-icons-outlined" id="tooltip-icon" matTooltipClass="tooltip" matTooltip="The volume of a particular cryptocurrency is simply the total amount of coins traded in the last 24 hours."
-        style="font-size: 20px;">info</span></th>
+      <th mat-header-cell *matHeaderCellDef>TOTAL VOL <span class="material-icons-outlined" id="tooltip-icon"
+          matTooltipClass="tooltip"
+          matTooltip="The volume of a particular cryptocurrency is simply the total amount of coins traded in the last 24 hours."
+          style="font-size: 20px;">info</span></th>
       <td mat-cell *matCellDef="let row">{{row.totalvolume}}</td>
     </ng-container>
     <ng-container matColumnDef="marketcap">
-      <th mat-header-cell *matHeaderCellDef>MARKET CAP <span class="material-icons-outlined" id="tooltip-icon" matTooltipClass="tooltip" matTooltip="Market Cap is Total Supply × Price. Where Total Supply includes coins held by the project team, locked in smart contracts or escrow. Supply that is verifiably burned is not included. A penalty is applied to coins with low liquidity." style="font-size: 20px;">info</span></th>
+      <th mat-header-cell *matHeaderCellDef>MARKET CAP <span class="material-icons-outlined" id="tooltip-icon"
+          matTooltipClass="tooltip"
+          matTooltip="Market Cap is Total Supply × Price. Where Total Supply includes coins held by the project team, locked in smart contracts or escrow. Supply that is verifiably burned is not included. A penalty is applied to coins with low liquidity."
+          style="font-size: 20px;">info</span></th>
       <td mat-cell *matCellDef="let row"><span>{{row.marketcap}}</span></td>
     </ng-container>
     <ng-container matColumnDef="sparkchart">
       <th mat-header-cell *matHeaderCellDef>LAST 7 DAYS</th>
-      <td mat-cell *matCellDef="let row"><img src="{{row.sparkchart}}"/></td>
+      <td mat-cell *matCellDef="let row"><img src="{{row.sparkchart}}" /></td>
     </ng-container>
     <!-- <ng-container matColumnDef="buy">
       <th mat-header-cell *matHeaderCellDef></th>
@@ -108,3 +116,83 @@
     </tr>
   </table>
 </div>
+
+<footer *ngIf="!isLoading">
+  <div class="footer-content">
+    <div class="about">
+      <!-- <img src=".\.\assets\imgs\DSC_6596.jpg"> -->
+      <div class="firm-container">
+        <div class="firm">
+          <p id="juan">Juan</p>
+          <p id="gab">Gabriel</p>
+          <p id="mazz">Mazzoleni</p>
+          <p id="soft">Software Developer</p>
+        </div>
+      </div>
+    </div>
+    <div class="description">
+      <h1 style="font-size: 28px; font-style: italic; font-weight: 700;">Investraining</h1>
+      <div>
+        This is a web app made to learn and show usage of different technologies. Consist basically on a crypto currency
+        portal,
+        where it shows from different currencies: live market data, general information, news feed, and statistical
+        market
+        data of
+        specific currencies.<br>
+        Almost all of the data shown on the site is loaded from an API while the live data is being fed from a
+        WebSocket.
+      </div>
+      <div class="contact" style="display: flex;flex-direction: row;">
+        <div class="contact-link">
+          <a href="https://github.com/gabmzzn/investraining" target="_blank"><img src=".\.\assets\imgs\github.png"></a>
+        </div>
+        <div class="contact-link">
+          <a href="https://www.linkedin.com/in/juan-gabriel-mazzoleni-a6b506142/" target="_blank"><img
+              src=".\.\assets\imgs\linkedin.png"></a>
+        </div>
+        <!-- <div class="contact-link">
+          <a href=".\.\assets\CV - Juan Gabriel Mazzoleni.pdf" target="_blank"><img
+              src=".\.\assets\imgs\cv.png" href=""></a>
+        </div> -->
+        <div class="contact-link">
+          <a href="mailto: gabmzzn@gmail.com" title="gabmzzn@gmail.com" target="_blank"><img
+              src=".\.\assets\imgs\mail.png"></a>
+        </div>
+      </div>
+    </div>
+    <div class="resources">
+      <div>
+        <h2>Made with</h2>
+      </div>
+      <mat-chip-list>
+        <mat-chip>
+          Angular
+        </mat-chip>
+        <mat-chip>
+          TypeScript
+        </mat-chip>
+        <mat-chip>
+          CryptoCompare API
+        </mat-chip>
+        <mat-chip>
+          WebSocket
+        </mat-chip>
+        <mat-chip>
+          Apache ECharts
+        </mat-chip>
+        <mat-chip>
+          Angular Material
+        </mat-chip>
+        <mat-chip>
+          HTML5
+        </mat-chip>
+        <mat-chip>
+          CSS3
+        </mat-chip>
+        <mat-chip>
+          GitHub
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</footer>
